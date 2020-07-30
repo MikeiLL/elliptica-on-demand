@@ -1,0 +1,11 @@
+{
+	"name": "mz-mindbody-classes",
+	"version": "1.0.0",
+	"description": "",
+	"author": "Your Name <email@example.com>",
+	"devDependencies": {
+		"grunt": "*",
+		"grunt-contrib-watch": "*",
+		"grunt-contrib-compass": "*"
+	}
+}

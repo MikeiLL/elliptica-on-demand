@@ -1,0 +1,21 @@
+---
+parameters:
+  git_dir: .
+  bin_dir: composer/bin
+  ignore_unstaged_changes: false
+  tasks:
+    composer:
+      with_dependencies: false
+      strict: false
+    phpmd:
+      ruleset:
+      - phpmd.xml
+      triggered_by:
+      - php
+    git_blacklist:
+      keywords:
+      - print_r(
+      - var_dump(
+      triggered_by:
+      - php
+...
