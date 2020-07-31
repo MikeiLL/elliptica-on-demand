@@ -29,32 +29,35 @@ class PostTypes extends Engine\Base {
 		/*
 		* Custom Columns
 		*/
-		$post_columns = new \CPT_columns( 'demo' );
-		$post_columns->add_column(
-			'cmb2_field',
-			array(
-				'label'    => __( 'CMB2 Field', MMC_TEXTDOMAIN ),
-				'type'     => 'post_meta',
-				'meta_key' => '_demo_' . MMC_TEXTDOMAIN . '_text', // phpcs:ignore WordPress.DB
-				'orderby'  => 'meta_value',
-				'sortable' => true,
-				'prefix'   => '<b>',
-				'suffix'   => '</b>',
-				'def'      => 'Not defined', // Default value in case post meta not found
-				'order'    => '-1',
-			)
-		);
+		// $post_columns = new \CPT_columns( 'mindbody_class' );
+		// $post_columns->add_column(
+		// 	'mindbody_class_date',
+		// 	array(
+		// 		'label'    => __( 'Class Date', MMC_TEXTDOMAIN ),
+		// 		'type'     => 'post_meta',
+		// 		'meta_key' => '_mindbody_class_' . MMC_TEXTDOMAIN . '_date', // phpcs:ignore WordPress.DB
+		// 		'orderby'  => 'meta_value',
+		// 		'sortable' => true,
+		// 		'prefix'   => '<b>',
+		// 		'suffix'   => '</b>',
+		// 		'title_icon'  => 'dashicons-calendar-alt',
+		// 		'def'      => 'Not defined', // Default value in case post meta not found
+		// 		'order'    => '-1',
+		// 	)
+		// );
+
+
 		/*
 		* Custom Bulk Actions
 		*/
-		$bulk_actions = new \Seravo_Custom_Bulk_Action( array( 'post_type' => 'demo' ) );
+		$bulk_actions = new \Seravo_Custom_Bulk_Action( array( 'post_type' => 'mindbody_class' ) );
 		$bulk_actions->register_bulk_action(
 			array(
 				'menu_text'    => 'Mark meta',
 				'admin_notice' => 'Written something on custom bulk meta',
 				'callback'     => function( $post_ids ) {
 					foreach ( $post_ids as $post_id ) {
-						update_post_meta( $post_id, '_demo_' . MMC_TEXTDOMAIN . '_text', 'Random stuff' );
+						update_post_meta( $post_id, '_mindbody_class_' . MMC_TEXTDOMAIN . '_text', 'Random stuff' );
 					}
 
 					return true;
@@ -113,26 +116,24 @@ class PostTypes extends Engine\Base {
 		# Add some custom columns to the admin screen:
 		'admin_cols' => [
 			'mindbody_class_featured_image' => [
-				'title'          => 'Bio Pic',
+				'title'          => 'Class Image',
 				'featured_image' => 'thumbnail'
 			],
-			'mindbody_class_published' => [
+			'mindbody_class_date_col' => [
 				'title_icon'  => 'dashicons-calendar-alt',
-				'meta_key'    => 'published_date',
+				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_text',
 				'date_format' => 'd/m/Y'
 			],
 			'mindbody_class_music_style' => [
 				'taxonomy' => 'music_style'
 			],
 		],
+		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],
 
 		# Add some dropdown filters to the admin screen:
 		'admin_filters' => [
 			'mindbody_class_music_style' => [
 				'taxonomy' => 'music_style'
-			],
-			'mindbody_class_rating' => [
-				'meta_key' => 'star_rating',
 			],
 		],
 
@@ -145,31 +146,16 @@ class PostTypes extends Engine\Base {
 
 	] );
 	// Create Custom Taxonomy https://github.com/johnbillion/extended-taxos
-	register_extended_taxonomy( 'music_style', 'story', [
+	register_extended_taxonomy( 'music_style', 'mindbody_class', [
 
-		# Use radio buttons in the meta box for this taxonomy on the post editing screen:
-		'meta_box' => 'radio',
-
-		# Add a custom column to the admin screen:
-		'admin_cols' => [
-			'updated' => [
-				'title_cb'    => function() {
-					return '<em>Last</em> Updated';
-				},
-				'meta_key'    => 'updated_date',
-				'date_format' => 'd/m/Y'
-			],
-		],
+		'dashboard_glance' => true,
 
 	] );
+	register_extended_taxonomy( 'difficulty_level', 'mindbody_class', [
 
-		$tax->add_taxonomy(
-			'mindbody_class-section',
-			array(
-				'hierarchical' => false,
-				'show_ui'      => false,
-			)
-		);
+		'dashboard_glance' => true,
+
+	] );
 
 	}
 

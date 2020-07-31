@@ -28,7 +28,7 @@ class CMB extends Engine\Base {
         parent::initialize();
 		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2/init.php';
 		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2-grid/Cmb2GridPluginLoad.php';
-		add_action( 'cmb2_init', array( $this, 'cmb_demo_metaboxes' ) );
+		add_action( 'cmb2_init', array( $this, 'cmb_mindbody_metaboxes' ) );
 	}
 
 	/**
@@ -38,57 +38,51 @@ class CMB extends Engine\Base {
 	 *
 	 * @return void
 	 */
-	public function cmb_demo_metaboxes() {
+	public function cmb_mindbody_metaboxes() {
 		// Start with an underscore to hide fields from custom fields list
-		$prefix   = '_demo_';
-		$cmb_demo = new_cmb2_box(
+		$prefix   = '_mindbody_classes_';
+		$cmb_mindbody_mb = new_cmb2_box(
             array(
 			'id'           => $prefix . 'metabox',
-			'title'        => __( 'Demo Metabox', MMC_TEXTDOMAIN ),
-			'object_types' => array( 'demo' ),
+			'title'        => __( 'MBO Class Custom Fields', MMC_TEXTDOMAIN ),
+			'object_types' => array( 'mindbody_class' ),
 			'context'      => 'normal',
 			'priority'     => 'high',
 			'show_names'   => true, // Show field names on the left
 		)
             );
-		$cmb2Grid = new Cmb2Grid( $cmb_demo ); //phpcs:ignore WordPress.NamingConventions
+		$cmb2Grid = new Cmb2Grid( $cmb_mindbody_mb ); //phpcs:ignore WordPress.NamingConventions
 		$row      = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
-		$field1 = $cmb_demo->add_field(
+		$datetime = $cmb_mindbody_mb->add_field(
             array(
-			'name' => __( 'Text', MMC_TEXTDOMAIN ),
-			'desc' => __( 'field description (optional)', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_text',
-			'type' => 'text',
+			'name' => __( 'Date and Time of Class', MMC_TEXTDOMAIN ),
+			'desc' => __( 'Pulled in from MBO', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_date',
+			'type' => 'text_datetime_timestamp',
 				)
             );
-		$field2 = $cmb_demo->add_field(
+
+        $class_length = $cmb_mindbody_mb->add_field(
             array(
-			'name' => __( 'Text 2', MMC_TEXTDOMAIN ),
-			'desc' => __( 'field description (optional)', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_text2',
+			'name' => __( 'Class Length', MMC_TEXTDOMAIN ),
+			'desc' => __( 'Pulled in from MBO', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_length',
 			'type' => 'text',
 				)
             );
 
-		$field3 = $cmb_demo->add_field(
+        $instructor = $cmb_mindbody_mb->add_field(
             array(
-			'name' => __( 'Text Small', MMC_TEXTDOMAIN ),
-			'desc' => __( 'field description (optional)', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_textsmall',
-			'type' => 'text_small',
+			'name' => __( 'Instructor', MMC_TEXTDOMAIN ),
+			'desc' => __( 'Pulled in from MBO', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_instructor',
+			'type' => 'text',
 				)
             );
-		$field4 = $cmb_demo->add_field(
-            array(
-			'name' => __( 'Text Small 2', MMC_TEXTDOMAIN ),
-			'desc' => __( 'field description (optional)', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_textsmall2',
-			'type' => 'text_small',
-		)
-            );
-		$row->addColumns( array( $field1, $field2 ) );
+
+		$row->addColumns( array( $datetime, $class_length ) );
 		$row = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
-		$row->addColumns( array( $field3, $field4 ) );
+		$row->addColumns( array( $instructor ) );
 	}
 
 }
