@@ -121,7 +121,7 @@ class PostTypes extends Engine\Base {
 			],
 			'mindbody_class_date_col' => [
 				'title_icon'  => 'dashicons-calendar-alt',
-				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_date',
+				'meta_key'    => '_intensity_on_demand_' . MMC_TEXTDOMAIN . '_date',
 				'date_format' => 'd/m/Y'
 			],
 			'mindbody_class_music_style' => [
@@ -131,7 +131,7 @@ class PostTypes extends Engine\Base {
 				'taxonomy' => 'fitness_level'
 			],
 			'mindbody_class_instructor' => [
-				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_instructor',
+				'meta_key'    => '_intensity_on_demand_' . MMC_TEXTDOMAIN . '_instructor',
 			],
 		],
 		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],

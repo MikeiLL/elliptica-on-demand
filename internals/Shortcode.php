@@ -27,7 +27,7 @@ class Shortcode extends Engine\Base {
 	 */
 	public function initialize() {
 		parent::initialize();
-        add_shortcode( 'mindbody-classes', array( $this, 'mindbody_classes' ) );
+        add_shortcode( 'mindbody-classes', array( $this, 'intensity_on_demand' ) );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Shortcode extends Engine\Base {
 	 *
 	 * @return string
 	 */
-	public static function mindbody_classes( $atts ) {
+	public static function intensity_on_demand( $atts ) {
 		shortcode_atts(
 			array(
 				'foo' => 'something',
