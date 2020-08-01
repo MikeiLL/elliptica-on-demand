@@ -23,7 +23,7 @@ class Ajax extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !apply_filters( 'intensity_on_demand_mmc_ajax_initialize', true ) ) {
+		if ( !apply_filters( 'elliptica_on_demand_mmc_ajax_initialize', true ) ) {
 			return;
 		}
 

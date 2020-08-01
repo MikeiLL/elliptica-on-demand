@@ -19,7 +19,7 @@ parameters:
         - %currentWorkingDirectory%/tests
         - integrations/Widgets/
     scanFiles:
-        - intensity-on-demand.php
+        - elliptica-on-demand.php
         - vendor/freemius/wordpress-sdk/start.php
         - vendor/cmb2-grid/Cmb2GridPluginLoad.php
     ignoreErrors:

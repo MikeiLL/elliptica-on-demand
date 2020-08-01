@@ -43,7 +43,7 @@ class Enqueue extends Engine\Base {
 	 */
 	public function enqueue_admin_styles() {
 		$admin_page = get_current_screen();
-		if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_intensity-on-demand' ) {
+		if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
 			wp_enqueue_style( MMC_TEXTDOMAIN . '-settings-styles', plugins_url( 'assets/css/settings.css', MMC_PLUGIN_ABSOLUTE ), array( 'dashicons' ), MMC_VERSION );
 		}
 
@@ -59,7 +59,7 @@ class Enqueue extends Engine\Base {
 	 */
 	public function enqueue_admin_scripts() {
 		$admin_page = get_current_screen();
-        if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_intensity-on-demand' ) {
+        if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
             wp_enqueue_script( MMC_TEXTDOMAIN . '-settings-script', plugins_url( 'assets/js/settings.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', 'jquery-ui-tabs' ), MMC_VERSION, false );
         }
 

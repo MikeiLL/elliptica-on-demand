@@ -75,8 +75,8 @@ modules:
             phpBinary: php
             language: ''
             configFile: 'wp-config-test.php'
-            plugins: ["WordPress-Plugin-Boilerplate-Powered/intensity-on-demand/intensity-on-demand.php"]
-            activatePlugins: ["WordPress-Plugin-Boilerplate-Powered/intensity-on-demand/intensity-on-demand.php"]
+            plugins: ["WordPress-Plugin-Boilerplate-Powered/elliptica-on-demand/elliptica-on-demand.php"]
+            activatePlugins: ["WordPress-Plugin-Boilerplate-Powered/elliptica-on-demand/elliptica-on-demand.php"]
         WPWebDriver:
             url: "%WP_URL%"
             browser: chrome

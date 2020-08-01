@@ -28,7 +28,7 @@ class CMB extends Engine\Base {
         parent::initialize();
 		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2/init.php';
 		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2-grid/Cmb2GridPluginLoad.php';
-		add_action( 'cmb2_init', array( $this, 'cmb_intensity_od_metaboxes' ) );
+		add_action( 'cmb2_init', array( $this, 'cmb_elliptica_od_metaboxes' ) );
 	}
 
 	/**
@@ -38,22 +38,22 @@ class CMB extends Engine\Base {
 	 *
 	 * @return void
 	 */
-	public function cmb_intensity_od_metaboxes() {
+	public function cmb_elliptica_od_metaboxes() {
 		// Start with an underscore to hide fields from custom fields list
-		$prefix   = '_intensity_on_demand_';
-		$cmb_intensity_od_mb = new_cmb2_box(
+		$prefix   = '_elliptica_on_demand_';
+		$cmb_elliptica_od_mb = new_cmb2_box(
             array(
 			'id'           => $prefix . 'metabox',
 			'title'        => __( 'On Demand Class Custom Fields', MMC_TEXTDOMAIN ),
-			'object_types' => array( 'intensity_on_demand_video' ),
+			'object_types' => array( 'elliptica_on_demand_video' ),
 			'context'      => 'normal',
 			'priority'     => 'high',
 			'show_names'   => true, // Show field names on the left
 		)
             );
-		$cmb2Grid = new Cmb2Grid( $cmb_intensity_od_mb ); //phpcs:ignore WordPress.NamingConventions
+		$cmb2Grid = new Cmb2Grid( $cmb_elliptica_od_mb ); //phpcs:ignore WordPress.NamingConventions
 		$row      = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
-		$datetime = $cmb_intensity_od_mb->add_field(
+		$datetime = $cmb_elliptica_od_mb->add_field(
             array(
 			'name' => __( 'Date and Time of Class', MMC_TEXTDOMAIN ),
 			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),
@@ -62,7 +62,7 @@ class CMB extends Engine\Base {
 				)
             );
 
-        $class_length = $cmb_intensity_od_mb->add_field(
+        $class_length = $cmb_elliptica_od_mb->add_field(
             array(
 			'name' => __( 'Class Length', MMC_TEXTDOMAIN ),
 			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),
@@ -71,7 +71,7 @@ class CMB extends Engine\Base {
 				)
             );
 
-        $instructor = $cmb_intensity_od_mb->add_field(
+        $instructor = $cmb_elliptica_od_mb->add_field(
             array(
 			'name' => __( 'Instructor', MMC_TEXTDOMAIN ),
 			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),

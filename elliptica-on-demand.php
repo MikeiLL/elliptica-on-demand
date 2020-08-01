@@ -14,7 +14,7 @@
  * Version:         1.0.0
  * Author:          Mike iLL
  * Author URI:      http://mzoo.org
- * Text Domain:     intensity-on-demand
+ * Text Domain:     elliptica-on-demand
  * License:         GPL 2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:     /languages
@@ -27,7 +27,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 define( 'MMC_VERSION', '1.0.0' );
-define( 'MMC_TEXTDOMAIN', 'intensity-on-demand' );
+define( 'MMC_TEXTDOMAIN', 'elliptica-on-demand' );
 define( 'MMC_NAME', 'Elliptica On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
@@ -63,7 +63,7 @@ if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	return;
 }
 
-$intensity_on_demand_libraries = require_once MMC_PLUGIN_ROOT . 'vendor/autoload.php';
+$elliptica_on_demand_libraries = require_once MMC_PLUGIN_ROOT . 'vendor/autoload.php';
 
 require_once MMC_PLUGIN_ROOT . 'functions/functions.php';
 require_once MMC_PLUGIN_ROOT . 'functions/debug.php';
@@ -101,14 +101,14 @@ function mmc_fs() {
 		$mmc_fs = fs_dynamic_init(
 			array(
 				'id'             => '',
-				'slug'           => 'intensity-on-demand',
+				'slug'           => 'elliptica-on-demand',
 				'public_key'     => '',
 				'is_live'        => false,
 				'is_premium'     => true,
 				'has_addons'     => false,
 				'has_paid_plans' => true,
 				'menu'           => array(
-					'slug' => 'intensity-on-demand',
+					'slug' => 'elliptica-on-demand',
 				),
 			)
 		);
@@ -131,16 +131,16 @@ function mmc_fs() {
 
 // Documentation to integrate GitHub, GitLab or BitBucket https://github.com/YahnisElsts/plugin-update-checker/blob/master/README.md
 $my_update_checker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/git@github.com:MikeiLL/intensity-on-demand',
+	'https://github.com/git@github.com:MikeiLL/elliptica-on-demand',
 	__FILE__,
-	'intensity-on-demand'
+	'elliptica-on-demand'
 );
 
 if ( ! wp_installing() ) {
 	add_action(
         'plugins_loaded',
-        function () use ( $intensity_on_demand_libraries ) {
-			new \Elliptica_On_Demand\Engine\Initialize( $intensity_on_demand_libraries );
+        function () use ( $elliptica_on_demand_libraries ) {
+			new \Elliptica_On_Demand\Engine\Initialize( $elliptica_on_demand_libraries );
 		}
     );
 }

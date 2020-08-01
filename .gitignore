@@ -36,5 +36,5 @@ intermediate
 cache
 vendor
 tests/_output
-/intensity-on-demand/vendor/
+/elliptica-on-demand/vendor/
 tests/_support/_generated

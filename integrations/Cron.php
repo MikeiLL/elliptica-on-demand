@@ -33,7 +33,7 @@ class Cron extends Engine\Base {
 			'schedule'         => 'schedule',
 			'name'             => 'hourly_cron',
 			'cb'               => array( $this, 'hourly_cron' ),
-			'plugin_root_file' => 'intensity-on-demand.php',
+			'plugin_root_file' => 'elliptica-on-demand.php',
 		);
 
 		$cronplus = new CronPlus( $args );

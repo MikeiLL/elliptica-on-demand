@@ -218,9 +218,9 @@ class ActDeact extends Engine\Base {
 	 */
 	public static function upgrade_procedure() {
 		if ( is_admin() ) {
-			$version = get_option( 'intensity-on-demand-version' );
+			$version = get_option( 'elliptica-on-demand-version' );
 			if ( version_compare( MMC_VERSION, $version, '>' ) ) {
-				update_option( 'intensity-on-demand-version', MMC_VERSION );
+				update_option( 'elliptica-on-demand-version', MMC_VERSION );
 				delete_option( MMC_TEXTDOMAIN . '_fake-meta' );
 			}
 		}

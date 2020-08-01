@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TODO 1.0.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/plugins/intensity-on-demand\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/elliptica-on-demand\n"
 "POT-Creation-Date: 2020-05-21 19:28+0200\n"
 "PO-Revision-Date: 2014-07-07 18:52+0100\n"
 "Last-Translator: Mte90 <mte90net@gmail.com>\n"
@@ -392,7 +392,7 @@ msgstr ""
 msgid "Plugin Name"
 msgstr ""
 
-#: intensity-on-demand.php:64
+#: elliptica-on-demand.php:64
 msgid "\"Elliptica On Demand\" requires PHP 5.6 or newer."
 msgstr ""
 

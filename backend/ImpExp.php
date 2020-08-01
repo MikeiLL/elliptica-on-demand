@@ -64,7 +64,7 @@ class ImpExp extends Engine\Base {
 
 		nocache_headers();
 		header( 'Content-Type: application/json; charset=utf-8' );
-		header( 'Content-Disposition: attachment; filename=intensity_on_demand-settings-export-' . gmdate( 'm-d-Y' ) . '.json' );
+		header( 'Content-Disposition: attachment; filename=elliptica_on_demand-settings-export-' . gmdate( 'm-d-Y' ) . '.json' );
 		header( 'Expires: 0' );
 
 		echo wp_json_encode( $settings, JSON_PRETTY_PRINT );
@@ -117,7 +117,7 @@ class ImpExp extends Engine\Base {
 		}
 
 		new WP_Error(
-                'intensity_on_demand_import_settings_failed',
+                'elliptica_on_demand_import_settings_failed',
                 __( 'Failed to import the settings.', MMC_TEXTDOMAIN )
             );
 
