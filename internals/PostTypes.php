@@ -84,7 +84,7 @@ class PostTypes extends Engine\Base {
 			$post_types = $query->get( 'post_type' );
 			if ( $post_types === 'post' ) {
 				$post_types = array( $post_types );
-				$query->set( 'post_type', array_push( $post_types, array( 'demo' ) ) );
+				$query->set( 'post_type', array_push( $post_types, array( 'elliptica_od_video' ) ) );
 			}
 		}
 
