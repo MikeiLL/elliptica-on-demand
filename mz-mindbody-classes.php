@@ -14,7 +14,7 @@
  * Version:         1.0.0
  * Author:          Mike iLL
  * Author URI:      http://mzoo.org
- * Text Domain:     mz-mindbody-classes
+ * Text Domain:     intensity-on-demand
  * License:         GPL 2.0+
  * License URI:     http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:     /languages
@@ -27,7 +27,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 
 define( 'MMC_VERSION', '1.0.0' );
-define( 'MMC_TEXTDOMAIN', 'mz-mindbody-classes' );
+define( 'MMC_TEXTDOMAIN', 'intensity-on-demand' );
 define( 'MMC_NAME', 'MZ Mindbody Classes' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
@@ -101,14 +101,14 @@ function mmc_fs() {
 		$mmc_fs = fs_dynamic_init(
 			array(
 				'id'             => '',
-				'slug'           => 'mz-mindbody-classes',
+				'slug'           => 'intensity-on-demand',
 				'public_key'     => '',
 				'is_live'        => false,
 				'is_premium'     => true,
 				'has_addons'     => false,
 				'has_paid_plans' => true,
 				'menu'           => array(
-					'slug' => 'mz-mindbody-classes',
+					'slug' => 'intensity-on-demand',
 				),
 			)
 		);
@@ -131,9 +131,9 @@ function mmc_fs() {
 
 // Documentation to integrate GitHub, GitLab or BitBucket https://github.com/YahnisElsts/plugin-update-checker/blob/master/README.md
 $my_update_checker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/user-name/repo-name/',
+	'https://github.com/git@github.com:MikeiLL/intensity-on-demand',
 	__FILE__,
-	'unique-plugin-or-theme-slug'
+	'intensity-on-demand'
 );
 
 if ( ! wp_installing() ) {
