@@ -1,6 +1,6 @@
 <?php
 
-namespace MZ_Mindbody_Classes\Tests\WPUnit;
+namespace Intensity_On_Demand\Tests\WPUnit;
 
 class InitializeAdminTest extends \Codeception\TestCase\WPTestCase {
 	/**
@@ -35,22 +35,22 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase {
 		$sut = $this->make_instance();
 
 		$classes   = array();
-		$classes[] = 'MZ_Mindbody_Classes\Internals\PostTypes';
-		$classes[] = 'MZ_Mindbody_Classes\Internals\Shortcode';
-		$classes[] = 'MZ_Mindbody_Classes\Internals\Transient';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\CMB';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Cron';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\FakePage';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Template';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Widgets';
- 		$classes[] = 'MZ_Mindbody_Classes\Ajax\Ajax';
- 		$classes[] = 'MZ_Mindbody_Classes\Ajax\Ajax_Admin';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\ActDeact';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\Enqueue';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\ImpExp';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\Notices';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\Pointers';
-		$classes[] = 'MZ_Mindbody_Classes\Backend\Settings_Page';
+		$classes[] = 'Intensity_On_Demand\Internals\PostTypes';
+		$classes[] = 'Intensity_On_Demand\Internals\Shortcode';
+		$classes[] = 'Intensity_On_Demand\Internals\Transient';
+		$classes[] = 'Intensity_On_Demand\Integrations\CMB';
+		$classes[] = 'Intensity_On_Demand\Integrations\Cron';
+		$classes[] = 'Intensity_On_Demand\Integrations\FakePage';
+		$classes[] = 'Intensity_On_Demand\Integrations\Template';
+		$classes[] = 'Intensity_On_Demand\Integrations\Widgets';
+ 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax';
+ 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax_Admin';
+		$classes[] = 'Intensity_On_Demand\Backend\ActDeact';
+		$classes[] = 'Intensity_On_Demand\Backend\Enqueue';
+		$classes[] = 'Intensity_On_Demand\Backend\ImpExp';
+		$classes[] = 'Intensity_On_Demand\Backend\Notices';
+		$classes[] = 'Intensity_On_Demand\Backend\Pointers';
+		$classes[] = 'Intensity_On_Demand\Backend\Settings_Page';
 
 		$this->assertTrue( is_admin() );
 		$this->assertEquals( $classes, $sut->classes );

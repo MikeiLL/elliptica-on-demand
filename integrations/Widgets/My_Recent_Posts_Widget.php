@@ -1,14 +1,14 @@
 <?php
 /**
- * MZ_Mindbody_Classes
+ * Intensity_On_Demand
  *
- * @package   MZ_Mindbody_Classes
+ * @package   Intensity_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Integrations\Widgets;
+namespace Intensity_On_Demand\Integrations\Widgets;
 
 /**
  * Create custom widget class extending WPH_Widget
@@ -199,7 +199,7 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 		add_action(
 		'widgets_init',
 		function() {
-			register_widget( 'MZ_Mindbody_Classes\Integrations\Widgets\My_Recent_Posts_Widget' );
+			register_widget( 'Intensity_On_Demand\Integrations\Widgets\My_Recent_Posts_Widget' );
 		}
 		);
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace MZ_Mindbody_Classes\Tests\WPUnit;
+namespace Intensity_On_Demand\Tests\WPUnit;
 
 class AjaxTest extends \Codeception\TestCase\WPAjaxTestCase {
 

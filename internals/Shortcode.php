@@ -9,10 +9,10 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Internals;
+namespace Intensity_On_Demand\Internals;
 
-use \MZ_Mindbody_Classes\Engine;
-use \MZ_Mindbody_Classes\Integrations as Integrations;
+use \Intensity_On_Demand\Engine;
+use \Intensity_On_Demand\Integrations as Integrations;
 
 /**
  * Shortcodes of this plugin

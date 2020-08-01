@@ -52,12 +52,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "MZ_Mindbody_Classes\\Backend\\": "backend",
-            "MZ_Mindbody_Classes\\Frontend\\": "frontend",
-            "MZ_Mindbody_Classes\\Ajax\\": "ajax",
-            "MZ_Mindbody_Classes\\Internals\\": "internals",
-            "MZ_Mindbody_Classes\\Integrations\\": "integrations",
-            "MZ_Mindbody_Classes\\Engine\\": "engine"
+            "Intensity_On_Demand\\Backend\\": "backend",
+            "Intensity_On_Demand\\Frontend\\": "frontend",
+            "Intensity_On_Demand\\Ajax\\": "ajax",
+            "Intensity_On_Demand\\Internals\\": "internals",
+            "Intensity_On_Demand\\Integrations\\": "integrations",
+            "Intensity_On_Demand\\Engine\\": "engine"
         },
         "files": [
             "vendor\/wp-custom-bulk-actions\/custom-bulk-actions.php"

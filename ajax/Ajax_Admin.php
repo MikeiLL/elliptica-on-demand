@@ -9,9 +9,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Ajax;
+namespace Intensity_On_Demand\Ajax;
 
-use \MZ_Mindbody_Classes\Engine;
+use \Intensity_On_Demand\Engine;
 
 /**
  * AJAX as logged user

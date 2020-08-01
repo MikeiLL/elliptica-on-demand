@@ -1,6 +1,6 @@
 <?php
 
-namespace MZ_Mindbody_Classes\Tests\WPUnit;
+namespace Intensity_On_Demand\Tests\WPUnit;
 
 class InitializeTest extends \Codeception\TestCase\WPTestCase {
 	/**
@@ -44,18 +44,18 @@ class InitializeTest extends \Codeception\TestCase\WPTestCase {
 		$sut = $this->make_instance();
 
 		$classes   = array();
-		$classes[] = 'MZ_Mindbody_Classes\Internals\PostTypes';
-		$classes[] = 'MZ_Mindbody_Classes\Internals\Shortcode';
-		$classes[] = 'MZ_Mindbody_Classes\Internals\Transient';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\CMB';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Cron';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\FakePage';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Template';
-		$classes[] = 'MZ_Mindbody_Classes\Integrations\Widgets';
- 		$classes[] = 'MZ_Mindbody_Classes\Ajax\Ajax';
- 		$classes[] = 'MZ_Mindbody_Classes\Ajax\Ajax_Admin';
-		$classes[] = 'MZ_Mindbody_Classes\Frontend\Enqueue';
-		$classes[] = 'MZ_Mindbody_Classes\Frontend\extras\Body_Class';
+		$classes[] = 'Intensity_On_Demand\Internals\PostTypes';
+		$classes[] = 'Intensity_On_Demand\Internals\Shortcode';
+		$classes[] = 'Intensity_On_Demand\Internals\Transient';
+		$classes[] = 'Intensity_On_Demand\Integrations\CMB';
+		$classes[] = 'Intensity_On_Demand\Integrations\Cron';
+		$classes[] = 'Intensity_On_Demand\Integrations\FakePage';
+		$classes[] = 'Intensity_On_Demand\Integrations\Template';
+		$classes[] = 'Intensity_On_Demand\Integrations\Widgets';
+ 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax';
+ 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax_Admin';
+		$classes[] = 'Intensity_On_Demand\Frontend\Enqueue';
+		$classes[] = 'Intensity_On_Demand\Frontend\extras\Body_Class';
 
 		$this->assertEquals( $classes, $sut->classes );
 	}

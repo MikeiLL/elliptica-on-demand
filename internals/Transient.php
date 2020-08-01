@@ -9,9 +9,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Internals;
+namespace Intensity_On_Demand\Internals;
 
-use \MZ_Mindbody_Classes\Engine;
+use \Intensity_On_Demand\Engine;
 
 /**
  * Transient used by the plugin

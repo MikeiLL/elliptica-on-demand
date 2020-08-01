@@ -1,17 +1,17 @@
 <?php
 
 /**
- * MZ_Mindbody_Classes
+ * Intensity_On_Demand
  *
- * @package   MZ_Mindbody_Classes
+ * @package   Intensity_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Engine;
+namespace Intensity_On_Demand\Engine;
 
-use MZ_Mindbody_Classes\Engine;
+use Intensity_On_Demand\Engine;
 use \Exception as Exception;
 /**
  * Plugin Name Initializer
@@ -109,10 +109,10 @@ class Initialize {
 	private function get_classes( string $namespace ) {
 		$prefix    = $this->composer->getPrefixesPsr4();
 		$classmap  = $this->composer->getClassMap();
-		$namespace = 'MZ_Mindbody_Classes\\' . $namespace;
+		$namespace = 'Intensity_On_Demand\\' . $namespace;
 
 		// In case composer has autoload optimized
-		if ( isset( $classmap[ 'MZ_Mindbody_Classes\\Engine\\Initialize' ] ) ) {
+		if ( isset( $classmap[ 'Intensity_On_Demand\\Engine\\Initialize' ] ) ) {
 			$classes = array_keys( $classmap );
 			foreach ( $classes as $class ) {
 				if ( strncmp( (string) $class, $namespace, strlen( $namespace ) ) === 0 ) {

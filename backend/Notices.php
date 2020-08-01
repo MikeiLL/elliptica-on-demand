@@ -8,9 +8,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Backend;
+namespace Intensity_On_Demand\Backend;
 
-use \MZ_Mindbody_Classes\Engine;
+use \Intensity_On_Demand\Engine;
 use Yoast_I18n_WordPressOrg_v3;
 use \WP_Review_Me as WP_Review_Me;
 

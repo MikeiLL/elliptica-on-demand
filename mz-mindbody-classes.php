@@ -2,7 +2,7 @@
 
 /**
  *
- * @package   MZ_Mindbody_Classes
+ * @package   Intensity_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
@@ -140,7 +140,7 @@ if ( ! wp_installing() ) {
 	add_action(
         'plugins_loaded',
         function () use ( $mz_mindbody_classes_libraries ) {
-			new \MZ_Mindbody_Classes\Engine\Initialize( $mz_mindbody_classes_libraries );
+			new \Intensity_On_Demand\Engine\Initialize( $mz_mindbody_classes_libraries );
 		}
     );
 }

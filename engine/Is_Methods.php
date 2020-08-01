@@ -1,15 +1,15 @@
 <?php
 
 /**
- * MZ_Mindbody_Classes
+ * Intensity_On_Demand
  *
- * @package   MZ_Mindbody_Classes
+ * @package   Intensity_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace MZ_Mindbody_Classes\Engine;
+namespace Intensity_On_Demand\Engine;
 
 /**
  * Plugin Name Is Methods
