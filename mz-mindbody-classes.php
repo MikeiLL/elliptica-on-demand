@@ -8,7 +8,7 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  *
- * Plugin Name:     MZ Mindbody Classes
+ * Plugin Name:     Intensity On Demand
  * Plugin URI:      @TODO
  * Description:     @TODO
  * Version:         1.0.0
@@ -28,7 +28,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 define( 'MMC_VERSION', '1.0.0' );
 define( 'MMC_TEXTDOMAIN', 'intensity-on-demand' );
-define( 'MMC_NAME', 'MZ Mindbody Classes' );
+define( 'MMC_NAME', 'Intensity On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
