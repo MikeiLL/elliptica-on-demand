@@ -51,7 +51,7 @@ e.g.
 = Using The WordPress Dashboard =
 
 1. Navigate to the 'Add New' in the plugins dashboard
-2. Search for 'mz-mindbody-classes'
+2. Search for 'intensity-on-demand'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
@@ -59,15 +59,15 @@ e.g.
 
 1. Navigate to the 'Add New' in the plugins dashboard
 2. Navigate to the 'Upload' area
-3. Select `mz-mindbody-classes.zip` from your computer
+3. Select `intensity-on-demand.zip` from your computer
 4. Click 'Install Now'
 5. Activate the plugin in the Plugin dashboard
 
 = Using FTP =
 
-1. Download `mz-mindbody-classes.zip`
-2. Extract the `mz-mindbody-classes` directory to your computer
-3. Upload the `mz-mindbody-classes` directory to the `/wp-content/plugins/` directory
+1. Download `intensity-on-demand.zip`
+2. Extract the `intensity-on-demand` directory to your computer
+3. Upload the `intensity-on-demand` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
 == Frequently Asked Questions ==

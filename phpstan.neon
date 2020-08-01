@@ -19,7 +19,7 @@ parameters:
         - %currentWorkingDirectory%/tests
         - integrations/Widgets/
     scanFiles:
-        - mz-mindbody-classes.php
+        - intensity-on-demand.php
         - vendor/freemius/wordpress-sdk/start.php
         - vendor/cmb2-grid/Cmb2GridPluginLoad.php
     ignoreErrors:

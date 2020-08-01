@@ -11,4 +11,4 @@ echo " - Run Codeception"
 
 ./tests/custom.sh
 
-codecept run "$1"
+php vendor/bin/codecept run "$1"

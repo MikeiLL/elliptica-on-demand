@@ -36,5 +36,5 @@ intermediate
 cache
 vendor
 tests/_output
-/mz-mindbody-classes/vendor/
+/intensity-on-demand/vendor/
 tests/_support/_generated

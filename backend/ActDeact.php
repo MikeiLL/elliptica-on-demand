@@ -218,9 +218,9 @@ class ActDeact extends Engine\Base {
 	 */
 	public static function upgrade_procedure() {
 		if ( is_admin() ) {
-			$version = get_option( 'mz-mindbody-classes-version' );
+			$version = get_option( 'intensity-on-demand-version' );
 			if ( version_compare( MMC_VERSION, $version, '>' ) ) {
-				update_option( 'mz-mindbody-classes-version', MMC_VERSION );
+				update_option( 'intensity-on-demand-version', MMC_VERSION );
 				delete_option( MMC_TEXTDOMAIN . '_fake-meta' );
 			}
 		}
