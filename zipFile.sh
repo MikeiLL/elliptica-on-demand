@@ -28,7 +28,7 @@ if [ ! -f "$fullpathfile" ]; then
     exit 1
 fi
 
-mktemp -d "/tmp/$originalfoldername"
+# mktemp -d "/tmp/$originalfoldername"
 foldername="/tmp/$originalfoldername"
 
 cd "$pluginfolder" || exit
@@ -54,7 +54,7 @@ cd "$foldername" || exit
 
 echo "-Generating the zip in progress in $foldername..."
 
-ls $foldername
+ls "$foldername"
 
 echo "-Cleaning in Progress..."
 rm -rf ./.git*

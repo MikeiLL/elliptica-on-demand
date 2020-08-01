@@ -45,7 +45,7 @@ class CMB extends Engine\Base {
             array(
 			'id'           => $prefix . 'metabox',
 			'title'        => __( 'On Demand Class Custom Fields', MMC_TEXTDOMAIN ),
-			'object_types' => array( 'elliptica_on_demand_video' ),
+			'object_types' => array( 'elliptica_od_video' ),
 			'context'      => 'normal',
 			'priority'     => 'high',
 			'show_names'   => true, // Show field names on the left

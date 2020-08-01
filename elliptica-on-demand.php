@@ -131,7 +131,7 @@ function mmc_fs() {
 
 // Documentation to integrate GitHub, GitLab or BitBucket https://github.com/YahnisElsts/plugin-update-checker/blob/master/README.md
 $my_update_checker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/git@github.com:MikeiLL/elliptica-on-demand',
+	'https://github.com/MikeiLL/elliptica-on-demand',
 	__FILE__,
 	'elliptica-on-demand'
 );

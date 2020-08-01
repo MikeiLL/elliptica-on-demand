@@ -29,13 +29,13 @@ class PostTypes extends Engine\Base {
 		/*
 		* Custom Columns
 		*/
-		// $post_columns = new \CPT_columns( 'elliptica_on_demand_video' );
+		// $post_columns = new \CPT_columns( 'elliptica_od_video' );
 		// $post_columns->add_column(
-		// 	'elliptica_on_demand_video_date',
+		// 	'elliptica_od_video_date',
 		// 	array(
 		// 		'label'    => __( 'Class Date', MMC_TEXTDOMAIN ),
 		// 		'type'     => 'post_meta',
-		// 		'meta_key' => '_elliptica_on_demand_video_' . MMC_TEXTDOMAIN . '_date', // phpcs:ignore WordPress.DB
+		// 		'meta_key' => '_elliptica_od_video_' . MMC_TEXTDOMAIN . '_date', // phpcs:ignore WordPress.DB
 		// 		'orderby'  => 'meta_value',
 		// 		'sortable' => true,
 		// 		'prefix'   => '<b>',
@@ -50,14 +50,14 @@ class PostTypes extends Engine\Base {
 		/*
 		* Custom Bulk Actions
 		*/
-		$bulk_actions = new \Seravo_Custom_Bulk_Action( array( 'post_type' => 'elliptica_on_demand_video' ) );
+		$bulk_actions = new \Seravo_Custom_Bulk_Action( array( 'post_type' => 'elliptica_od_video' ) );
 		$bulk_actions->register_bulk_action(
 			array(
 				'menu_text'    => 'Mark meta',
 				'admin_notice' => 'Written something on custom bulk meta',
 				'callback'     => function( $post_ids ) {
 					foreach ( $post_ids as $post_id ) {
-						update_post_meta( $post_id, '_elliptica_on_demand_video_' . MMC_TEXTDOMAIN . '_text', 'Random stuff' );
+						update_post_meta( $post_id, '_elliptica_od_video_' . MMC_TEXTDOMAIN . '_text', 'Random stuff' );
 					}
 
 					return true;
@@ -100,7 +100,7 @@ class PostTypes extends Engine\Base {
 	 */
 	public function load_cpts() {
 		// Create Custom Post Type https://github.com/johnbillion/extended-cpts/wiki
-		register_extended_post_type( 'elliptica_on_demand_video', [
+		register_extended_post_type( 'elliptica_od_video', [
 
 		# Add the post type to the site's main RSS feed:
 		'show_in_feed' => true,
@@ -115,22 +115,22 @@ class PostTypes extends Engine\Base {
 
 		# Add some custom columns to the admin screen:
 		'admin_cols' => [
-			'elliptica_on_demand_video_featured_image' => [
+			'elliptica_od_video_featured_image' => [
 				'title'          => 'Class Image',
 				'featured_image' => 'thumbnail'
 			],
-			'elliptica_on_demand_video_date_col' => [
+			'elliptica_od_video_date_col' => [
 				'title_icon'  => 'dashicons-calendar-alt',
 				'meta_key'    => '_elliptica_on_demand_' . MMC_TEXTDOMAIN . '_date',
 				'date_format' => 'd/m/Y'
 			],
-			'elliptica_on_demand_video_music_style' => [
+			'elliptica_od_video_music_style' => [
 				'taxonomy' => 'music_style'
 			],
-			'elliptica_on_demand_video_fitness_level' => [
+			'elliptica_od_video_fitness_level' => [
 				'taxonomy' => 'fitness_level'
 			],
-			'elliptica_on_demand_video_instructor' => [
+			'elliptica_od_video_instructor' => [
 				'meta_key'    => '_elliptica_on_demand_' . MMC_TEXTDOMAIN . '_instructor',
 			],
 		],
@@ -138,7 +138,7 @@ class PostTypes extends Engine\Base {
 
 		# Add some dropdown filters to the admin screen:
 		'admin_filters' => [
-			'elliptica_on_demand_video_music_style' => [
+			'elliptica_od_video_music_style' => [
 				'taxonomy' => 'music_style'
 			],
 		],
@@ -148,16 +148,16 @@ class PostTypes extends Engine\Base {
 		# Override the base names used for labels:
 		'singular' => 'On Demand Video',
 		'plural'   => 'On Demand Videos',
-		'slug'     => 'elliptica_on_demand_video',
+		'slug'     => 'elliptica_od_video',
 
 	] );
 	// Create Custom Taxonomy https://github.com/johnbillion/extended-taxos
-	register_extended_taxonomy( 'music_style', 'elliptica_on_demand_video', [
+	register_extended_taxonomy( 'music_style', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
 
 	] );
-	register_extended_taxonomy( 'fitness_level', 'elliptica_on_demand_video', [
+	register_extended_taxonomy( 'fitness_level', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
 
@@ -178,7 +178,7 @@ class PostTypes extends Engine\Base {
 	public function pending_cpt_bubble() {
 		global $menu;
 
-		$post_types = array( 'elliptica_on_demand_video' );
+		$post_types = array( 'elliptica_od_video' );
 		foreach ( $post_types as $type ) {
 			if ( !post_type_exists( $type ) ) {
 				continue;
