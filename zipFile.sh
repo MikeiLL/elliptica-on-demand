@@ -111,7 +111,7 @@ if [ -s './composer.json' ]; then
 
     if [ "$dep" == 'true' ]; then
         echo "-Downloading clean composer dependencies..."
-        composer update --no-dev &> /dev/null
+        composer update --no-dev # &> /dev/null
         echo "-Running composer dumpautoload -o"
         composer dumpautoload -o
     else

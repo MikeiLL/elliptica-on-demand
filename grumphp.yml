@@ -14,6 +14,7 @@ parameters:
       - php
     git_blacklist:
       keywords:
+      - print_r(
       - var_dump(
       triggered_by:
       - php

@@ -76,9 +76,9 @@ $requirements = new \Micropackage\Requirements\Requirements(
 			'php'            => MMC_MIN_PHP_VERSION,
 			'php_extensions' => array( 'mbstring' ),
 			'wp'             => MMC_MIN_WP_VERSION,
-			'plugins'            => array(
-				array( 'file' => 'mz-mindbody-api/mz-mindbody.php', 'name' => 'MZ Mindbody API', 'version' => '1.5' )
-			),
+			// 'plugins'            => array(
+			// 	array( 'file' => 'mz-mindbody-api/mz-mindbody.php', 'name' => 'MZ Mindbody API', 'version' => '1.5' )
+			// ),
 		)
     );
 if ( ! $requirements->satisfied() ) {
