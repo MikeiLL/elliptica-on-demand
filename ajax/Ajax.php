@@ -23,7 +23,7 @@ class Ajax extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !apply_filters( 'mz_mindbody_classes_mmc_ajax_initialize', true ) ) {
+		if ( !apply_filters( 'intensity_on_demand_mmc_ajax_initialize', true ) ) {
 			return;
 		}
 

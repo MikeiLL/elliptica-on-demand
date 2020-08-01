@@ -49,11 +49,11 @@ class Notices extends Engine\Base {
 		 * Alert after few days to suggest to contribute to the localization if it is incomplete
 		 * on translate.wordpress.org, the filter enables to remove globally.
 		 */
-		if ( apply_filters( 'mz_mindbody_classes_alert_localization', true ) ) {
+		if ( apply_filters( 'intensity_on_demand_alert_localization', true ) ) {
 			new Yoast_I18n_WordPressOrg_V3(
 			array(
 				'textdomain'  => MMC_TEXTDOMAIN,
-				'mz_mindbody_classes' => MMC_NAME,
+				'intensity_on_demand' => MMC_NAME,
 				'hook'        => 'admin_notices',
 			),
 			true

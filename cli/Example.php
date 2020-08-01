@@ -29,7 +29,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
          * @return void
          */
         public function initialize() {
-            if ( !apply_filters( 'mz_mindbody_classes_mmc_enqueue_admin_initialize', true ) ) {
+            if ( !apply_filters( 'intensity_on_demand_mmc_enqueue_admin_initialize', true ) ) {
                 return;
             }
 

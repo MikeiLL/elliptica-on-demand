@@ -83,13 +83,13 @@ class Initialize {
      * @since 1.0.0
      */
 	private function load_classes() {
-		$this->classes = apply_filters( 'mz_mindbody_classes_classes_to_execute', $this->classes );
+		$this->classes = apply_filters( 'intensity_on_demand_classes_to_execute', $this->classes );
 		foreach ( $this->classes as $class ) {
 			try {
 				$temp = new $class;
 				$temp->initialize();
 			} catch ( Exception $err ) {
-				do_action( 'mz_mindbody_classes_initialize_failed', $err );
+				do_action( 'intensity_on_demand_initialize_failed', $err );
 				if ( WP_DEBUG ) {
 					throw new Exception( $err->getMessage() );
 				}

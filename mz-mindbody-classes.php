@@ -63,7 +63,7 @@ if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	return;
 }
 
-$mz_mindbody_classes_libraries = require_once MMC_PLUGIN_ROOT . 'vendor/autoload.php';
+$intensity_on_demand_libraries = require_once MMC_PLUGIN_ROOT . 'vendor/autoload.php';
 
 require_once MMC_PLUGIN_ROOT . 'functions/functions.php';
 require_once MMC_PLUGIN_ROOT . 'functions/debug.php';
@@ -139,8 +139,8 @@ $my_update_checker = Puc_v4_Factory::buildUpdateChecker(
 if ( ! wp_installing() ) {
 	add_action(
         'plugins_loaded',
-        function () use ( $mz_mindbody_classes_libraries ) {
-			new \Intensity_On_Demand\Engine\Initialize( $mz_mindbody_classes_libraries );
+        function () use ( $intensity_on_demand_libraries ) {
+			new \Intensity_On_Demand\Engine\Initialize( $intensity_on_demand_libraries );
 		}
     );
 }
