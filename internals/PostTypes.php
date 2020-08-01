@@ -121,7 +121,7 @@ class PostTypes extends Engine\Base {
 			],
 			'elliptica_od_video_date_col' => [
 				'title_icon'  => 'dashicons-calendar-alt',
-				'meta_key'    => '_elliptica_on_demand_' . MMC_TEXTDOMAIN . '_date',
+				'meta_key'    => '_elliptica_od_' . MMC_TEXTDOMAIN . '_date',
 				'date_format' => 'd/m/Y'
 			],
 			'elliptica_od_video_music_style' => [
@@ -131,7 +131,8 @@ class PostTypes extends Engine\Base {
 				'taxonomy' => 'fitness_level'
 			],
 			'elliptica_od_video_instructor' => [
-				'meta_key'    => '_elliptica_on_demand_' . MMC_TEXTDOMAIN . '_instructor',
+				'title'          => 'Instructor',
+				'meta_key'    => '_elliptica_od_' . MMC_TEXTDOMAIN . '_instructor',
 			],
 		],
 		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],

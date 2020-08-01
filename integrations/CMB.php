@@ -40,7 +40,7 @@ class CMB extends Engine\Base {
 	 */
 	public function cmb_elliptica_od_metaboxes() {
 		// Start with an underscore to hide fields from custom fields list
-		$prefix   = '_elliptica_on_demand_';
+		$prefix   = '_elliptica_od_';
 		$cmb_elliptica_od_mb = new_cmb2_box(
             array(
 			'id'           => $prefix . 'metabox',
