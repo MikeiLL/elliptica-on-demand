@@ -121,11 +121,17 @@ class PostTypes extends Engine\Base {
 			],
 			'mindbody_class_date_col' => [
 				'title_icon'  => 'dashicons-calendar-alt',
-				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_text',
+				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_date',
 				'date_format' => 'd/m/Y'
 			],
 			'mindbody_class_music_style' => [
 				'taxonomy' => 'music_style'
+			],
+			'mindbody_class_fitness_level' => [
+				'taxonomy' => 'fitness_level'
+			],
+			'mindbody_class_instructor' => [
+				'meta_key'    => '_mindbody_classes_' . MMC_TEXTDOMAIN . '_instructor',
 			],
 		],
 		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],
@@ -151,7 +157,7 @@ class PostTypes extends Engine\Base {
 		'dashboard_glance' => true,
 
 	] );
-	register_extended_taxonomy( 'difficulty_level', 'mindbody_class', [
+	register_extended_taxonomy( 'fitness_level', 'mindbody_class', [
 
 		'dashboard_glance' => true,
 
