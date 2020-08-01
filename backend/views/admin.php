@@ -5,7 +5,7 @@
  * This includes the header, options, and other information that should provide
  * The User Interface to the end user.
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+

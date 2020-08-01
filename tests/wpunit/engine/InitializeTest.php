@@ -1,6 +1,6 @@
 <?php
 
-namespace Intensity_On_Demand\Tests\WPUnit;
+namespace Elliptica_On_Demand\Tests\WPUnit;
 
 class InitializeTest extends \Codeception\TestCase\WPTestCase {
 	/**
@@ -44,18 +44,18 @@ class InitializeTest extends \Codeception\TestCase\WPTestCase {
 		$sut = $this->make_instance();
 
 		$classes   = array();
-		$classes[] = 'Intensity_On_Demand\Internals\PostTypes';
-		$classes[] = 'Intensity_On_Demand\Internals\Shortcode';
-		$classes[] = 'Intensity_On_Demand\Internals\Transient';
-		$classes[] = 'Intensity_On_Demand\Integrations\CMB';
-		$classes[] = 'Intensity_On_Demand\Integrations\Cron';
-		$classes[] = 'Intensity_On_Demand\Integrations\FakePage';
-		$classes[] = 'Intensity_On_Demand\Integrations\Template';
-		$classes[] = 'Intensity_On_Demand\Integrations\Widgets';
- 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax';
- 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax_Admin';
-		$classes[] = 'Intensity_On_Demand\Frontend\Enqueue';
-		$classes[] = 'Intensity_On_Demand\Frontend\extras\Body_Class';
+		$classes[] = 'Elliptica_On_Demand\Internals\PostTypes';
+		$classes[] = 'Elliptica_On_Demand\Internals\Shortcode';
+		$classes[] = 'Elliptica_On_Demand\Internals\Transient';
+		$classes[] = 'Elliptica_On_Demand\Integrations\CMB';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Cron';
+		$classes[] = 'Elliptica_On_Demand\Integrations\FakePage';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Template';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Widgets';
+ 		$classes[] = 'Elliptica_On_Demand\Ajax\Ajax';
+ 		$classes[] = 'Elliptica_On_Demand\Ajax\Ajax_Admin';
+		$classes[] = 'Elliptica_On_Demand\Frontend\Enqueue';
+		$classes[] = 'Elliptica_On_Demand\Frontend\extras\Body_Class';
 
 		$this->assertEquals( $classes, $sut->classes );
 	}

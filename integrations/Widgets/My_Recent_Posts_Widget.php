@@ -1,14 +1,14 @@
 <?php
 /**
- * Intensity_On_Demand
+ * Elliptica_On_Demand
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Integrations\Widgets;
+namespace Elliptica_On_Demand\Integrations\Widgets;
 
 /**
  * Create custom widget class extending WPH_Widget
@@ -199,7 +199,7 @@ class My_Recent_Posts_Widget extends \WPH_Widget {
 		add_action(
 		'widgets_init',
 		function() {
-			register_widget( 'Intensity_On_Demand\Integrations\Widgets\My_Recent_Posts_Widget' );
+			register_widget( 'Elliptica_On_Demand\Integrations\Widgets\My_Recent_Posts_Widget' );
 		}
 		);
 	}

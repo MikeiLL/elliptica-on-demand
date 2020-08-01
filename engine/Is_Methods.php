@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Intensity_On_Demand
+ * Elliptica_On_Demand
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Engine;
+namespace Elliptica_On_Demand\Engine;
 
 /**
  * Plugin Name Is Methods

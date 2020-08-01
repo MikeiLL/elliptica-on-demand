@@ -48,7 +48,7 @@ msgid "Click here to review"
 msgstr ""
 
 #: admin/class-admin-settings-page.php:57
-msgid "Intensity On Demand Settings"
+msgid "Elliptica On Demand Settings"
 msgstr ""
 
 #: admin/class-admin-settings-page.php:83 admin/views/admin.php:22
@@ -393,7 +393,7 @@ msgid "Plugin Name"
 msgstr ""
 
 #: intensity-on-demand.php:64
-msgid "\"Intensity On Demand\" requires PHP 5.6 or newer."
+msgid "\"Elliptica On Demand\" requires PHP 5.6 or newer."
 msgstr ""
 
 #: public/class-enqueue.php:77

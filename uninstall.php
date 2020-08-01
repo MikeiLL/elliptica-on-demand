@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Intensity_On_Demand
+ * Elliptica_On_Demand
  *
  * Fired when the plugin is uninstalled.
  *
@@ -15,7 +15,7 @@
  * - Repeat with other user roles. Best directly by using the links/query string parameters.
  * - Repeat things for multisite. Once for a single site in the network, once sitewide.
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+

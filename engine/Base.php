@@ -9,7 +9,7 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Engine;
+namespace Elliptica_On_Demand\Engine;
 
 /**
  * Base skeleton of the plugin

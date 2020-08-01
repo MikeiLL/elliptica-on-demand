@@ -8,9 +8,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Frontend\Extras;
+namespace Elliptica_On_Demand\Frontend\Extras;
 
-use \Intensity_On_Demand\Engine;
+use \Elliptica_On_Demand\Engine;
 
 /**
  * Add custom css class to <body>

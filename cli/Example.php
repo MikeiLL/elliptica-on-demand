@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Intensity_On_Demand
+ * Elliptica_On_Demand
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Cli;
+namespace Elliptica_On_Demand\Cli;
 
-use \Intensity_On_Demand\Engine;
+use \Elliptica_On_Demand\Engine;
 use \WP_CLI as WP_CLI;
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {

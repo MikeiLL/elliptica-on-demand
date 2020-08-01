@@ -1,6 +1,6 @@
 <?php
 
-namespace Intensity_On_Demand\Tests\WPUnit;
+namespace Elliptica_On_Demand\Tests\WPUnit;
 
 class AdminAjaxTest extends \Codeception\TestCase\WPAjaxTestCase {
 

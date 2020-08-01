@@ -9,9 +9,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Ajax;
+namespace Elliptica_On_Demand\Ajax;
 
-use \Intensity_On_Demand\Engine;
+use \Elliptica_On_Demand\Engine;
 
 /**
  * AJAX as logged user

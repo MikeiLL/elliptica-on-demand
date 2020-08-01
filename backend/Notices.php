@@ -8,9 +8,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Backend;
+namespace Elliptica_On_Demand\Backend;
 
-use \Intensity_On_Demand\Engine;
+use \Elliptica_On_Demand\Engine;
 use Yoast_I18n_WordPressOrg_v3;
 use \WP_Review_Me as WP_Review_Me;
 

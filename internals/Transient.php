@@ -9,9 +9,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Internals;
+namespace Elliptica_On_Demand\Internals;
 
-use \Intensity_On_Demand\Engine;
+use \Elliptica_On_Demand\Engine;
 
 /**
  * Transient used by the plugin

@@ -1,6 +1,6 @@
 <?php
 
-namespace Intensity_On_Demand\Tests\WPUnit;
+namespace Elliptica_On_Demand\Tests\WPUnit;
 
 class InitializeAdminTest extends \Codeception\TestCase\WPTestCase {
 	/**
@@ -35,22 +35,22 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase {
 		$sut = $this->make_instance();
 
 		$classes   = array();
-		$classes[] = 'Intensity_On_Demand\Internals\PostTypes';
-		$classes[] = 'Intensity_On_Demand\Internals\Shortcode';
-		$classes[] = 'Intensity_On_Demand\Internals\Transient';
-		$classes[] = 'Intensity_On_Demand\Integrations\CMB';
-		$classes[] = 'Intensity_On_Demand\Integrations\Cron';
-		$classes[] = 'Intensity_On_Demand\Integrations\FakePage';
-		$classes[] = 'Intensity_On_Demand\Integrations\Template';
-		$classes[] = 'Intensity_On_Demand\Integrations\Widgets';
- 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax';
- 		$classes[] = 'Intensity_On_Demand\Ajax\Ajax_Admin';
-		$classes[] = 'Intensity_On_Demand\Backend\ActDeact';
-		$classes[] = 'Intensity_On_Demand\Backend\Enqueue';
-		$classes[] = 'Intensity_On_Demand\Backend\ImpExp';
-		$classes[] = 'Intensity_On_Demand\Backend\Notices';
-		$classes[] = 'Intensity_On_Demand\Backend\Pointers';
-		$classes[] = 'Intensity_On_Demand\Backend\Settings_Page';
+		$classes[] = 'Elliptica_On_Demand\Internals\PostTypes';
+		$classes[] = 'Elliptica_On_Demand\Internals\Shortcode';
+		$classes[] = 'Elliptica_On_Demand\Internals\Transient';
+		$classes[] = 'Elliptica_On_Demand\Integrations\CMB';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Cron';
+		$classes[] = 'Elliptica_On_Demand\Integrations\FakePage';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Template';
+		$classes[] = 'Elliptica_On_Demand\Integrations\Widgets';
+ 		$classes[] = 'Elliptica_On_Demand\Ajax\Ajax';
+ 		$classes[] = 'Elliptica_On_Demand\Ajax\Ajax_Admin';
+		$classes[] = 'Elliptica_On_Demand\Backend\ActDeact';
+		$classes[] = 'Elliptica_On_Demand\Backend\Enqueue';
+		$classes[] = 'Elliptica_On_Demand\Backend\ImpExp';
+		$classes[] = 'Elliptica_On_Demand\Backend\Notices';
+		$classes[] = 'Elliptica_On_Demand\Backend\Pointers';
+		$classes[] = 'Elliptica_On_Demand\Backend\Settings_Page';
 
 		$this->assertTrue( is_admin() );
 		$this->assertEquals( $classes, $sut->classes );

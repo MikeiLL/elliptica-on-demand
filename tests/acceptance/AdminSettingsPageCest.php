@@ -20,7 +20,7 @@ class AdminSettingsPageCest {
     function add_action_link(AcceptanceTester $I) {
 		$I->wantTo('check plugin list page if include mine');
         $I->amOnPluginsPage();
-        $I->see('Intensity On Demand', 'tr.active[data-plugin="intensity-on-demand/intensity-on-demand.php"] td strong');
+        $I->see('Elliptica On Demand', 'tr.active[data-plugin="intensity-on-demand/intensity-on-demand.php"] td strong');
     }
 
 }

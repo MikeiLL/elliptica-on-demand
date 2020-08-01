@@ -2,13 +2,13 @@
 
 /**
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  *
- * Plugin Name:     Intensity On Demand
+ * Plugin Name:     Elliptica On Demand
  * Plugin URI:      @TODO
  * Description:     @TODO
  * Version:         1.0.0
@@ -28,7 +28,7 @@ if ( !defined( 'ABSPATH' ) ) {
 
 define( 'MMC_VERSION', '1.0.0' );
 define( 'MMC_TEXTDOMAIN', 'intensity-on-demand' );
-define( 'MMC_NAME', 'Intensity On Demand' );
+define( 'MMC_NAME', 'Elliptica On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
@@ -140,7 +140,7 @@ if ( ! wp_installing() ) {
 	add_action(
         'plugins_loaded',
         function () use ( $intensity_on_demand_libraries ) {
-			new \Intensity_On_Demand\Engine\Initialize( $intensity_on_demand_libraries );
+			new \Elliptica_On_Demand\Engine\Initialize( $intensity_on_demand_libraries );
 		}
     );
 }

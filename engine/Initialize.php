@@ -1,17 +1,17 @@
 <?php
 
 /**
- * Intensity_On_Demand
+ * Elliptica_On_Demand
  *
- * @package   Intensity_On_Demand
+ * @package   Elliptica_On_Demand
  * @author    Mike iLL <mike@mzoo.org>
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Intensity_On_Demand\Engine;
+namespace Elliptica_On_Demand\Engine;
 
-use Intensity_On_Demand\Engine;
+use Elliptica_On_Demand\Engine;
 use \Exception as Exception;
 /**
  * Plugin Name Initializer
@@ -109,10 +109,10 @@ class Initialize {
 	private function get_classes( string $namespace ) {
 		$prefix    = $this->composer->getPrefixesPsr4();
 		$classmap  = $this->composer->getClassMap();
-		$namespace = 'Intensity_On_Demand\\' . $namespace;
+		$namespace = 'Elliptica_On_Demand\\' . $namespace;
 
 		// In case composer has autoload optimized
-		if ( isset( $classmap[ 'Intensity_On_Demand\\Engine\\Initialize' ] ) ) {
+		if ( isset( $classmap[ 'Elliptica_On_Demand\\Engine\\Initialize' ] ) ) {
 			$classes = array_keys( $classmap );
 			foreach ( $classes as $class ) {
 				if ( strncmp( (string) $class, $namespace, strlen( $namespace ) ) === 0 ) {
