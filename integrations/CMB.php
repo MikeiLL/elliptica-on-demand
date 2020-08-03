@@ -53,36 +53,83 @@ class CMB extends Engine\Base {
             );
 		$cmb2Grid = new Cmb2Grid( $cmb_elliptica_od_mb ); //phpcs:ignore WordPress.NamingConventions
 		$row      = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
+
 		$datetime = $cmb_elliptica_od_mb->add_field(
             array(
 			'name' => __( 'Date and Time of Class', MMC_TEXTDOMAIN ),
 			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),
 			'id'   => $prefix . MMC_TEXTDOMAIN . '_date',
+			'data-validation' => 'required',
 			'type' => 'text_datetime_timestamp',
 				)
             );
 
-        $class_length = $cmb_elliptica_od_mb->add_field(
+
+		$datetime = $cmb_elliptica_od_mb->add_field(
             array(
-			'name' => __( 'Class Length', MMC_TEXTDOMAIN ),
-			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_length',
+			'name' => __( 'ID of Video', MMC_TEXTDOMAIN ),
+			'desc' => __( 'What you see at end of http address', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_video_id',
+			'data-validation' => 'required',
 			'type' => 'text',
 				)
             );
 
-        $instructor = $cmb_elliptica_od_mb->add_field(
-            array(
-			'name' => __( 'Instructor', MMC_TEXTDOMAIN ),
-			'desc' => __( 'Searchable', MMC_TEXTDOMAIN ),
-			'id'   => $prefix . MMC_TEXTDOMAIN . '_instructor',
-			'type' => 'text',
-				)
-            );
+        $class_plan = $cmb_elliptica_od_mb->add_field( array(
+			'id'          => $prefix . MMC_TEXTDOMAIN . '_classplan',
+			'type'        => 'group',
+			'description' => __( 'Generates reusable form entries', 'cmb2' ),
+			'repeatable'  => true, // use false if you want non-repeatable group
+			'options'     => array(
+				'group_title'       => __( 'Segment {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+				'add_button'        => __( 'Add Another Segment', 'cmb2' ),
+				'remove_button'     => __( 'Remove Segment', 'cmb2' ),
+				'sortable'          => true,
+				// 'closed'         => true, // true to have the groups closed by default
+				'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation before removing group.
+			),
+		) );
 
-		$row->addColumns( array( $datetime, $class_length ) );
+		// Id's for group's fields only need to be unique for the group. Prefix is not needed.
+		$cmb_elliptica_od_mb->add_group_field( $class_plan, array(
+			'name' => 'Song Title',
+			'id'   => 'song_title',
+			'type' => 'text',
+			// 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
+		) );
+
+		$cmb_elliptica_od_mb->add_group_field( $class_plan, array(
+			'name' => 'Song Artists',
+			'description' => 'Name(s)',
+			'id'   => 'song_artists',
+			'type' => 'text',
+		) );
+
+		$cmb_elliptica_od_mb->add_group_field( $class_plan, array(
+			'name' => 'Song Artwork',
+			'description' => 'Starts http:// or https://',
+			'id'   => 'song_artwork',
+			'type' => 'text',
+		) );
+
+		$cmb_elliptica_od_mb->add_group_field( $class_plan, array(
+			'name' => 'Segment Type',
+			'description' => 'What role does this segment play in the workout',
+			'id'   => 'segment_type',
+			'type' => 'text',
+		) );
+
+		$cmb_elliptica_od_mb->add_group_field( $class_plan, array(
+			'name' => 'Segment Duration',
+			'id'   => 'segment_duration',
+			'type' => 'text',
+			'description' => 'Just number, app adds "minutes".',
+		) );
+
+
+		$row->addColumns( array( $datetime ) );
 		$row = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
-		$row->addColumns( array( $instructor ) );
+		$row->addColumns( array( $class_plan ) );
 	}
 
 }

@@ -132,7 +132,7 @@ class PostTypes extends Engine\Base {
 			],
 			'elliptica_od_video_instructor' => [
 				'title'          => 'Instructor',
-				'meta_key'    => '_elliptica_od_' . MMC_TEXTDOMAIN . '_instructor',
+				'taxonomy' => 'class_instructor'
 			],
 		],
 		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],
@@ -159,6 +159,21 @@ class PostTypes extends Engine\Base {
 
 	] );
 	register_extended_taxonomy( 'fitness_level', 'elliptica_od_video', [
+
+		'dashboard_glance' => true,
+
+	] );
+	register_extended_taxonomy( 'difficluty_level', 'elliptica_od_video', [
+
+		'dashboard_glance' => true,
+
+	] );
+	register_extended_taxonomy( 'class_length', 'elliptica_od_video', [
+
+		'dashboard_glance' => true,
+
+	] );
+	register_extended_taxonomy( 'class_instructor', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
 

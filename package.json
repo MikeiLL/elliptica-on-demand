@@ -2,7 +2,7 @@
 	"name": "elliptica-on-demand",
 	"version": "1.0.0",
 	"description": "",
-	"author": "Your Name <email@example.com>",
+	"author": "Mike iLL <mike@mzoo.org>",
 	"devDependencies": {
 		"grunt": "*",
 		"grunt-contrib-watch": "*",

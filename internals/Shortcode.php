@@ -12,6 +12,7 @@
 namespace Elliptica_On_Demand\Internals;
 
 use \Elliptica_On_Demand\Engine;
+use \WP_Query as WP_Query;
 
 /**
  * Shortcodes of this plugin
@@ -26,7 +27,7 @@ class Shortcode extends Engine\Base {
 	 */
 	public function initialize() {
 		parent::initialize();
-        add_shortcode( 'mindbody-classes', array( $this, 'elliptica_on_demand' ) );
+        add_shortcode( 'on-demand-videos', array( $this, 'elliptica_on_demand' ) );
 	}
 
 	/**
@@ -43,18 +44,28 @@ class Shortcode extends Engine\Base {
 	public static function elliptica_on_demand( $atts ) {
 		shortcode_atts(
 			array(
-				'foo' => 'something',
-				'bar' => 'something else',
+				'blank' => 'something',
 			),
             $atts
 		);
+		$query = new WP_Query(array(
+			'post_type' => 'elliptica_od_video',
+			'post_status' => 'publish',
+			'posts_per_page' => -1,
+		));
 
+		$return = '';
 
+		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
+			the_title();
 
-		echo "</pre>";
+			$post_id = get_the_ID();
+			$return .= '<div class="od-video">';
+			the_content();
+			$return .=  '</div>';
+		endwhile; endif;
 
-		return '<span class="foo">foo = ' . $atts[ 'foo' ] . '</span>' .
-			'<span class="bar">bar = ' . $atts[ 'bar' ] . '</span>';
+		return $return;
 	}
 
 }
