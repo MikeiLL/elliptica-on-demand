@@ -20,6 +20,18 @@ use \WP_Query as WP_Query;
  */
 class Shortcode extends Engine\Base {
 
+
+    /**
+     * If shortcode script has been enqueued.
+     *
+     * @since    2.4.7
+     * @access   public
+     *
+     * @used in handleShortcode, addScript
+     * @var      boolean $addedAlready True if shorcdoe scripts have been enqueued.
+     */
+    static $addedAlready = false;
+
 	/**
 	 * Initialize the class.
 	 *
@@ -54,19 +66,53 @@ class Shortcode extends Engine\Base {
 			'posts_per_page' => -1,
 		));
 
-		$return = '';
+		// Add Style with script adder
+        self::addScript();
+
+		$return = '<div id="elliptica_od_videos">';
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
-			the_title();
+			$return .= '<div class="all od-video">';
+			$return .= get_the_title();
 
 			$post_id = get_the_ID();
-			$return .= '<div class="od-video">';
-			the_content();
+			$return .= the_content();
 			$return .=  '</div>';
 		endwhile; endif;
 
 		return $return;
 	}
+
+
+    public function addScript()
+    {
+        if (!self::$addedAlready) {
+            self::$addedAlready = true;
+
+            wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
+            wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos');
+
+            wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION );
+            wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope');
+
+            wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope' ), MMC_VERSION );
+            wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos');
+
+            $this->localizeScript();
+        }
+    }
+
+    public function localizeScript()
+    {
+
+        $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+
+        $params = array(
+            'ajaxurl' => admin_url('admin-ajax.php', $protocol),
+            'alert' => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
+       );
+        wp_localize_script( MMC_TEXTDOMAIN . '-od-videos', 'mmc_js_vars', $params);
+    }
 
 }
 
