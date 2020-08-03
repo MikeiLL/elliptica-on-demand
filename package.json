@@ -5,7 +5,13 @@
 	"author": "Mike iLL <mike@mzoo.org>",
 	"devDependencies": {
 		"grunt": "*",
-		"grunt-contrib-watch": "*",
-		"grunt-contrib-compass": "*"
+		"grunt-contrib-clean": "^2.0.0",
+		"grunt-contrib-jshint": "^2.1.0",
+		"grunt-contrib-sass": "^1.0.0",
+		"grunt-contrib-uglify": "^5.0.0",
+		"grunt-contrib-watch": "^1.1.0"
+	},
+	"dependencies": {
+		"isotope-layout": "^3.0.6"
 	}
 }
