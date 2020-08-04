@@ -3,6 +3,9 @@
   "eqeqeq": true,
   "undef": true,
   "globals": {
-    "jQuery": true
+    "jQuery": true,
+    "$": true,
+    "document": true,
+    "module": true
   }
 }
