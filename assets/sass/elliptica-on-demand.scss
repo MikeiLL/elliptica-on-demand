@@ -1,4 +1,10 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
-.test {
-	display:none;
+.od-video,
+.grid-sizer {
+	width:300px;
+	height:175px;
+	border:1px solid green;
+	background-repeat:none;
+	background-position:center;
+	background-size:contain;
 }

@@ -3,14 +3,14 @@
  */
 jQuery(document).ready(function( $ ) {
 // Write in console log the PHP value passed in enqueue_js_vars in public/class-plugin-name.php
-    console.log(mmc_js_vars.alert);
-    //var container = $('#elliptica_od_videos');
+    var container = $('#elliptica_od_videos');
 
-    $('#elliptica_od_videos').isotope({
+    container.isotope({
 	  // options...
 	  itemSelector: '.od-video',
+  	  percentPosition: true,
 	  masonry: {
-		columnWidth: 200
+		columnWidth: '.grid-sizer'
 	  }
 	});
 
