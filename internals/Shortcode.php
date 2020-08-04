@@ -72,7 +72,6 @@ class Shortcode extends Engine\Base {
 		$return = '<div id="elliptica_od_videos">';
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
-			$return .= '<div class="grid-sizer"></div>';
 			$return .= '<a href="' . get_the_permalink() . '">';
 			$return .= '<div class="all od-video"';
 			if (has_post_thumbnail( $post->ID ) ):
@@ -83,7 +82,6 @@ class Shortcode extends Engine\Base {
 			$return .= get_the_title();
 
 			$post_id = get_the_ID();
-			$return .= the_content();
 			$return .=  '</div>';
 			$return .= '</a>';
 		endwhile; endif;

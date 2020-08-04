@@ -10,7 +10,7 @@ jQuery(document).ready(function( $ ) {
 	  itemSelector: '.od-video',
   	  percentPosition: true,
 	  masonry: {
-		columnWidth: '.grid-sizer'
+		columnWidth: 300
 	  }
 	});
 
