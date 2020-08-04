@@ -105,6 +105,9 @@ class PostTypes extends Engine\Base {
 		# Add the post type to the site's main RSS feed:
 		'show_in_feed' => true,
 
+		'menu_icon'	=> 'dashicons-desktop',
+
+
 		# Show all posts on the post type archive:
 		'archive' => [
 			'nopaging' => true,
@@ -127,15 +130,15 @@ class PostTypes extends Engine\Base {
 			'elliptica_od_video_music_style' => [
 				'taxonomy' => 'music_style'
 			],
-			'elliptica_od_video_fitness_level' => [
-				'taxonomy' => 'fitness_level'
+			'elliptica_od_video_difficulty_level' => [
+				'taxonomy' => 'difficulty_level'
 			],
 			'elliptica_od_video_instructor' => [
 				'title'          => 'Instructor',
 				'taxonomy' => 'class_instructor'
 			],
 		],
-		'supports'            => ['title', 'editor', 'thumbnail', 'revisions', 'custom-fields', ],
+		'supports'            => ['title', 'thumbnail', 'revisions' ],
 
 		# Add some dropdown filters to the admin screen:
 		'admin_filters' => [
@@ -158,12 +161,7 @@ class PostTypes extends Engine\Base {
 		'dashboard_glance' => true,
 
 	] );
-	register_extended_taxonomy( 'fitness_level', 'elliptica_od_video', [
-
-		'dashboard_glance' => true,
-
-	] );
-	register_extended_taxonomy( 'difficluty_level', 'elliptica_od_video', [
+	register_extended_taxonomy( 'difficulty_level', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
 

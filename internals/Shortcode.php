@@ -72,12 +72,20 @@ class Shortcode extends Engine\Base {
 		$return = '<div id="elliptica_od_videos">';
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
-			$return .= '<div class="all od-video">';
+			$return .= '<div class="grid-sizer"></div>';
+			$return .= '<a href="' . get_the_permalink() . '">';
+			$return .= '<div class="all od-video"';
+			if (has_post_thumbnail( $post->ID ) ):
+				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
+			  	$return .= 'style="background-image: url(' . $image[0] .')"';
+			endif;
+			$return .= '>';
 			$return .= get_the_title();
 
 			$post_id = get_the_ID();
 			$return .= the_content();
 			$return .=  '</div>';
+			$return .= '</a>';
 		endwhile; endif;
 
 		return $return;
@@ -92,7 +100,7 @@ class Shortcode extends Engine\Base {
             wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
             wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos');
 
-            wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION );
+            wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
             wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope');
 
             wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope' ), MMC_VERSION );

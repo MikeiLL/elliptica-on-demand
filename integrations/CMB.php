@@ -64,12 +64,31 @@ class CMB extends Engine\Base {
 				)
             );
 
-
-		$datetime = $cmb_elliptica_od_mb->add_field(
+		$id_of_video = $cmb_elliptica_od_mb->add_field(
             array(
 			'name' => __( 'ID of Video', MMC_TEXTDOMAIN ),
 			'desc' => __( 'What you see at end of http address', MMC_TEXTDOMAIN ),
 			'id'   => $prefix . MMC_TEXTDOMAIN . '_video_id',
+			'data-validation' => 'required',
+			'type' => 'text',
+				)
+            );
+
+		$short_description = $cmb_elliptica_od_mb->add_field(
+            array(
+			'name' => __( 'Short Description', MMC_TEXTDOMAIN ),
+			'desc' => __( 'No longer than a sentence, please.', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_desc',
+			'data-validation' => 'required',
+			'type' => 'text',
+				)
+            );
+
+		$class_type = $cmb_elliptica_od_mb->add_field(
+            array(
+			'name' => __( 'Class Type', MMC_TEXTDOMAIN ),
+			'desc' => __( 'Gym Class, etc...', MMC_TEXTDOMAIN ),
+			'id'   => $prefix . MMC_TEXTDOMAIN . '_class_type',
 			'data-validation' => 'required',
 			'type' => 'text',
 				)
@@ -127,7 +146,9 @@ class CMB extends Engine\Base {
 		) );
 
 
-		$row->addColumns( array( $datetime ) );
+		$row->addColumns( array( $datetime, $id_of_video ) );
+		$row = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
+		$row->addColumns( array( $short_description, $class_type ) );
 		$row = $cmb2Grid->addRow(); //phpcs:ignore WordPress.NamingConventions
 		$row->addColumns( array( $class_plan ) );
 	}

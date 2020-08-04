@@ -15,11 +15,11 @@
 			}
 		}
 
-		$fitness_levels = get_the_terms( $post_id, 'fitness_level' );
-		if ( !empty($fitness_levels) ) {
-			$return .= "<strong>Class Type</strong>: ";
-			foreach ( $fitness_levels as $fitness_level ) {
-				$return .= $fitness_level->slug .' ';
+		$difficulty_levels = get_the_terms( $post_id, 'difficulty_level' );
+		if ( !empty($difficulty_levels) ) {
+			$return .= "<strong>Difficulty Level</strong>: ";
+			foreach ( $difficulty_levels as $difficulty_level ) {
+				$return .= $difficulty_level->slug .' ';
 			}
 		}
 
@@ -29,6 +29,23 @@
 			foreach ( $class_instructors as $class_instructor ) {
 				$return .= $class_instructor->slug .' ';
 			}
+		}
+
+		$class_type = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' );
+		if ( !empty($class_type) ) {
+			$return .= "<strong>Class Type</strong>: ";
+			$return .= $class_type[0] .' ';
+		}
+
+		$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
+		if ( !empty($date_time) ) {
+			$return .= "<strong>Recorded</strong>: ";
+			$return .= date_i18n('F j', $date_time[0]) . ' @ ' . date_i18n('g:i a', $date_time[0]);
+		}
+
+		$brief_description = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_desc' );
+		if ( !empty($brief_description) ) {
+			$return .= '<h4>' . $brief_description[0] .'</h4>';
 		}
 
 		$class_plans = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
