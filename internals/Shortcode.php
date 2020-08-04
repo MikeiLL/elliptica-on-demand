@@ -88,10 +88,15 @@ class Shortcode extends Engine\Base {
 
 		$return .= $filter_control;
 
+		$prefix   = '_elliptica_od_';
+
 		$query = new WP_Query(array(
 			'post_type' => 'elliptica_od_video',
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
+			'order'     => 'ASC',
+            'meta_key' => $prefix . MMC_TEXTDOMAIN . '_date',
+            'orderby'   => 'meta_value', //or 'meta_value_num'
 		));
 
 		// Add Style with script adder
@@ -101,8 +106,6 @@ class Shortcode extends Engine\Base {
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
 			$isotope_filter_classes = "all od-video ";
-
-			$prefix   = '_elliptica_od_';
 
 			$post_id   = get_the_ID();
 
@@ -121,6 +124,8 @@ class Shortcode extends Engine\Base {
 			if (has_post_thumbnail( $post->ID ) ):
 				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
 			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $image[0] .')"';
+			else:
+				$return .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
 			endif;
 			$return .= '>';
 
