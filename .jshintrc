@@ -6,6 +6,7 @@
     "jQuery": true,
     "$": true,
     "document": true,
-    "module": true
+    "module": true,
+    "console": true
   }
 }

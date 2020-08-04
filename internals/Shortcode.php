@@ -60,6 +60,34 @@ class Shortcode extends Engine\Base {
 			),
             $atts
 		);
+
+		// Build out the FILTER
+        $terms = get_terms( array(
+			'taxonomy' => 'difficulty_level',
+			'hide_empty' => true,
+		) );
+
+
+		$return = "";
+
+		$filter_control = '<div class="button-group filter-button-group">';
+		$count = count($terms);
+		$filter_control .= '<button style="float:left;" class="active" data-filter="*">Any Level</button>';
+		$all_terms = [];
+		if ( $count > 0 ){
+			foreach ( $terms as $term ) {
+				$termname = strtolower($term->name);
+				$termname = str_replace(' ', '-', $termname);
+				$filter_control .= '<button style="float:left;" data-filter=".'.$termname.'">' . $term->name . '</button>';
+				$all_terms[$count] = $termname;
+				$count--;
+			}
+		$filter_control .= '<button style="float:left;" data-filter=".'.implode('.', $all_terms).'">All Levels Welcome</button>';;
+		}
+		$filter_control .= '</div>';
+
+		$return .= $filter_control;
+
 		$query = new WP_Query(array(
 			'post_type' => 'elliptica_od_video',
 			'post_status' => 'publish',
@@ -69,20 +97,60 @@ class Shortcode extends Engine\Base {
 		// Add Style with script adder
         self::addScript();
 
-		$return = '<div id="elliptica_od_videos">';
+		$return .= '<div id="elliptica_od_videos">';
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
+			$isotope_filter_classes = "all od-video ";
+
+			$prefix   = '_elliptica_od_';
+
+			$post_id   = get_the_ID();
+
+			// Difficulty levels
+			$difficulty_levels = get_the_terms( $post_id, 'difficulty_level' );
+			if ( !empty($difficulty_levels) ) {
+				foreach ( $difficulty_levels as $difficulty_level ) {
+					$termname = strtolower($difficulty_level->name);
+					$termname = str_replace(' ', '-', $termname);
+					$isotope_filter_classes .= $termname .' ';
+				}
+			}
+
 			$return .= '<a href="' . get_the_permalink() . '">';
-			$return .= '<div class="all od-video"';
+			$return .= '<div class="' . $isotope_filter_classes . '" ';
 			if (has_post_thumbnail( $post->ID ) ):
 				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-			  	$return .= 'style="background-image: url(' . $image[0] .')"';
+			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $image[0] .')"';
 			endif;
 			$return .= '>';
-			$return .= get_the_title();
 
-			$post_id = get_the_ID();
-			$return .=  '</div>';
+			$return .= '	<div class="od-video_info">';
+
+			$return .= '		<h5>' . get_the_title() . '</h5>';
+
+			$class_instructors = get_the_terms( $post_id, 'class_instructor' );
+			if ( !empty($class_instructors) ) {
+				foreach ( $class_instructors as $class_instructor ) {
+					$return .= $class_instructor->slug . ' ';
+				}
+			}
+
+			$return .= '		<span aria-hidden="true"> · </span>';
+
+			$class_type = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' );
+			if ( !empty($class_type) ) {
+				$return .= $class_type[0] . ' ';
+			}
+
+			$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
+			if ( !empty($date_time) ) {
+				$return .= "<br/>";
+				$return .= date_i18n('F j', $date_time[0]) . ' @ ' . date_i18n('g:i a', $date_time[0]);
+			}
+
+			$return .= '	</div> <!-- //od-video_info -->';
+
+			$return .=  '</div> <!-- //od-video -->';
 			$return .= '</a>';
 		endwhile; endif;
 

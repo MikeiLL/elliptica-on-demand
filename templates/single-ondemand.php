@@ -7,10 +7,10 @@
 
 		$post_id   = get_the_ID();
 
-		$music_style = get_the_terms( $post_id, 'music_style' );
-		if ( !empty($music_style) ) {
+		$music_styles = get_the_terms( $post_id, 'music_style' );
+		if ( !empty($music_styles) ) {
 			$return .= "<strong>Music</strong>: ";
-			foreach ( $music_style as $music_style ) {
+			foreach ( $music_styles as $music_style ) {
 				$return .= $music_style->slug .' ';
 			}
 		}

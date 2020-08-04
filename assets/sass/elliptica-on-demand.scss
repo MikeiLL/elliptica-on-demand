@@ -1,9 +1,30 @@
 /* This stylesheet is used to style the public-facing components of the plugin. */
 .od-video {
-	width:300px;
-	height:175px;
-	border:1px solid green;
-	background-repeat:none;
+	width:400px;
+	height:250px;
+	background-repeat:no-repeat;
 	background-position:center;
-	background-size:contain;
+	background-size:cover;
+  	margin: 15px;
+  	padding: 10px;
+  	border-radius: 10px;
+	position: relative;
+	color: white;
+	font-family:sans-serif;
+}
+
+.od-video a, .od-video a:hover {
+	text-decoration:none;
+	color:white;
+}
+
+.od-video_info {
+	position:absolute;
+	bottom:0;
+}
+
+.button-group:after {
+    content: '';
+    display: block;
+    clear: both;
 }
