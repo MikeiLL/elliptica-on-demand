@@ -59,7 +59,7 @@ class Settings_Page extends Engine\Base {
 		 * Add a settings page for this plugin to the main menu
 		 *
 		 */
-		add_menu_page( __( 'Elliptica On Demand Settings', MMC_TEXTDOMAIN ), MMC_NAME, 'manage_options', MMC_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
+		//add_menu_page( __( 'Elliptica On Demand Settings', MMC_TEXTDOMAIN ), MMC_NAME, 'manage_options', MMC_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
 	}
 
 	/**
