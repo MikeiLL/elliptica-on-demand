@@ -82,3 +82,75 @@
   display: inline-block;
   margin-right: 20px;
 }
+
+/* Modaal */
+.modaal-wrapper {
+	z-index:19999;
+}
+
+.modaal-container {
+	width: 400px;
+	max-width: 100%;
+}
+
+.modaal-content-container {
+	padding-left: 0;
+	padding-right: 0;
+	background-color: #ddd;
+	padding: 1em;
+}
+
+.modal-class-details__header {
+	background-repeat: no-repeat;
+	background-position: top;
+	background-size: cover;
+	margin: 0 -1em;
+	width: 400px;
+	height: 200px;
+	max-width: 100%;
+	color: white;
+	font-family: sans-serif;
+	position: relative;
+	padding: 0.5em;
+}
+
+.modal_header_play_button {
+	text-align: center;
+    font-family: sans-serif;
+  	border-radius: 40px;
+    font-weight: 600;
+    padding: 0.5em;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+  	background-color: #d50058;
+    transition-property: filter, background-color, color;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+}
+
+.modal_header_play_button svg {
+    padding: 2px;
+    width: 16;
+    height: 16;
+    display: flex;
+}
+
+.modal-class-details__header span {
+	width: 50%;
+	float: left;
+}
+
+.modal-class-details__header span a {
+	position: absolute;
+	bottom: 20px;
+	right: 30px;
+}
+
+.modal-class-details__header_content {
+	position: absolute;
+	bottom: 0;
+}

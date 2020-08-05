@@ -212,8 +212,8 @@ class Shortcode extends Engine\Base {
 			$return .= '<a data-modaal-content-source="#modal-id-' . $modaal_id_count .'" href="#modal-id-' . $modaal_id_count .'" class="info-popup">';
 			$return .= '<div class="' . $isotope_filter_classes . '" data-modaal-type="inline" data-modaal-animation="fade" class="modaal" ';
 			if (has_post_thumbnail( $post->ID ) ):
-				$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumbnail' );
-			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $image[0] .')"';
+				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium_large' );
+			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
 			else:
 				$return .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
 			endif;
@@ -262,9 +262,31 @@ class Shortcode extends Engine\Base {
 
 			// Build the Modal Content
 			$modal_content = '<div id="modal-id-' . $modaal_id_count .'" style="display:none;">';
-			$modal_content .= 	'<h5>' . $class_title .' </h5>';
-			$modal_content .= 	'<p>' . $description .' </p>';
-			$modal_content .= 	'<hr/>';
+
+			// Build modal class header background declaration
+			$modal_header = '<div class="modal-class-details__header" ';
+			if (has_post_thumbnail( $post->ID ) ):
+				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium_large' );
+			  	$modal_header .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
+			else:
+				$modal_header .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
+			endif;
+			$modal_header .= '>'; // End modal class image background declaration
+
+			$modal_header .= 	'	<div class="modal-class-details__header_content">';
+			$modal_header .= 	'		<span>';
+
+			$modal_header .= 	'			<h5>' . $class_title .' </h5>';
+			$modal_header .= 	'			<p>' . $description .' </p>';
+			$modal_header .= 	'		</span>';
+			$modal_header .= 	'		<span>';
+			$modal_header .= 	'			<a class="modal_header_play_button" href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'">Watch</a>';
+			// <svg viewBox="0 0 28 28" width="16" height="16"><g stroke="none" stroke-width="1" fill-rule="evenodd"><path d="M23.3870324,12.1022967 C25.1944355,13.1466985 25.1944355,14.8547015 23.3870324,15.8977033 L8.04720582,24.7541186 C6.23840269,25.7985204 4.76000013,24.9445189 4.76000013,22.8571153 L4.76000013,5.14288467 C4.76000013,3.05548105 6.23840269,2.20147957 8.04720582,3.24588138 L23.3870324,12.1022967 Z" fill="#ffffff"></path></g></svg>
+			$modal_header .= 	'		</span>';
+			$modal_header .= 	'	</div>';
+			$modal_header .= 	'</div>';
+
+			$modal_content .= $modal_header;
 
 			$class_plans = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
 			if ( !empty($class_plans) ) {
@@ -292,7 +314,7 @@ class Shortcode extends Engine\Base {
 				}
 				$modal_content .= "</table>";
 			}
-			$modal_content .= 	'<a href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'"><button>Watch Video</button></a>';
+
 			$modal_content .= '</div>';
 
 			$return .= $modal_content;
@@ -313,11 +335,11 @@ class Shortcode extends Engine\Base {
         if (!self::$addedAlready) {
             self::$addedAlready = true;
 
-            wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
-            wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos');
-
             wp_register_style( MMC_TEXTDOMAIN . '-od-modaal', plugins_url( 'dist/css/modaal.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
             wp_enqueue_style( MMC_TEXTDOMAIN . '-od-modaal');
+
+            wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
+            wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos');
 
             wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
             wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope');
