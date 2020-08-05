@@ -45,4 +45,6 @@ jQuery(document).ready(function( $ ) {
 	  return value;
 	}
 
+	$('.info-popup').modaal();
+
 });

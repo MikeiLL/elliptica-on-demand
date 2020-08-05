@@ -11,7 +11,7 @@
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			  },
 			main: {
-				src: 'assets/js/<%= pkg.name %>.js',
+				src: ['assets/js/<%= pkg.name %>.js', 'node_modules/modaal/source/js/modaal.js' ],
 				dest: 'dist/js/<%= pkg.name %>.min.js'
 			},
 			isotope: {
@@ -38,6 +38,7 @@
 			},
 			files: [
 				{src: ['assets/sass/<%= pkg.name %>.scss'], dest: 'dist/css/<%= pkg.name %>.min.css'},
+				{src: ['node_modules/modaal/source/css/modaal.scss'], dest: 'dist/css/modaal.min.css'},
 				{src: ['assets/sass/settings.scss'], dest: 'dist/css/settings.css'},
 			  ]
 		  }
