@@ -62,7 +62,7 @@ class Shortcode extends Engine\Base {
 		);
 
 		// Build out the FILTER
-        $terms = get_terms( array(
+        $difficulty_levels = get_terms( array(
 			'taxonomy' => 'difficulty_level',
 			'hide_empty' => true,
 		) );
@@ -70,21 +70,60 @@ class Shortcode extends Engine\Base {
 
 		$return = "";
 
-		$filter_control = '<div class="button-group filter-button-group">';
-		$count = count($terms);
-		$filter_control .= '<button style="float:left;" class="active" data-filter="*">Any Level</button>';
+		$filter_control = '<div class="filters">';
+
+		$level_filter_control = '  <div class="ui-group">';
+
+		$level_filter_control .= '		<div class="button-group">';
+		$count = count($difficulty_levels);
+		$level_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Level</button>';
 		$all_terms = [];
 		if ( $count > 0 ){
-			foreach ( $terms as $term ) {
+			foreach ( $difficulty_levels as $term ) {
 				$termname = strtolower($term->name);
 				$termname = str_replace(' ', '-', $termname);
-				$filter_control .= '<button style="float:left;" data-filter=".'.$termname.'">' . $term->name . '</button>';
+				$level_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
 				$all_terms[$count] = $termname;
 				$count--;
 			}
-		$filter_control .= '<button style="float:left;" data-filter=".'.implode('.', $all_terms).'">All Levels Welcome</button>';;
+		$level_filter_control .= '<button style="float:left;" class="button" data-filter=".'.implode('.', $all_terms).'">All Levels Welcome</button>';;
 		}
-		$filter_control .= '</div>';
+		$level_filter_control .= '		</div> <!-- button-group -->';
+
+		$level_filter_control .= '	</div> <!-- ui-group -->';
+
+		$filter_control .= $level_filter_control;
+
+
+
+		// Build out the FILTER
+        $instructors = get_terms( array(
+			'taxonomy' => 'class_instructor',
+			'hide_empty' => true,
+		) );
+
+
+
+		$instructor_filter_control = '  <div class="ui-group">';
+
+		$instructor_filter_control .= '		<div class="button-group">';
+		$count = count($instructors);
+		$instructor_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Instructor</button>';
+		if ( $count > 0 ){
+			foreach ( $instructors as $term ) {
+				$termname = strtolower($term->name);
+				$termname = str_replace(' ', '-', $termname);
+				$instructor_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
+
+			}
+		}
+		$instructor_filter_control .= '		</div> <!-- button-group -->';
+
+		$instructor_filter_control .= '	</div> <!-- ui-group -->';
+
+		$filter_control .= $instructor_filter_control;
+
+		$filter_control .= '</div> <!-- // filters -->';
 
 		$return .= $filter_control;
 
