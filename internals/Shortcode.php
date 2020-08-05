@@ -74,7 +74,7 @@ class Shortcode extends Engine\Base {
 
 		$level_filter_control = '  <div class="ui-group">';
 
-		$level_filter_control .= '		<div class="button-group">';
+		$level_filter_control .= '		<div class="button-group" data-filter-group="level">';
 		$count = count($difficulty_levels);
 		$level_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Level</button>';
 		$all_terms = [];
@@ -106,7 +106,7 @@ class Shortcode extends Engine\Base {
 
 		$instructor_filter_control = '  <div class="ui-group">';
 
-		$instructor_filter_control .= '		<div class="button-group">';
+		$instructor_filter_control .= '		<div class="button-group" data-filter-group="instructor">';
 		$count = count($instructors);
 		$instructor_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Instructor</button>';
 		if ( $count > 0 ){
@@ -122,6 +122,57 @@ class Shortcode extends Engine\Base {
 		$instructor_filter_control .= '	</div> <!-- ui-group -->';
 
 		$filter_control .= $instructor_filter_control;
+
+
+
+		// Build out the FILTER
+        $music_styles = get_terms( array(
+			'taxonomy' => 'music_style',
+			'hide_empty' => true,
+		) );
+		$music_style_filter_control = '  <div class="ui-group">';
+
+		$music_style_filter_control .= '		<div class="button-group" data-filter-group="music">';
+		$count = count($music_styles);
+		$music_style_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">All Styles</button>';
+		if ( $count > 0 ){
+			foreach ( $music_styles as $term ) {
+				$termname = strtolower($term->name);
+				$termname = str_replace(' ', '-', $termname);
+				$music_style_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
+
+			}
+		}
+		$music_style_filter_control .= '		</div> <!-- button-group -->';
+
+		$music_style_filter_control .= '	</div> <!-- ui-group -->';
+
+		$filter_control .= $music_style_filter_control;
+
+
+		// Build out the FILTER
+        $class_lengths = get_terms( array(
+			'taxonomy' => 'class_length',
+			'hide_empty' => true,
+		) );
+		$class_length_filter_control = '  <div class="ui-group">';
+
+		$class_length_filter_control .= '		<div class="button-group" data-filter-group="length">';
+		$count = count($class_lengths);
+		$class_length_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Length</button>';
+		if ( $count > 0 ){
+			foreach ( $class_lengths as $term ) {
+				$termname = strtolower($term->name);
+				$termname = str_replace(' ', '-', $termname);
+				$class_length_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
+
+			}
+		}
+		$class_length_filter_control .= '		</div> <!-- button-group -->';
+
+		$class_length_filter_control .= '	</div> <!-- ui-group -->';
+
+		$filter_control .= $class_length_filter_control;
 
 		$filter_control .= '</div> <!-- // filters -->';
 
@@ -149,10 +200,11 @@ class Shortcode extends Engine\Base {
 			$post_id   = get_the_ID();
 
 			// Difficulty levels
-			$difficulty_levels = get_the_terms( $post_id, 'difficulty_level' );
-			if ( !empty($difficulty_levels) ) {
-				foreach ( $difficulty_levels as $difficulty_level ) {
-					$termname = strtolower($difficulty_level->name);
+			$post_terms = wp_get_object_terms( $post_id, ['class_instructor', 'difficulty_level','music_style', 'class_length'] );
+
+			if ( !empty($post_terms) ) {
+				foreach ( $post_terms as $post_meta_item ) {
+					$termname = strtolower($post_meta_item->name);
 					$termname = str_replace(' ', '-', $termname);
 					$isotope_filter_classes .= $termname .' ';
 				}

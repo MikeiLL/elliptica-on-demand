@@ -13,16 +13,27 @@ jQuery(document).ready(function( $ ) {
 	});
 
 	var filters = {}; //store filters in an array
-	$('.filters').on( 'click', '.button', function() {
-	  var $this = $(this);
+	$('.filters').on( 'click', '.button', function(event) {
+	   var button = $( event.currentTarget );
 	  // get group key
-	  var $buttonGroup = $this.parents('.button-group');
-	  var filterGroup = $buttonGroup.attr('data-filter-group');
+	  var buttonGroup = button.parents('.button-group');
+	  var filterGroup = buttonGroup.attr('data-filter-group');
 	  // set filter for group
-	  filters[ filterGroup ] = $this.attr('data-filter');
+	  filters[ filterGroup ] = button.attr('data-filter');
 	  // combine filters
 	  var filterValue = concatValues( filters );
+	  console.log(filterValue);
 	  iso_grid.isotope({ filter: filterValue });
+	});
+
+	// change is-checked class on buttons
+	$('.button-group').each( function( i, buttonGroup ) {
+	  var $buttonGroup = $( buttonGroup );
+	  $buttonGroup.on( 'click', 'button', function( event ) {
+		$buttonGroup.find('.is-checked').removeClass('is-checked');
+		var button = $( event.currentTarget );
+		button.addClass('is-checked');
+	  });
 	});
 
 	// flatten object by concatting values
