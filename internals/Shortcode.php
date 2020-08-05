@@ -292,7 +292,7 @@ class Shortcode extends Engine\Base {
 				}
 				$modal_content .= "</table>";
 			}
-			$modal_content .= 	'<a href="' . $video_link .'"><button>Watch Video</button></a>';
+			$modal_content .= 	'<a href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'"><button>Watch Video</button></a>';
 			$modal_content .= '</div>';
 
 			$return .= $modal_content;
