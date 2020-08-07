@@ -321,6 +321,7 @@ class Shortcode extends Engine\Base {
 			/* // Intro */
 
 			$class_plans = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
+			$class_plans_only = $class_plans;
 			/* Playlist */
 			if ( !empty($class_plans) ) {
 				$modal_content .= '	<div class="modal-class-details__playlist_section">';
@@ -350,17 +351,17 @@ class Shortcode extends Engine\Base {
 				$modal_content .= '		<h2>Class Plan</h2>';
 				$modal_content .= '		<div class="modal-class-details__listwrap">';
 				$modal_content .= '			<ol>';
-				foreach ( $class_plans as $class_plan ) {
-					foreach ( $class_plan as $class_segment ) {
-						$modal_content .= '				<li class="modal-class-details__classplan_item">';
-						$modal_content .= '					<div class="modal-class-details__segment_type">';
-						$modal_content .= '						' . $class_segment['segment_type'];
-						$modal_content .= '					</div>';
-						$modal_content .= '					<div class="modal-class-details__segment_duration">';
-						$modal_content .= '						' . $class_segment['segment_duration'] . ' min';
-						$modal_content .= '					</div>';
-						$modal_content .= '				</li>';
-					}
+
+				$minimized_class_plan = minimize_and_sum_class_plans($class_plans);
+				foreach ( $minimized_class_plan as $class_segment ) {
+					$modal_content .= '				<li class="modal-class-details__classplan_item">';
+					$modal_content .= '					<div class="modal-class-details__segment_type">';
+					$modal_content .= '						' . $class_segment['segment_type'];
+					$modal_content .= '					</div>';
+					$modal_content .= '					<div class="modal-class-details__segment_duration">';
+					$modal_content .= '						' . $class_segment['segment_duration'] . ' min';
+					$modal_content .= '					</div>';
+					$modal_content .= '				</li>';
 				}
 				$modal_content .= '			</ol>';
 				$modal_content .= '		</div>';
