@@ -225,25 +225,29 @@ class Shortcode extends Engine\Base {
 
 			$return .= '		<h5>' . $class_title . '</h5>';
 
+			$instructor_and_type = '';
+
 			$class_instructors = get_the_terms( $post_id, 'class_instructor' );
 			if ( !empty($class_instructors) ) {
 				foreach ( $class_instructors as $class_instructor ) {
-					$return .= $class_instructor->slug . ' ';
+					$instructor_and_type .= $class_instructor->slug . ' ';
 				}
 			}
 
-			$return .= '		<span aria-hidden="true"> · </span>';
+			$instructor_and_type .= '		<span aria-hidden="true"> · </span>';
 
 			$class_type = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' );
 			if ( !empty($class_type) ) {
-				$return .= $class_type[0] . ' ';
+				$instructor_and_type .= $class_type[0] . ' ';
 			}
 
 			$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
 			if ( !empty($date_time) ) {
-				$return .= "<br/>";
-				$return .= date_i18n('F j', $date_time[0]) . ' @ ' . date_i18n('g:i a', $date_time[0]);
+				$instructor_and_type .= "<br/>";
+				$instructor_and_type .= date_i18n('F j', $date_time[0]) . ' @ ' . date_i18n('g:i a', $date_time[0]);
 			}
+
+			$return .= $instructor_and_type;
 
 			$return .= '	</div> <!-- //od-video_info -->';
 
@@ -260,9 +264,18 @@ class Shortcode extends Engine\Base {
 				$video_link = $video_id[0] . ' ';
 			}
 
-			// Build the Modal Content
+			/* Build the Modal Content */
 			$modal_content = '<div id="modal-id-' . $modaal_id_count .'" style="display:none;">';
 
+			/* Header */
+
+			$difficulty_levels = [];
+			$difficulty_levels_array = get_the_terms( $post_id, 'difficulty_level' );
+			if ( !empty($difficulty_levels_array) ) {
+				foreach ( $difficulty_levels_array as $k => $difficulty_level ) {
+					$difficulty_levels[$k] = $difficulty_level->name . ' ';
+				}
+			}
 			// Build modal class header background declaration
 			$modal_header = '<div class="modal-class-details__header" ';
 			if (has_post_thumbnail( $post->ID ) ):
@@ -274,47 +287,91 @@ class Shortcode extends Engine\Base {
 			$modal_header .= '>'; // End modal class image background declaration
 
 			$modal_header .= 	'	<div class="modal-class-details__header_content">';
-			$modal_header .= 	'		<span>';
-
+			$modal_header .= 	'		<div>';
 			$modal_header .= 	'			<h5>' . $class_title .' </h5>';
-			$modal_header .= 	'			<p>' . $description .' </p>';
-			$modal_header .= 	'		</span>';
-			$modal_header .= 	'		<span>';
-			$modal_header .= 	'			<a class="modal_header_play_button" href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'">Watch</a>';
+			$modal_header .= 	'			<p>' . $instructor_and_type .' </p>';
+			$modal_header .= 	'		</div>';
+			$modal_header .= 	'		<div>';
+			$modal_header .= 	'			<a class="modal_header_play_button" href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'">Start</a>';
 			// <svg viewBox="0 0 28 28" width="16" height="16"><g stroke="none" stroke-width="1" fill-rule="evenodd"><path d="M23.3870324,12.1022967 C25.1944355,13.1466985 25.1944355,14.8547015 23.3870324,15.8977033 L8.04720582,24.7541186 C6.23840269,25.7985204 4.76000013,24.9445189 4.76000013,22.8571153 L4.76000013,5.14288467 C4.76000013,3.05548105 6.23840269,2.20147957 8.04720582,3.24588138 L23.3870324,12.1022967 Z" fill="#ffffff"></path></g></svg>
-			$modal_header .= 	'		</span>';
+			$modal_header .= 	'		</div>';
 			$modal_header .= 	'	</div>';
 			$modal_header .= 	'</div>';
+			/* // End Header */
+
 
 			$modal_content .= $modal_header;
 
+			/* Modal Details Body */
+			// (to wrap with padding below header, to avoid negative margin in header)
+			$modal_content .= '	<div class="modal-class-details__body">';
+
+			/* Intro */
+			$modal_intro = 		'	<div class="modal-class-details__intro">';
+			$modal_intro .= 	'		<div class="modal-class-details__intro__level>" ';
+			$modal_intro .= 	'			<p><strong>Level</strong>: ' . implode(', ', $difficulty_levels) .' </p>';
+			$modal_intro .= 	'		</div>';
+			$modal_intro .= 	'		<div class="modal-class-details__intro__desc>" ';
+			$modal_intro .= 	'			<p>' . $description .'</p>';
+			$modal_intro .= 	'		</div>';
+			$modal_intro .= 	'	</div>';
+
+			$modal_content .= $modal_intro;
+
+			/* // Intro */
+
 			$class_plans = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
+			/* Playlist */
 			if ( !empty($class_plans) ) {
-				$modal_content .= "<h4>Playlist</h4>";
-				$modal_content .= "<table>";
+				$modal_content .= '	<div class="modal-class-details__playlist_section">';
+				$modal_content .= '		<h2>Playlist</h2>';
+				$modal_content .= '		<div class="modal-class-details__listwrap mcd__playlist_hideContent">';
+				$modal_content .= '			<ol>';
 				foreach ( $class_plans as $class_plan ) {
 					foreach ( $class_plan as $class_segment ) {
-						$modal_content .= '<tr>';
-						$modal_content .= '<td><img src="' . $class_segment['song_artwork'] . '" height="100" width="100" /></td>';
-						$modal_content .= '<td>' . $class_segment['song_title'] . '</td>';
-						$modal_content .= '<td>' . $class_segment['song_artists'] . '</td>';
-						$modal_content .= '</tr>';
+						$modal_content .= '				<li class="modal-class-details__playlist_item"><img class="modal-class-details__playlist_img" src="' . $class_segment['song_artwork'] . '"/>';
+						$modal_content .= '					<div class="modal-class-details__song_details">';
+						$modal_content .= '						<strong>' . $class_segment['song_title'] . '</strong>';
+						$modal_content .= '						<span>' . $class_segment['song_artists'] . '</span>';
+						$modal_content .= '					</div>';
+						$modal_content .= '			</li>';
 					}
 				}
-				$modal_content .= "</table>";
-				$modal_content .= "<h4>Class Plan</h4>";
-				$modal_content .= "<table>";
+				$modal_content .= '			</ol>';
+				$modal_content .= '		</div>';
+
+				$modal_content .= '		<div class="mcd_playlist__show-more">';
+				$modal_content .= '			<a href="#">Show more</a>';
+				$modal_content .= '		</div>';
+				$modal_content .= '	</div>';
+
+			/* Class Plan */
+				$modal_content .= '	<div class="modal-class-details__classplan_section">';
+				$modal_content .= '		<h2>Class Plan</h2>';
+				$modal_content .= '		<div class="modal-class-details__listwrap">';
+				$modal_content .= '			<ol>';
 				foreach ( $class_plans as $class_plan ) {
 					foreach ( $class_plan as $class_segment ) {
-						$modal_content .= '<tr>';
-						$modal_content .= '<td>' . $class_segment['segment_type'] . '</td>';
-						$modal_content .= '<td>' . $class_segment['segment_duration'] . ' minutes</td>';
-						$modal_content .= '</tr>';
+						$modal_content .= '				<li class="modal-class-details__classplan_item">';
+						$modal_content .= '					<div class="modal-class-details__segment_type">';
+						$modal_content .= '						' . $class_segment['segment_type'];
+						$modal_content .= '					</div>';
+						$modal_content .= '					<div class="modal-class-details__segment_duration">';
+						$modal_content .= '						' . $class_segment['segment_duration'] . ' min';
+						$modal_content .= '					</div>';
+						$modal_content .= '				</li>';
 					}
 				}
-				$modal_content .= "</table>";
+				$modal_content .= '			</ol>';
+				$modal_content .= '		</div>';
+				$modal_content .= '	</div>';
 			}
 
+
+			/* End Modal Details Body */
+			$modal_content .= '	</div>';
+
+			/* End Modal Content */
 			$modal_content .= '</div>';
 
 			$return .= $modal_content;

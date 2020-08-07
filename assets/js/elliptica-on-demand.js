@@ -47,4 +47,22 @@ jQuery(document).ready(function( $ ) {
 
 	$('.info-popup').modaal();
 
+	$(".mcd_playlist__show-more > a").on("click", function() {
+    var self = $(this);
+    var content = self.parent().prev(".modal-class-details__listwrap");
+    var linkText = self.text().toUpperCase();
+
+    if(linkText === "SHOW MORE"){
+        linkText = "Show less";
+        content.removeClass("mcd__playlist_hideContent", 400);
+        content.addClass("mcd__playlist_showContent", 400);
+    } else {
+        linkText = "Show more";
+        content.addClass("mcd__playlist_hideContent", 400);
+        content.removeClass("mcd__playlist_showContent", 400);
+    }
+
+    self.text(linkText);
+});
+
 });

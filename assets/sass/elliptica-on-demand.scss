@@ -1,12 +1,14 @@
-/* This stylesheet is used to style the public-facing components of the plugin. */
+/* Styling for public-facing components of the plugin. */
+
+/*  Isotope Video Archive Display */
 .od-video {
-	width:400px;
-	height:250px;
+	width:300px;
+	height:180px;
 	background-repeat:no-repeat;
 	background-position:center;
 	background-size:cover;
-  	margin: 15px;
   	padding: 10px;
+	margin: 0.3em 0;
   	border-radius: 10px;
 	position: relative;
 	color: white;
@@ -53,20 +55,11 @@
   color: white;
 }
 
-/* ---- isotope ---- */
 
-#elliptica_od_videos {
-  max-width: 1200px;
-}
 
-/* clear fix */
-#elliptica_od_videos:after {
-  content: '';
-  display: block;
-  clear: both;
-}
+/* Filter Section */
 
-/* ui group */
+/* Buttons */
 
 .ui-group {
   display: inline-block;
@@ -75,12 +68,16 @@
 .ui-group h3 {
   display: inline-block;
   margin-right: 0.2em;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .ui-group .button-group {
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 5px;
+}
+
+.ui-group .button-group button {
+  font-size: 0.9rem;
 }
 
 /* Modaal */
@@ -89,24 +86,34 @@
 }
 
 .modaal-container {
-	width: 400px;
 	max-width: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+    height: 100%;
 }
 
 .modaal-content-container {
 	padding-left: 0;
 	padding-right: 0;
-	background-color: #ddd;
-	padding: 1em;
+	background-color: rgb(245, 247, 249);
+	padding: 0;
+	color: rgb(76, 82, 94);
+	flex: 1;
 }
+
+/***********************
+ *
+ * Modal Content
+ *
+ */
 
 .modal-class-details__header {
 	background-repeat: no-repeat;
 	background-position: top;
 	background-size: cover;
-	margin: 0 -1em;
-	width: 400px;
-	height: 200px;
+	margin: 0;
+	height: 180px;
 	max-width: 100%;
 	color: white;
 	font-family: sans-serif;
@@ -130,6 +137,9 @@
     transition-property: filter, background-color, color;
     transition-duration: 250ms;
     transition-timing-function: ease;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
 }
 
 .modal_header_play_button svg {
@@ -139,18 +149,231 @@
     display: flex;
 }
 
-.modal-class-details__header span {
-	width: 50%;
-	float: left;
-}
-
-.modal-class-details__header span a {
-	position: absolute;
-	bottom: 20px;
+.modal-class-details__header div a {
+	position: fixed;
+	bottom: 10px;
 	right: 30px;
 }
 
 .modal-class-details__header_content {
 	position: absolute;
 	bottom: 0;
+	width: 100%;
+	-webkit-box-align: center;
+    -webkit-box-pack: justify;
+    align-items: center;
+    bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 10px;
+    right: 10px;
+}
+
+/* Class Details Body */
+
+.modal-class-details__body {
+	padding: 0.5em;
+}
+
+
+
+/* Playlist */
+.modal-class-details__playlist_img {
+	width: 20px;
+	height: 20px;
+}
+
+.modal-class-details__playlist_section {
+	background: #fafafa;
+	border-radius: 10px;
+	counter-reset: playlist-order;
+}
+
+.modal-class-details__playlist_item, .modal-class-details__classplan_item {
+	line-height: 1.4em;
+    letter-spacing: 0.02em;
+    font-size: 12px;
+    font-weight: 500;
+    counter-increment: playlist-order 1;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(168, 172, 177, 0.25);
+ }
+
+.modal-class-details__playlist_item img {
+ 	height: 40px;
+    width: 40px;
+    background-color: rgb(228, 231, 235);
+    margin: 0px 15px 0px 10px;
+    border-radius: 5px;
+}
+
+.modal-class-details__playlist_item::before {
+	content: counter(playlist-order);
+}
+
+.modal-class-details__song_details {
+    overflow: hidden;
+}
+
+.modal-class-details__song_details strong {
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    color: rgb(34, 37, 41);
+    overflow: hidden;
+}
+
+.modal-class-details__song_details span {
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    color: rgb(90, 100, 116);
+    overflow: hidden;
+}
+
+.modal-class-details__playlist_section h2 {
+ 	font-weight: 500;
+    line-height: 1.35em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: rgb(90, 100, 116);
+    padding: 15px 15px 0px;
+}
+
+.mcd__playlist_hideContent {
+    overflow: hidden;
+    line-height: 1em;
+    height: 8em;
+}
+
+.mcd__playlist_showContent {
+    line-height: 1em;
+    height: auto;
+}
+.mcd__playlist_showContent{
+    height: auto;
+}
+
+.mcd_playlist__show-more {
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Class Plan */
+.modal-class-details__classplan_section h2 {
+	font-weight: 500;
+    line-height: 1.35em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    border-bottom: 1px solid rgba(168, 172, 177, 0.4);
+}
+
+.modal-class-details__classplan_item {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 50px;
+    flex-direction: row;
+}
+
+.modal-class-details__classplan_section .modal-class-details__classplan_listwrap {
+	padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.modal-class-details__segment_type, .modal-class-details__segment_duration {
+	line-height: 1.4em;
+    letter-spacing: 0.02em;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.modal-class-details__segment_type {
+    width: 72px;
+}
+
+.modal-class-details__intro {
+    letter-spacing: 0.02em;
+    line-height: 1.5em;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgb(76, 82, 94);
+    margin: 0.6em 0;
+}
+.modal-class-details__listwrap {
+    transition-duration: 350ms;
+    transition-timing-function: ease;
+}
+
+// From Paleton, not sure how works
+// .modal-class-details__listwrap > * {
+//     height: 0px;
+// }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+
+	/* Isotope Video Archive */
+	.od-video {
+		width:400px;
+		height:250px;
+	}
+
+	.modal-class-details__header {
+		width: 400px;
+		height: 200px;
+	}
+
+	.modaal-container {
+		width: 400px;
+		max-width: 100%;
+	}
+
+	.modal-class-details__header div a  {
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+	}
+
+	/* Filter */
+	/* buttons */
+	.ui-group h3 {
+	  font-size: 16px;
+	}
+
+	.ui-group .button-group {
+	  margin-right: 5px;
+	}
+
+	.ui-group .button-group button {
+	  font-size: 0.6em;
+	}
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+
+	/* ---- isotope ---- */
+
+	#elliptica_od_videos {
+	  max-width: 1200px;
+	}
+
 }
