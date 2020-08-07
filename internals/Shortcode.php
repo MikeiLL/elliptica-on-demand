@@ -328,15 +328,13 @@ class Shortcode extends Engine\Base {
 				$modal_content .= '		<h2>Playlist</h2>';
 				$modal_content .= '		<div class="modal-class-details__listwrap mcd__playlist_hideContent">';
 				$modal_content .= '			<ol>';
-				foreach ( $class_plans as $class_plan ) {
-					foreach ( $class_plan as $class_segment ) {
-						$modal_content .= '				<li class="modal-class-details__playlist_item"><img class="modal-class-details__playlist_img" src="' . $class_segment['song_artwork'] . '"/>';
-						$modal_content .= '					<div class="modal-class-details__song_details">';
-						$modal_content .= '						<strong>' . $class_segment['song_title'] . '</strong>';
-						$modal_content .= '						<span>' . $class_segment['song_artists'] . '</span>';
-						$modal_content .= '					</div>';
-						$modal_content .= '			</li>';
-					}
+				foreach ( $class_plans[0] as $class_segment ) {
+					$modal_content .= '				<li class="modal-class-details__playlist_item"><img class="modal-class-details__playlist_img" src="' . $class_segment['song_artwork'] . '"/>';
+					$modal_content .= '					<div class="modal-class-details__song_details">';
+					$modal_content .= '						<strong>' . $class_segment['song_title'] . '</strong>';
+					$modal_content .= '						<span>' . $class_segment['song_artists'] . '</span>';
+					$modal_content .= '					</div>';
+					$modal_content .= '			</li>';
 				}
 				$modal_content .= '			</ol>';
 				$modal_content .= '		</div>';
