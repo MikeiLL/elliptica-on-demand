@@ -339,7 +339,7 @@ class Shortcode extends Engine\Base {
 				$modal_content .= '			</ol>';
 				$modal_content .= '		</div>';
 
-				if (count($class_plans) > 3) {
+				if (count($class_plans[0]) > 3) {
 					$modal_content .= '		<div class="mcd_playlist__show-more">';
 					$modal_content .= '			<a href="#">Show more</a>';
 					$modal_content .= '		</div>';
