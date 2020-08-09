@@ -26,6 +26,11 @@ class PostTypes extends Engine\Base {
 	public function initialize() {
 		parent::initialize();
 		add_action( 'init', array( $this, 'load_cpts' ) );
+
+		// Add custom image size for isotope display.
+		add_theme_support( 'post-thumbnails' );
+		add_image_size( 'on_demand_video', 400, 225, array( 'center', 'center' ) );
+
 		/*
 		* Custom Columns
 		*/

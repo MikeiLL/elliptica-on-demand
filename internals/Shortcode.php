@@ -39,7 +39,11 @@ class Shortcode extends Engine\Base {
 	 */
 	public function initialize() {
 		parent::initialize();
+		// Just in case, but I believe the plural of video is video
         add_shortcode( 'on-demand-videos', array( $this, 'elliptica_on_demand' ) );
+
+        // Like this:
+        add_shortcode( 'on-demand-video', array( $this, 'elliptica_on_demand' ) );
 	}
 
 	/**
@@ -191,6 +195,8 @@ class Shortcode extends Engine\Base {
 
 		$return .= '<div id="elliptica_od_videos">';
 
+		$return .= '<div class="on_demand_video_grid-sizer"></div>';
+
 		$modaal_id_count = 1;
 
 		if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
@@ -209,10 +215,10 @@ class Shortcode extends Engine\Base {
 				}
 			}
 
-			$return .= '<a data-modaal-content-source="#modal-id-' . $modaal_id_count .'" href="#modal-id-' . $modaal_id_count .'" class="info-popup">';
-			$return .= '<div class="' . $isotope_filter_classes . '" data-modaal-type="inline" data-modaal-animation="fade" class="modaal" ';
+			$return .= '<a data-modaal-content-source="#modal-id-' . $modaal_id_count .'" href="#modal-id-' . $modaal_id_count .'" class="' . $isotope_filter_classes . ' info-popup isotope_video_item">';
+			$return .= '<div class="od-video" data-modaal-type="inline" data-modaal-animation="fade" class="modaal" ';
 			if (has_post_thumbnail( $post->ID ) ):
-				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium_large' );
+				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'on_demand_video' );
 			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
 			else:
 				$return .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
@@ -230,7 +236,7 @@ class Shortcode extends Engine\Base {
 			$class_instructors = get_the_terms( $post_id, 'class_instructor' );
 			if ( !empty($class_instructors) ) {
 				foreach ( $class_instructors as $class_instructor ) {
-					$instructor_and_type .= $class_instructor->slug . ' ';
+					$instructor_and_type .= $class_instructor->name . ' ';
 				}
 			}
 

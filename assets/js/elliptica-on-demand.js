@@ -5,10 +5,10 @@ jQuery(document).ready(function( $ ) {
 // Write in console log the PHP value passed in enqueue_js_vars in public/class-plugin-name.php
 
     var iso_grid = $('#elliptica_od_videos').isotope({
-	  itemSelector: '.od-video',
+	  itemSelector: '.isotope_video_item',
   	  percentPosition: true,
 	  masonry: {
-		columnWidth: 450
+		columnWidth: '.on_demand_video_grid-sizer'
 	  }
 	});
 

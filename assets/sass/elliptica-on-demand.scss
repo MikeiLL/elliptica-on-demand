@@ -1,14 +1,25 @@
 /* Styling for public-facing components of the plugin. */
 
 /*  Isotope Video Archive Display */
-.od-video {
-	width:300px;
-	height:180px;
-	background-repeat:no-repeat;
-	background-position:center;
-	background-size:cover;
+
+.on_demand_video_grid-sizer, .isotope_video_item {
+	width: 100%;
+}
+.isotope_video_item {
+	float: left;
+	height: auto;
+	min-height: 180px;
   	padding: 10px;
 	margin: 0.3em 0;
+}
+
+.od-video {
+	height: auto;
+	min-height: 180px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+  	padding: 10px;
   	border-radius: 10px;
 	position: relative;
 	color: white;
@@ -124,7 +135,7 @@
 .modal_header_play_button {
 	text-align: center;
     font-family: sans-serif;
-  	border-radius: 40px;
+  	border-radius: 5px;
     font-weight: 600;
     padding: 0.5em;
     letter-spacing: 0.6px;
@@ -152,7 +163,7 @@
 .modal-class-details__header div a {
 	position: fixed;
 	bottom: 10px;
-	right: 30px;
+	right: 20px;
 }
 
 .modal-class-details__header_content {
@@ -200,6 +211,7 @@
     -webkit-box-align: center;
     align-items: center;
     border-bottom: 1px solid rgba(168, 172, 177, 0.25);
+    height: 3.5em;
  }
 
 .modal-class-details__playlist_item img {
@@ -212,6 +224,7 @@
 
 .modal-class-details__playlist_item::before {
 	content: counter(playlist-order);
+	min-width: 1.2em;
 }
 
 .modal-class-details__song_details {
@@ -247,7 +260,8 @@
 .mcd__playlist_hideContent {
     overflow: hidden;
     line-height: 1em;
-    height: 8em;
+    font-size:12px;
+    height: 12.2em;
 }
 
 .mcd__playlist_showContent {
@@ -296,7 +310,7 @@
 }
 
 .modal-class-details__segment_type {
-    width: 72px;
+    width: 36%;
 }
 
 .modal-class-details__intro {
@@ -312,6 +326,10 @@
     transition-timing-function: ease;
 }
 
+.modal-class-details__listwrap ol {
+	margin: 0;
+}
+
 // From Paleton, not sure how works
 // .modal-class-details__listwrap > * {
 //     height: 0px;
@@ -320,10 +338,8 @@
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
 
-	/* Isotope Video Archive */
-	.od-video {
-		width:400px;
-		height:250px;
+	.on_demand_video_grid-sizer, .isotope_video_item {
+		width: 45%;
 	}
 
 	.modal-class-details__header {
@@ -338,9 +354,24 @@
 
 	.modal-class-details__header div a  {
 		position: absolute;
-		right: 10px;
+		right: 20px;
 		bottom: 10px;
 	}
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+
+	.on_demand_video_grid-sizer, .isotope_video_item {
+		width: 33.333%;
+	}
+
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+
+	/* Isotope Video Archive */
 
 	/* Filter */
 	/* buttons */
@@ -355,15 +386,6 @@
 	.ui-group .button-group button {
 	  font-size: 0.6em;
 	}
-}
-
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {
-
-}
-
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) {
 
 }
 
