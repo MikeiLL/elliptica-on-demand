@@ -188,7 +188,7 @@ class Shortcode extends Engine\Base {
 			'post_type' => 'elliptica_od_video',
 			'post_status' => 'publish',
 			'posts_per_page' => -1,
-			'order'     => 'ASC',
+			'order'     => 'DESC',
             'meta_key' => $prefix . MMC_TEXTDOMAIN . '_date',
             'orderby'   => 'meta_value', //or 'meta_value_num'
 		));
