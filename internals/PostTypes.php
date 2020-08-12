@@ -29,7 +29,7 @@ class PostTypes extends Engine\Base {
 
 		// Add custom image size for isotope display.
 		add_theme_support( 'post-thumbnails' );
-		add_image_size( 'on_demand_video', 400, 225, array( 'center', 'center' ) );
+		add_image_size( 'on_demand_video', 400, 245, array( 'center', 'top' ) );
 
 		/*
 		* Custom Columns
