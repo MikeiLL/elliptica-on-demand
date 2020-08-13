@@ -227,9 +227,9 @@ class Shortcode extends Engine\Base {
 
 			$return .= '	<div class="od-video_info">';
 
-			$class_title = get_the_title();
+			$class_title = ''; //get_the_title();
 
-			$return .= '		<h5>' . $class_title . '</h5>';
+			//$return .= '		<h5>' . $class_title . '</h5>';
 
 			$instructor_and_type = '';
 
@@ -294,7 +294,7 @@ class Shortcode extends Engine\Base {
 
 			$modal_header .= 	'	<div class="modal-class-details__header_content">';
 			$modal_header .= 	'		<div>';
-			$modal_header .= 	'			<h5>' . $class_title .' </h5>';
+			//$modal_header .= 	'			<h5>' . $class_title .' </h5>';
 			$modal_header .= 	'			<p>' . $instructor_and_type .' </p>';
 			$modal_header .= 	'		</div>';
 			$modal_header .= 	'		<div>';
