@@ -1,6 +1,6 @@
 {
-    "name": "mike-ill/elliptica-on-demand",
-    "description": "Wordpress Plugin Boilerplate with steroids!",
+    "name": "mikeill/elliptica-on-demand",
+    "description": "Manage and display virtual Elliptica Studio classes.",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -9,6 +9,7 @@
             "homepage": "http://mzoo.org"
         }
     ],
+    "keywords": ["wordpress", "plugin"],
     "require": {
         "php": ">=7.0",
         "composer\/installers": "1.x",
@@ -73,5 +74,5 @@
             ]
         }
     },
-    "homepage": "https:\/\/github.com\/WPBP\/WordPress-Plugin-Boilerplate-Powered"
+    "homepage": "https:\/\/github.com\/MikeiLL\/elliptica-on-demand"
 }
