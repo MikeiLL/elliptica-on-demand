@@ -162,8 +162,10 @@
 
 .modal-class-details__header div a {
 	position: fixed;
-	bottom: 40px;
+	bottom: 50px;
 	right: 30px;
+	z-index: 1000;
+	padding: 1em;
 }
 
 .modal-class-details__header_content {
