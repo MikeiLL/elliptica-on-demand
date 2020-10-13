@@ -51,28 +51,6 @@ class PostTypes extends Engine\Base {
 		// 	)
 		// );
 
-
-		/*
-		* Custom Bulk Actions
-		*/
-		$bulk_actions = new \Seravo_Custom_Bulk_Action( array( 'post_type' => 'elliptica_od_video' ) );
-		$bulk_actions->register_bulk_action(
-			array(
-				'menu_text'    => 'Mark meta',
-				'admin_notice' => 'Written something on custom bulk meta',
-				'callback'     => function( $post_ids ) {
-					foreach ( $post_ids as $post_id ) {
-						update_post_meta( $post_id, '_elliptica_od_video_' . MMC_TEXTDOMAIN . '_text', 'Random stuff' );
-					}
-
-					return true;
-				},
-			)
-		);
-		$bulk_actions->init();
-		// Add bubble notification for cpt pending
-		add_action( 'admin_menu', array( $this, 'pending_cpt_bubble' ), 999 );
-		add_filter( 'pre_get_posts', array( $this, 'filter_search' ) );
 	}
 
 	/**
