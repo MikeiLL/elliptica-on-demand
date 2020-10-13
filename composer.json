@@ -22,7 +22,6 @@
         "wpbp\/debug": "1.1.*",
         "wpbp\/cpt_columns": "1.0.*",
         "wpbp\/language": "1.0.*",
-        "seravo\/wp-custom-bulk-actions": "dev-master",
         "johnbillion\/extended-cpts": "4.3.*",
         "cmb2\/cmb2": "2.7.*",
         "origgami\/cmb2-grid": "dev-master",
@@ -60,10 +59,7 @@
             "Elliptica_On_Demand\\Internals\\": "internals",
             "Elliptica_On_Demand\\Integrations\\": "integrations",
             "Elliptica_On_Demand\\Engine\\": "engine"
-        },
-        "files": [
-            "vendor\/wp-custom-bulk-actions\/custom-bulk-actions.php"
-        ]
+        }
     },
     "extra": {
         "installer-paths": {
