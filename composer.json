@@ -9,6 +9,7 @@
             "homepage": "http://mzoo.org"
         }
     ],
+  	"type": "wordpress-plugin",
     "keywords": ["wordpress", "plugin"],
     "require": {
         "php": ">=7.0",
