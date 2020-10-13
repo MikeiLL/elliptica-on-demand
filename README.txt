@@ -4,7 +4,7 @@ Donate link: http://example.com/
 Tags: comments, spam (maximum 12)
 Requires at least: 4.9
 Tested up to: 5.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 7.0
@@ -89,6 +89,9 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 2. This is the second screen shot
 
 == Changelog ==
+
+= 1.0.3 =
+Remove some unused fat.
 
 = 1.0.2 =
 Larger Button Size

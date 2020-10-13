@@ -11,7 +11,7 @@
  * Plugin Name:     Elliptica On Demand
  * Plugin URI:      @TODO
  * Description:     @TODO
- * Version:         1.0.2
+ * Version:         1.0.3
  * Author:          Mike iLL
  * Author URI:      http://mzoo.org
  * Text Domain:     elliptica-on-demand
@@ -26,7 +26,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
 }
 
-define( 'MMC_VERSION', '1.0.2' );
+define( 'MMC_VERSION', '1.0.3' );
 define( 'MMC_TEXTDOMAIN', 'elliptica-on-demand' );
 define( 'MMC_NAME', 'Elliptica On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
