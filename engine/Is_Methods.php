@@ -99,7 +99,16 @@ class Is_Methods {
 	 * @return boolean
 	 */
 	public function is_rest() {
-		return defined( 'REST_REQUEST' );
+		return true;
+		if (defined('REST_REQUEST') && REST_REQUEST )
+			return true;
+
+		global $wp_rewrite;
+		if ($wp_rewrite === null) $wp_rewrite = new \WP_Rewrite();
+
+		$rest_url = wp_parse_url( trailingslashit( rest_url( ) ) );
+		$current_url = wp_parse_url( add_query_arg( array( ) ) );
+		return strpos( $current_url['path'], substr($rest_url['path'],0, strlen($rest_url['path'])-1)) === 0;
 	}
 
 	/**

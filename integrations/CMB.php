@@ -25,9 +25,9 @@ class CMB extends Engine\Base {
 	 * @since 1.0.0
 	 */
 	public function initialize() {
-        parent::initialize();
-		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2/init.php';
-		require_once MMC_PLUGIN_ROOT . 'vendor/cmb2-grid/Cmb2GridPluginLoad.php';
+		parent::initialize();
+		require_once WP_PLUGIN_DIR . '/cmb2/init.php';
+		require_once WP_PLUGIN_DIR . '/cmb2-grid/Cmb2GridPluginLoad.php';
 		add_action( 'cmb2_init', array( $this, 'cmb_elliptica_od_metaboxes' ) );
 	}
 

@@ -11,6 +11,7 @@
 namespace Elliptica_On_Demand\Rest;
 
 use \Elliptica_On_Demand\Engine;
+mmc_log_text("Rest page loaded.");
 
 /**
  * Example class for REST
@@ -23,6 +24,7 @@ class Example extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
+		mmc_log_text("Rest example ran.");
 		parent::initialize();
         add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
     }
@@ -36,7 +38,8 @@ class Example extends Engine\Base {
      */
     public function add_custom_stuff() {
         $this->add_custom_field();
-        $this->add_custom_ruote();
+        $this->add_custom_route();
+		$this->add_simple_route();
     }
 
     /**
@@ -68,7 +71,7 @@ class Example extends Engine\Base {
      *
      * @return void
      */
-    public function add_custom_ruote() {
+    public function add_custom_route() {
         // Only an example with 2 parameters
         register_rest_route(
             'wp/v2',
@@ -86,6 +89,17 @@ class Example extends Engine\Base {
 						'sanitize_callback' => 'absint',
 					),
 				),
+			)
+		);
+    }
+	public function add_simple_route() {
+        // Only an example with 2 parameters
+        register_rest_route(
+            'wp/v2',
+            '/dumb',
+            array(
+				'methods'  => 'GET',
+				'callback' => array( $this, 'dumb' )
 			)
 		);
     }
@@ -140,6 +154,19 @@ class Example extends Engine\Base {
      */
     public function sum( $data ) {
         return array( 'result' => $data[ 'first' ] + $data[ 'second' ] );
+    }
+
+    /**
+     * Examples
+     *
+     * @since 1.0.0
+     *
+     * @param array $data Values.
+     *
+     * @return array
+     */
+    public function dumb( ) {
+        return array( 'result' => 'I can hear you.' );
     }
 
 }

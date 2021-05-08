@@ -9,9 +9,9 @@
  * @link      http://mzoo.org
  *
  * Plugin Name:     Elliptica On Demand
- * Plugin URI:      @TODO
- * Description:     @TODO
- * Version:         1.0.3
+ * Plugin URI:      https://mzoo.org
+ * Description:     Archive and display video classes for Elliptica Studios.
+ * Version:         1.0.4
  * Author:          Mike iLL
  * Author URI:      http://mzoo.org
  * Text Domain:     elliptica-on-demand
@@ -26,10 +26,11 @@ if ( !defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
 }
 
-define( 'MMC_VERSION', '1.0.3' );
+define( 'MMC_VERSION', '1.0.4' );
 define( 'MMC_TEXTDOMAIN', 'elliptica-on-demand' );
 define( 'MMC_NAME', 'Elliptica On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
+define( 'BEDROCK_SITE_ROOT', '/srv/www/ellipticastudios.com/current/' );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
 define( 'MMC_MIN_WP_VERSION',  5.3 );
@@ -63,7 +64,7 @@ if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	return;
 }
 
-$elliptica_on_demand_libraries = require_once MMC_PLUGIN_ROOT . 'vendor/autoload.php';
+$elliptica_on_demand_libraries = require '/srv/www/ellipticastudios.com/current/vendor/autoload.php';
 
 require_once MMC_PLUGIN_ROOT . 'functions/functions.php';
 require_once MMC_PLUGIN_ROOT . 'functions/debug.php';
@@ -126,15 +127,6 @@ function mmc_fs() {
 
 	return $mmc_fs;
 }
-
-// mmc_fs();
-
-// Documentation to integrate GitHub, GitLab or BitBucket https://github.com/YahnisElsts/plugin-update-checker/blob/master/README.md
-$my_update_checker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/MikeiLL/elliptica-on-demand',
-	__FILE__,
-	'elliptica-on-demand'
-);
 
 if ( ! wp_installing() ) {
 	add_action(

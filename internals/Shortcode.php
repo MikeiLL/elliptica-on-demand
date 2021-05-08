@@ -187,7 +187,7 @@ class Shortcode extends Engine\Base {
 		$query = new WP_Query(array(
 			'post_type' => 'elliptica_od_video',
 			'post_status' => 'publish',
-			'posts_per_page' => -1,
+			'posts_per_page' => 20,
 			'order'     => 'DESC',
             'meta_key' => $prefix . MMC_TEXTDOMAIN . '_date',
             'orderby'   => 'meta_value', //or 'meta_value_num'
@@ -217,8 +217,8 @@ class Shortcode extends Engine\Base {
 
 			$return .= '<a data-modaal-content-source="#modal-id-' . $modaal_id_count .'" href="#modal-id-' . $modaal_id_count .'" class="' . $isotope_filter_classes . ' info-popup isotope_video_item">';
 			$return .= '<div class="od-video" data-modaal-type="inline" data-modaal-animation="fade" class="modaal" ';
-			if (has_post_thumbnail( $post->ID ) ):
-				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'on_demand_video' );
+			if (has_post_thumbnail( $post_id ) ):
+				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'on_demand_video' );
 			  	$return .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
 			else:
 				$return .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
@@ -284,8 +284,8 @@ class Shortcode extends Engine\Base {
 			}
 			// Build modal class header background declaration
 			$modal_header = '<div class="modal-class-details__header" ';
-			if (has_post_thumbnail( $post->ID ) ):
-				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium_large' );
+			if (has_post_thumbnail( $post_id ) ):
+				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
 			  	$modal_header .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
 			else:
 				$modal_header .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
@@ -394,7 +394,7 @@ class Shortcode extends Engine\Base {
 	}
 
 
-    public function addScript()
+    public static function addScript()
     {
         if (!self::$addedAlready) {
             self::$addedAlready = true;
@@ -411,11 +411,11 @@ class Shortcode extends Engine\Base {
             wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope' ), MMC_VERSION );
             wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos');
 
-            $this->localizeScript();
+            self::localizeScript();
         }
     }
 
-    public function localizeScript()
+    public static function localizeScript()
     {
 
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';

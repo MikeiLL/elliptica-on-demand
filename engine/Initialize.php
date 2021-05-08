@@ -47,6 +47,7 @@ class Initialize {
 	 * @since 1.0.0
 	 */
 	public function __construct( \Composer\Autoload\ClassLoader $composer ) {
+
 		$this->is_methods       = new Engine\Is_Methods();
 		$this->composer = $composer;
 
@@ -54,6 +55,7 @@ class Initialize {
 		$this->get_classes( 'Integrations' );
 
 		if ( $this->is_methods->request( 'rest' ) ) {
+			mmc_log_text("Is Rest.");
 			$this->get_classes( 'Rest' );
 		}
 
@@ -119,7 +121,8 @@ class Initialize {
 					$this->classes[] = $class;
 				}
 			}
-
+			mmc_log_text($this->classes);
+			mmc_log($this->classes);
 			return $this->classes;
 		}
 
@@ -133,6 +136,8 @@ class Initialize {
 				wp_die( esc_html__( 'Plugin Name is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', MMC_TEXTDOMAIN ) );
 			}
 
+			mmc_log_text($this->classes);
+			mmc_log($this->classes);
 			return $this->classes;
 		}
 
