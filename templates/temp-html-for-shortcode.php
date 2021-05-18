@@ -39,9 +39,6 @@
 
 	</div> <!-- ui-group -->
 
-		$filter_control .= $music_style_filter_control;
-
-
 	<!-- Build out the Class Length FILTER -->
     <div class="ui-group">
 
