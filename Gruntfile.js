@@ -29,19 +29,15 @@
 					'!dist/*'
 				]
 			},
-			compass: {
-				dist: {
-					options: {
-						sassDir: 'assets/sass/*.scss',
-						cssDir: 'assets/css/*.css'
-					}
-				}
-			},
-			compass: {
-				compile: {
-					options: {
-						cssDir: 'dist/css'
-					}
+			'dart-sass': {
+				target: {
+					files: [{
+						expand: true,
+						cwd: 'assets/',
+						src: ['scss/*.scss', 'css/*.css'],
+						dest: 'dist/css',
+						ext: '.css'
+					}]
 				}
 			},
 			watch: {
@@ -52,7 +48,7 @@
 					files: [
 						'assets/sass/*.scss'
 					],
-					tasks: ['compass']
+					tasks: ['dart-sass']
 				},
 				js: {
 					files: [
@@ -74,12 +70,12 @@
 		grunt.loadNpmTasks('grunt-contrib-jshint');
 		grunt.loadNpmTasks('grunt-contrib-uglify');
 		grunt.loadNpmTasks('grunt-contrib-watch');
-		grunt.loadNpmTasks('grunt-contrib-compass');
+		grunt.loadNpmTasks('grunt-dart-sass');
 
 		// Register tasks
 		grunt.registerTask('default', [
 			'clean',
-			'compass',
+			'dart-sass',
 			'uglify'
 		]);
 		grunt.registerTask('dev', [
