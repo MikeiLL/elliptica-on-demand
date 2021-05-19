@@ -29,15 +29,30 @@
 					'!dist/*'
 				]
 			},
+			compass: {
+				dist: {
+					options: {
+						sassDir: 'assets/sass/*.scss',
+						cssDir: 'assets/css/*.css'
+					}
+				}
+			},
+			compass: {
+				compile: {
+					options: {
+						cssDir: 'dist/css'
+					}
+				}
+			},
 			watch: {
 				options: {
 					livereload: true
 				},
-				sass: {
+				compass: {
 					files: [
 						'assets/sass/*.scss'
 					],
-					tasks: ['sass']
+					tasks: ['compass']
 				},
 				js: {
 					files: [
@@ -59,10 +74,12 @@
 		grunt.loadNpmTasks('grunt-contrib-jshint');
 		grunt.loadNpmTasks('grunt-contrib-uglify');
 		grunt.loadNpmTasks('grunt-contrib-watch');
+		grunt.loadNpmTasks('grunt-contrib-compass');
 
 		// Register tasks
 		grunt.registerTask('default', [
 			'clean',
+			'compass',
 			'uglify'
 		]);
 		grunt.registerTask('dev', [
