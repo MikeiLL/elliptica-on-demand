@@ -21,6 +21,9 @@
  * Requires PHP:    7.2
  * WordPress-Plugin-Boilerplate-Powered: v3.2.0
  */
+
+use Elliptica_On_Demand\Rest;
+
 // If this file is called directly, abort.
 if ( !defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
@@ -34,6 +37,8 @@ define( 'BEDROCK_SITE_ROOT', '/srv/www/ellipticastudios.com/current/' );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
 define( 'MMC_MIN_WP_VERSION',  5.3 );
+
+example = new Rest\Example;
 
 add_action(
     'init',

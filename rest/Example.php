@@ -12,7 +12,7 @@ namespace Elliptica_On_Demand\Rest;
 
 use \Elliptica_On_Demand\Engine;
 mmc_log_text("Rest page loaded.");
-
+die("loaded, finally.");
 /**
  * Example class for REST
  */
