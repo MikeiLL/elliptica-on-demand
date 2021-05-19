@@ -1,5 +1,3 @@
-<?php ?>
-
 <div class="filters">
 	<!-- Build out the Instructors FILTER -->
 	<div class="ui-group">
@@ -89,11 +87,12 @@
 
 
 			<!-- Build the Modal Content -->
-			<!--
+
+			<!-- Hey Shafiq don't mind the extensive comments if they aren't helpful.
 			$class_desc = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_desc' );
-			if ( !empty($class_desc) ) {
-				$description = $class_desc[0] . ' ';
-			} -->
+			In the Shortcode, currently, $prefix = '_elliptica_od_' You can find the rest
+			of the metadata in `internals/PostTypes.php`. -->
+
 
 			<!-- $video_id = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_video_id' ); -->
 
@@ -101,109 +100,99 @@
 
 			<!-- Header -->
 
-			$difficulty_levels = [];
-			$difficulty_levels_array = get_the_terms( $post_id, 'difficulty_level' );
-			if ( !empty($difficulty_levels_array) ) {
-				foreach ( $difficulty_levels_array as $k => $difficulty_level ) {
-					$difficulty_levels[$k] = $difficulty_level->name . ' ';
-				}
-			}
-			// Build modal class header background declaration
-			$modal_header = '<div class="modal-class-details__header" ';
-			if (has_post_thumbnail( $post_id ) ):
-				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-			  	$modal_header .= 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] .')"';
-			else:
-				$modal_header .= 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
-			endif;
-			$modal_header .= '>'; // End modal class image background declaration
+			<!-- Build up $difficulty_levels_array from get_the_terms( $post_id, 'difficulty_level' ) -->
 
-			$modal_header .= 	'	<div class="modal-class-details__header_content">';
-			$modal_header .= 	'		<div>';
-			//$modal_header .= 	'			<h5>' . $class_title .' </h5>';
-			$modal_header .= 	'			<p>' . $instructor_and_type .' </p>';
-			$modal_header .= 	'		</div>';
-			$modal_header .= 	'		<div>';
-			$modal_header .= 	'			<a class="modal_header_play_button" href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'">Start</a>';
-			// <svg viewBox="0 0 28 28" width="16" height="16"><g stroke="none" stroke-width="1" fill-rule="evenodd"><path d="M23.3870324,12.1022967 C25.1944355,13.1466985 25.1944355,14.8547015 23.3870324,15.8977033 L8.04720582,24.7541186 C6.23840269,25.7985204 4.76000013,24.9445189 4.76000013,22.8571153 L4.76000013,5.14288467 C4.76000013,3.05548105 6.23840269,2.20147957 8.04720582,3.24588138 L23.3870324,12.1022967 Z" fill="#ffffff"></path></g></svg>
-			$modal_header .= 	'		</div>';
-			$modal_header .= 	'	</div>';
-			$modal_header .= 	'</div>';
-			/* // End Header */
+			<!-- Build modal class header background declaration to put image as CSS background -->
+			<div class="modal-class-details__header">
+			<!-- End modal class image background declaration -->
+
+			<!-- Now put the data in the header -->
+				<div class="modal-class-details__header_content">
+					<div>
+						<p>Instructor and Type Goes Here</p>
+					</div>
+					<div>
+						<a class="modal_header_play_button" href="https://video.mindbody.io/studios/526618/videos/' . $video_link .'">Start</a>
+
+			<!-- The following SVG was commented out, but leaving for the moment in case we want a play button: ▶︎ -->
+			<!--
+			<svg viewBox="0 0 28 28" width="16" height="16">
+				<g stroke="none" stroke-width="1" fill-rule="evenodd">
+					<path d="M23.3870324,12.1022967 C25.1944355,13.1466985 25.1944355,14.8547015 23.3870324,15.8977033 L8.04720582,24.7541186 C6.23840269,25.7985204 4.76000013,24.9445189 4.76000013,22.8571153 L4.76000013,5.14288467 C4.76000013,3.05548105 6.23840269,2.20147957 8.04720582,3.24588138 L23.3870324,12.1022967 Z" fill="#ffffff">
+					</path>
+				</g>
+			</svg>
+			-->
+					</div>
+				</div>
+			</div>
+			<!-- End Header -->
 
 
-			$modal_content .= $modal_header;
-
-			/* Modal Details Body */
-			// (to wrap with padding below header, to avoid negative margin in header)
-			$modal_content .= '	<div class="modal-class-details__body">';
-
-			/* Intro */
-			$modal_intro = 		'	<div class="modal-class-details__intro">';
-			$modal_intro .= 	'		<div class="modal-class-details__intro__level>" ';
-			$modal_intro .= 	'			<p><strong>Level</strong>: ' . implode(', ', $difficulty_levels) .' </p>';
-			$modal_intro .= 	'		</div>';
-			$modal_intro .= 	'		<div class="modal-class-details__intro__desc>" ';
-			$modal_intro .= 	'			<p>' . $description .'</p>';
-			$modal_intro .= 	'		</div>';
-			$modal_intro .= 	'	</div>';
-
-			$modal_content .= $modal_intro;
-
-			/* // Intro */
-
-			$class_plans = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
-			$class_plans_only = $class_plans;
-			/* Playlist */
-			if ( !empty($class_plans) ) {
-				$modal_content .= '	<div class="modal-class-details__playlist_section">';
-				$modal_content .= '		<h2>Playlist</h2>';
-				$modal_content .= '		<div class="modal-class-details__listwrap mcd__playlist_hideContent">';
-				$modal_content .= '			<ol>';
-				foreach ( $class_plans[0] as $class_segment ) {
-					$modal_content .= '				<li class="modal-class-details__playlist_item"><img class="modal-class-details__playlist_img" src="' . $class_segment['song_artwork'] . '"/>';
-					$modal_content .= '					<div class="modal-class-details__song_details">';
-					$modal_content .= '						<strong>' . $class_segment['song_title'] . '</strong>';
-					$modal_content .= '						<span>' . $class_segment['song_artists'] . '</span>';
-					$modal_content .= '					</div>';
-					$modal_content .= '			</li>';
-				}
-				$modal_content .= '			</ol>';
-				$modal_content .= '		</div>';
-
-				if (count($class_plans[0]) > 3) {
-					$modal_content .= '		<div class="mcd_playlist__show-more">';
-					$modal_content .= '			<a href="#">Show more</a>';
-					$modal_content .= '		</div>';
-				}
-				$modal_content .= '	</div>';
-
-			/* Class Plan */
-				$modal_content .= '	<div class="modal-class-details__classplan_section">';
-				$modal_content .= '		<h2>Class Plan</h2>';
-				$modal_content .= '		<div class="modal-class-details__listwrap">';
-				$modal_content .= '			<ol>';
-
-				$minimized_class_plan = minimize_and_sum_class_plans($class_plans);
-				foreach ( $minimized_class_plan as $class_segment ) {
-					$modal_content .= '				<li class="modal-class-details__classplan_item">';
-					$modal_content .= '					<div class="modal-class-details__segment_type">';
-					$modal_content .= '						' . $class_segment['segment_type'];
-					$modal_content .= '					</div>';
-					$modal_content .= '					<div class="modal-class-details__segment_duration">';
-					$modal_content .= '						' . $class_segment['segment_duration'] . ' min';
-					$modal_content .= '					</div>';
-					$modal_content .= '				</li>';
-				}
-				$modal_content .= '			</ol>';
-				$modal_content .= '		</div>';
-				$modal_content .= '	</div>';
-			}
 
 
-			/* End Modal Details Body */
-			$modal_content .= '	</div>';
+			<!-- Modal Details Body -->
+			<!-- Wrap with padding below header, to avoid negative margin in header -->
+			<div class="modal-class-details__body">
 
-			/* End Modal Content */
-			$modal_content .= '</div>';
+				<!-- Intro -->
+				<div class="modal-class-details__intro">';
+					<div class="modal-class-details__intro__level>"
+						<p><strong>Level</strong>: Difficulty Levels Here </p>
+					</div>
+					<div class="modal-class-details__intro__desc">
+						<p> description here </p>
+					</div>
+				</div>
+				<!-- End of Intro -->
+
+				<!-- Build up the Class Plan section -->
+				<!-- Song Playlist -->
+				<div class="modal-class-details__playlist_section">
+					<h2>Playlist</h2>
+					<div class="modal-class-details__listwrap mcd__playlist_hideContent">
+						<ol>
+						<!-- foreach ( $class_plans[0] as $class_segment ) -->
+							<li class="modal-class-details__playlist_item">
+								<img class="modal-class-details__playlist_img" src="' . $class_segment['song_artwork'] . '"/>
+								<div class="modal-class-details__song_details">
+									<strong>' . $class_segment['song_title'] . '</strong>
+									<span>' . $class_segment['song_artists'] . '</span>
+								</div>
+							</li>
+						</ol>
+					</div>
+
+				<!-- if (count($class_plans[0]) > 3) -->
+					<div class="mcd_playlist__show-more">
+						<a href="#">Show more</a>
+					</div>
+
+				</div>
+
+				<!-- Class Plan -->
+				<div class="modal-class-details__classplan_section">
+					<h2>Class Plan</h2>
+					<div class="modal-class-details__listwrap">
+						<ol>
+
+						<!-- foreach ( $minimized_class_plan as $class_segment ) -->
+							<li class="modal-class-details__classplan_item">
+								<div class="modal-class-details__segment_type">
+									Segment Type Here
+								</div>
+								<div class="modal-class-details__segment_duration">
+									Segment Duration (in minutes))
+								</div>
+							</li>
+
+						</ol>
+					</div>
+				</div>
+
+			<!-- End Modal Details Body -->
+				</div>
+
+			<!-- End Modal Content -->
+			</div>
 
