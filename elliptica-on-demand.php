@@ -38,7 +38,7 @@ define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
 define( 'MMC_MIN_WP_VERSION',  5.3 );
 
-example = new Rest\Example;
+//$example = new Rest\Example;
 
 add_action(
     'init',
