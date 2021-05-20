@@ -72,37 +72,14 @@ class Shortcode extends Engine\Base {
 		) );
 
 
-        $temp_args['test_var'] = 'kas59866-test';        
+        $temp_args['difficulty_levels'] = $difficulty_levels;        
         
         
-        eod_get_template('temp-html-for-shortcode.php', $temp_args);
+        
         
 		$return = "";
 
-		$filter_control = '<div class="filters">';
-
-		$level_filter_control = '  <div class="ui-group">';
-
-		$level_filter_control .= '		<div class="button-group" data-filter-group="level">';
-		$count = count($difficulty_levels);
-		$level_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Level</button>';
-		$all_terms = [];
-		if ( $count > 0 ){
-			foreach ( $difficulty_levels as $term ) {
-				$termname = strtolower($term->name);
-				$termname = str_replace(' ', '-', $termname);
-				$level_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
-				$all_terms[$count] = $termname;
-				$count--;
-			}
-		$level_filter_control .= '<button style="float:left;" class="button" data-filter=".'.implode('.', $all_terms).'">All Levels Welcome</button>';;
-		}
-		$level_filter_control .= '		</div> <!-- button-group -->';
-
-		$level_filter_control .= '	</div> <!-- ui-group -->';
-
-		$filter_control .= $level_filter_control;
-
+		$filter_control = '';
 
 
 		// Build out the FILTER
@@ -111,26 +88,9 @@ class Shortcode extends Engine\Base {
 			'hide_empty' => true,
 		) );
 
+        $temp_args['instructors'] = $instructors; 
+        
 
-
-		$instructor_filter_control = '  <div class="ui-group">';
-
-		$instructor_filter_control .= '		<div class="button-group" data-filter-group="instructor">';
-		$count = count($instructors);
-		$instructor_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Instructor</button>';
-		if ( $count > 0 ){
-			foreach ( $instructors as $term ) {
-				$termname = strtolower($term->name);
-				$termname = str_replace(' ', '-', $termname);
-				$instructor_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
-
-			}
-		}
-		$instructor_filter_control .= '		</div> <!-- button-group -->';
-
-		$instructor_filter_control .= '	</div> <!-- ui-group -->';
-
-		$filter_control .= $instructor_filter_control;
 
 
 
@@ -139,24 +99,9 @@ class Shortcode extends Engine\Base {
 			'taxonomy' => 'music_style',
 			'hide_empty' => true,
 		) );
-		$music_style_filter_control = '  <div class="ui-group">';
+        
+        $temp_args['music_styles'] = $music_styles; 
 
-		$music_style_filter_control .= '		<div class="button-group" data-filter-group="music">';
-		$count = count($music_styles);
-		$music_style_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">All Styles</button>';
-		if ( $count > 0 ){
-			foreach ( $music_styles as $term ) {
-				$termname = strtolower($term->name);
-				$termname = str_replace(' ', '-', $termname);
-				$music_style_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
-
-			}
-		}
-		$music_style_filter_control .= '		</div> <!-- button-group -->';
-
-		$music_style_filter_control .= '	</div> <!-- ui-group -->';
-
-		$filter_control .= $music_style_filter_control;
 
 
 		// Build out the FILTER
@@ -164,28 +109,12 @@ class Shortcode extends Engine\Base {
 			'taxonomy' => 'class_length',
 			'hide_empty' => true,
 		) );
-		$class_length_filter_control = '  <div class="ui-group">';
+        
+        $temp_args['class_lengths'] = $class_lengths;
 
-		$class_length_filter_control .= '		<div class="button-group" data-filter-group="length">';
-		$count = count($class_lengths);
-		$class_length_filter_control .= '<button style="float:left;" class="button is-checked" data-filter="*">Any Length</button>';
-		if ( $count > 0 ){
-			foreach ( $class_lengths as $term ) {
-				$termname = strtolower($term->name);
-				$termname = str_replace(' ', '-', $termname);
-				$class_length_filter_control .= '<button style="float:left;" class="button" data-filter=".'.$termname.'">' . $term->name . '</button>';
-
-			}
-		}
-		$class_length_filter_control .= '		</div> <!-- button-group -->';
-
-		$class_length_filter_control .= '	</div> <!-- ui-group -->';
-
-		$filter_control .= $class_length_filter_control;
-
-		$filter_control .= '</div> <!-- // filters -->';
-
-		$return .= $filter_control;
+		eod_get_template('shortcode-filter.php', $temp_args);
+		
+		//$return .= $filter_control;
 
 		$prefix   = '_elliptica_od_';
 

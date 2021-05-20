@@ -1,0 +1,434 @@
+/* Styling for public-facing components of the plugin. */
+/*  Isotope Video Archive Display */
+/* line 5, ../sass/elliptica-on-demand.scss */
+.on_demand_video_grid-sizer, .isotope_video_item {
+  width: 100%;
+}
+
+/* line 8, ../sass/elliptica-on-demand.scss */
+.isotope_video_item {
+  float: left;
+  height: auto;
+  min-height: 200px;
+  padding: 10px;
+  margin: 0.3em 0;
+}
+
+/* line 16, ../sass/elliptica-on-demand.scss */
+.od-video {
+  height: auto;
+  min-height: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  color: white;
+  font-family: sans-serif;
+}
+
+/* line 29, ../sass/elliptica-on-demand.scss */
+.od-video a, .od-video a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+/* line 34, ../sass/elliptica-on-demand.scss */
+.od-video_info {
+  position: absolute;
+  bottom: 0;
+}
+
+/* line 39, ../sass/elliptica-on-demand.scss */
+.button-group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* line 45, ../sass/elliptica-on-demand.scss */
+.button-group .button {
+  float: left;
+  border-radius: 0;
+  margin-left: 0;
+  margin-right: 1px;
+  background-color: #d50058;
+  text-decoration: none;
+}
+
+/* line 54, ../sass/elliptica-on-demand.scss */
+.button-group .button:active,
+.button-group .button.is-checked {
+  background-color: #231f20;
+  color: white;
+}
+
+/* line 60, ../sass/elliptica-on-demand.scss */
+.button-group .button:first-child {
+  border-radius: 0.5em 0 0 0.5em;
+}
+
+/* line 61, ../sass/elliptica-on-demand.scss */
+.button-group .button:last-child {
+  border-radius: 0 0.5em 0.5em 0;
+}
+
+/* line 63, ../sass/elliptica-on-demand.scss */
+.button-group .button:hover {
+  background-color: #53585a;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+/* Filter Section */
+/* Buttons */
+/* line 75, ../sass/elliptica-on-demand.scss */
+.ui-group {
+  display: inline-block;
+}
+
+/* line 79, ../sass/elliptica-on-demand.scss */
+.ui-group h3 {
+  display: inline-block;
+  margin-right: 0.2em;
+  font-size: 12px;
+}
+
+/* line 85, ../sass/elliptica-on-demand.scss */
+.ui-group .button-group {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* line 90, ../sass/elliptica-on-demand.scss */
+.ui-group .button-group button {
+  font-size: 0.9rem;
+}
+
+/* Modaal */
+/* line 95, ../sass/elliptica-on-demand.scss */
+.modaal-wrapper {
+  z-index: 19999;
+}
+
+/* line 99, ../sass/elliptica-on-demand.scss */
+.modaal-container {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+}
+
+/* line 107, ../sass/elliptica-on-demand.scss */
+.modaal-content-container {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #f5f7f9;
+  padding: 0;
+  color: #4c525e;
+  flex: 1;
+}
+
+/***********************
+ *
+ * Modal Content
+ *
+ */
+/* line 122, ../sass/elliptica-on-demand.scss */
+.modal-class-details__header {
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  margin: 0;
+  height: 200px;
+  max-width: 100%;
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+  padding: 0.5em;
+}
+
+/* line 135, ../sass/elliptica-on-demand.scss */
+.modal_header_play_button {
+  text-align: center;
+  font-family: sans-serif;
+  border-radius: 5px;
+  font-weight: 600;
+  padding: 0.5em;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px -1px 0px 0px inset;
+  background-color: #d50058;
+  transition-property: filter, background-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* line 156, ../sass/elliptica-on-demand.scss */
+.modal_header_play_button svg {
+  padding: 2px;
+  width: 16;
+  height: 16;
+  display: flex;
+}
+
+/* line 163, ../sass/elliptica-on-demand.scss */
+.modal-class-details__header div a {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  z-index: 1000;
+  padding: 1em;
+}
+
+/* line 171, ../sass/elliptica-on-demand.scss */
+.modal-class-details__header_content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  -webkit-box-align: center;
+  -webkit-box-pack: justify;
+  align-items: center;
+  bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+}
+
+/* Class Details Body */
+/* line 188, ../sass/elliptica-on-demand.scss */
+.modal-class-details__body {
+  padding: 0.5em;
+}
+
+/* Playlist */
+/* line 195, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_img {
+  width: 20px;
+  height: 20px;
+}
+
+/* line 200, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_section {
+  background: #fafafa;
+  border-radius: 10px;
+  counter-reset: playlist-order;
+}
+
+/* line 206, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_item, .modal-class-details__classplan_item {
+  line-height: 1.4em;
+  letter-spacing: 0.02em;
+  font-size: 12px;
+  font-weight: 500;
+  counter-increment: playlist-order 1;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(168, 172, 177, 0.25);
+  height: 3.5em;
+}
+
+/* line 219, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_item img {
+  height: 40px;
+  width: 40px;
+  background-color: #e4e7eb;
+  margin: 0px 15px 0px 10px;
+  border-radius: 5px;
+}
+
+/* line 227, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_item::before {
+  content: counter(playlist-order);
+  min-width: 1.2em;
+}
+
+/* line 232, ../sass/elliptica-on-demand.scss */
+.modal-class-details__song_details {
+  overflow: hidden;
+}
+
+/* line 236, ../sass/elliptica-on-demand.scss */
+.modal-class-details__song_details strong {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  color: #222529;
+  overflow: hidden;
+}
+
+/* line 244, ../sass/elliptica-on-demand.scss */
+.modal-class-details__song_details span {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  color: #5a6474;
+  overflow: hidden;
+}
+
+/* line 252, ../sass/elliptica-on-demand.scss */
+.modal-class-details__playlist_section h2 {
+  font-weight: 500;
+  line-height: 1.35em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #5a6474;
+  padding: 15px 15px 0px;
+}
+
+/* line 262, ../sass/elliptica-on-demand.scss */
+.mcd__playlist_hideContent {
+  overflow: hidden;
+  line-height: 1em;
+  font-size: 12px;
+  height: 12.2em;
+}
+
+/* line 269, ../sass/elliptica-on-demand.scss */
+.mcd__playlist_showContent {
+  line-height: 1em;
+  height: auto;
+}
+
+/* line 273, ../sass/elliptica-on-demand.scss */
+.mcd__playlist_showContent {
+  height: auto;
+}
+
+/* line 277, ../sass/elliptica-on-demand.scss */
+.mcd_playlist__show-more {
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Class Plan */
+/* line 283, ../sass/elliptica-on-demand.scss */
+.modal-class-details__classplan_section h2 {
+  font-weight: 500;
+  line-height: 1.35em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+  border-bottom: 1px solid rgba(168, 172, 177, 0.4);
+}
+
+/* line 294, ../sass/elliptica-on-demand.scss */
+.modal-class-details__classplan_item {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 50px;
+  flex-direction: row;
+}
+
+/* line 302, ../sass/elliptica-on-demand.scss */
+.modal-class-details__classplan_section .modal-class-details__classplan_listwrap {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/* line 307, ../sass/elliptica-on-demand.scss */
+.modal-class-details__segment_type, .modal-class-details__segment_duration {
+  line-height: 1.4em;
+  letter-spacing: 0.02em;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* line 314, ../sass/elliptica-on-demand.scss */
+.modal-class-details__segment_type {
+  width: 36%;
+}
+
+/* line 318, ../sass/elliptica-on-demand.scss */
+.modal-class-details__intro {
+  letter-spacing: 0.02em;
+  line-height: 1.5em;
+  font-size: 13px;
+  font-weight: 300;
+  color: #4c525e;
+  margin: 0.6em 0;
+}
+
+/* line 326, ../sass/elliptica-on-demand.scss */
+.modal-class-details__listwrap {
+  transition-duration: 350ms;
+  transition-timing-function: ease;
+}
+
+/* line 331, ../sass/elliptica-on-demand.scss */
+.modal-class-details__listwrap ol {
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  /* line 343, ../sass/elliptica-on-demand.scss */
+  .on_demand_video_grid-sizer, .isotope_video_item {
+    width: 45%;
+  }
+
+  /* line 347, ../sass/elliptica-on-demand.scss */
+  .modal-class-details__header {
+    width: 400px;
+    height: 200px;
+  }
+
+  /* line 352, ../sass/elliptica-on-demand.scss */
+  .modaal-container {
+    width: 400px;
+    max-width: 100%;
+  }
+
+  /* line 357, ../sass/elliptica-on-demand.scss */
+  .modal-class-details__header div a {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+  }
+}
+@media (min-width: 768px) {
+  /* line 367, ../sass/elliptica-on-demand.scss */
+  .on_demand_video_grid-sizer, .isotope_video_item {
+    width: 33.333%;
+  }
+}
+@media (min-width: 992px) {
+  /* Isotope Video Archive */
+  /* Filter */
+  /* buttons */
+  /* line 380, ../sass/elliptica-on-demand.scss */
+  .ui-group h3 {
+    font-size: 16px;
+  }
+
+  /* line 384, ../sass/elliptica-on-demand.scss */
+  .ui-group .button-group {
+    margin-right: 5px;
+  }
+
+  /* line 388, ../sass/elliptica-on-demand.scss */
+  .ui-group .button-group button {
+    font-size: 0.6em;
+  }
+}
+@media (min-width: 1200px) {
+  /* ---- isotope ---- */
+  /* line 399, ../sass/elliptica-on-demand.scss */
+  #elliptica_od_videos {
+    max-width: 1200px;
+  }
+}
