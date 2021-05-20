@@ -79,9 +79,6 @@ class Shortcode extends Engine\Base {
         
 		$return = "";
 
-		$filter_control = '';
-
-
 		// Build out the FILTER
         $instructors = get_terms( array(
 			'taxonomy' => 'class_instructor',
