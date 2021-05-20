@@ -324,7 +324,7 @@ class Shortcode extends Engine\Base {
 		// Add Style with script adder
         self::addScript();
 
-		return $return;
+		echo $return;
 	}
 
 
