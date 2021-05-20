@@ -72,6 +72,11 @@ class Shortcode extends Engine\Base {
 		) );
 
 
+        $temp_args['test_var'] = 'kas59866-test';        
+        
+        
+        eod_get_template('temp-html-for-shortcode.php', $temp_args);
+        
 		$return = "";
 
 		$filter_control = '<div class="filters">';

@@ -64,5 +64,5 @@ jQuery(document).ready(function( $ ) {
 
     self.text(linkText);
 });
-
+console.log('yes i am working...');
 });
