@@ -11,7 +11,7 @@
 namespace Elliptica_On_Demand\Frontend\Extras;
 
 use \Elliptica_On_Demand\Engine;
-use \Elliptica_On_Demand\Rest;
+
 /**
  * Add custom css class to <body>
  */
@@ -25,7 +25,6 @@ class Body_Class extends Engine\Base {
 	public function initialize() {
 		parent::initialize();
 		add_filter( 'body_class', array( __CLASS__, 'add_mmc_class' ), 10, 3 );
-		add_action( 'rest_api_init', array( __CLASS__, 'add_restful_endpoint' ), 10, 3);
 	}
 
 	/**
@@ -40,18 +39,6 @@ class Body_Class extends Engine\Base {
 	public static function add_mmc_class( $classes ) {
 		$classes[] = MMC_TEXTDOMAIN;
 		return $classes;
-	}
-
-	/**
-	 * Add class in the body on the frontend
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array
-	 */
-	public static function add_restful_endpoint( ) {
-		$restEx = new Rest\Example;
-		$restEx->add_simple_route();
 	}
 
 }
