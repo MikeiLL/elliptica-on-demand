@@ -90,47 +90,6 @@ if ( ! $requirements->satisfied() ) {
 	return;
 }
 
-
-/**
- * Create a helper function for easy SDK access.
- *
- * @global type $mmc_fs
- * @return object
- */
-function mmc_fs() {
-	global $mmc_fs;
-
-	if ( !isset( $mmc_fs ) ) {
-		require_once MMC_PLUGIN_ROOT . 'vendor/freemius/wordpress-sdk/start.php';
-		$mmc_fs = fs_dynamic_init(
-			array(
-				'id'             => '',
-				'slug'           => 'elliptica-on-demand',
-				'public_key'     => '',
-				'is_live'        => false,
-				'is_premium'     => true,
-				'has_addons'     => false,
-				'has_paid_plans' => true,
-				'menu'           => array(
-					'slug' => 'elliptica-on-demand',
-				),
-			)
-		);
-
-
-		if ( $mmc_fs->is_premium() ) {
-			$mmc_fs->add_filter(
-                'support_forum_url',
-                function( $wp_org_support_forum_url ) {
-					return $wp_org_support_forum_url . 'http://your url';
-				}
-            );
-		}
-	}
-
-	return $mmc_fs;
-}
-
 if ( ! wp_installing() ) {
 	add_action(
         'plugins_loaded',
