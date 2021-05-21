@@ -55,7 +55,6 @@ class Initialize {
 		$this->get_classes( 'Integrations' );
 
 		if ( $this->is_methods->request( 'rest' ) ) {
-			mmc_log_text("Is Rest.");
 			$this->get_classes( 'Rest' );
 		}
 
