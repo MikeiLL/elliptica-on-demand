@@ -11,7 +11,6 @@
 namespace Elliptica_On_Demand\Rest;
 
 use \Elliptica_On_Demand\Engine;
-mmc_log_text("Rest page loaded.");
 
 /**
  * Example class for REST
@@ -24,7 +23,6 @@ class Example extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		mmc_log_text("Rest example ran.");
 		parent::initialize();
         add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
     }
@@ -68,6 +66,10 @@ class Example extends Engine\Base {
      * Examples
      *
      * @since 1.0.0
+	 *
+	 * Make an instance of this class somewhere, then
+	 * call this method and test on the command line with
+	 * `curl http://example.com/wp-json/wp/v2/calc?first=1&second=2`
      *
      * @return void
      */
@@ -92,10 +94,18 @@ class Example extends Engine\Base {
 			)
 		);
     }
+
+	/**
+	 * Simple Route Example
+	 *
+	 * Make an instance of this class somewhere, then
+	 * call this method and test on the command line with
+	 * `curl http://example.com/wp-json/my_plugin/v1/dumb`
+	 */
 	public function add_simple_route() {
-        // Only an example with 2 parameters
+        // An example with 0 parameters.
         register_rest_route(
-            'wp/v2',
+            'my_plugin/v1',
             '/dumb',
             array(
 				'methods'  => 'GET',
