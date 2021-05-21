@@ -15,7 +15,7 @@ use \Elliptica_On_Demand\Engine;
 /**
  * Example class for REST
  */
-class Example extends Engine\Base {
+class OnDemand extends Engine\Base {
 
 	/**
 	 * Initialize the class.
@@ -100,16 +100,16 @@ class Example extends Engine\Base {
 	 *
 	 * Make an instance of this class somewhere, then
 	 * call this method and test on the command line with
-	 * `curl http://example.com/wp-json/my_plugin/v1/dumb`
+	 * `curl http://example.com/wp-json/eod/v1/simple`
 	 */
 	public function add_simple_route() {
         // An example with 0 parameters.
         register_rest_route(
-            'my_plugin/v1',
-            '/dumb',
+            'eod/v1',
+            '/simple',
             array(
 				'methods'  => 'GET',
-				'callback' => array( $this, 'dumb' )
+				'callback' => array( $this, 'simple_route_example' )
 			)
 		);
     }
@@ -167,7 +167,7 @@ class Example extends Engine\Base {
     }
 
     /**
-     * Examples
+     * Simple Route Example
      *
      * @since 1.0.0
      *
@@ -175,8 +175,8 @@ class Example extends Engine\Base {
      *
      * @return array
      */
-    public function dumb( ) {
-        return array( 'result' => 'I can hear you.' );
+    public function simple_route_example( ) {
+        return array( 'result' => 'Salaam. I can hear you.' );
     }
 
 }

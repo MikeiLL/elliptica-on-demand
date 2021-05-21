@@ -111,7 +111,6 @@ class Initialize {
 		$prefix    = $this->composer->getPrefixesPsr4();
 		$classmap  = $this->composer->getClassMap();
 		$namespace = 'Elliptica_On_Demand\\' . $namespace;
-
 		// In case composer has autoload optimized
 		if ( isset( $classmap[ 'Elliptica_On_Demand\\Engine\\Initialize' ] ) ) {
 			$classes = array_keys( $classmap );
