@@ -90,6 +90,11 @@ class PostTypes extends Engine\Base {
 
 		'menu_icon'	=> 'dashicons-desktop',
 
+		// Show in Rest API
+		'show_in_rest' => true,
+		'rest_base' => 'eod',
+		'rest_controller_class' => 'WP_REST_Posts_Controller',
+
 
 		# Show all posts on the post type archive:
 		'archive' => [
@@ -143,20 +148,32 @@ class PostTypes extends Engine\Base {
 
 		'dashboard_glance' => true,
 
+		// Show in Rest API
+		'show_in_rest' => true,
+
 	] );
 	register_extended_taxonomy( 'difficulty_level', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
+
+		// Show in Rest API
+		'show_in_rest' => true,
 
 	] );
 	register_extended_taxonomy( 'class_length', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
 
+		// Show in Rest API
+		'show_in_rest' => true,
+
 	] );
 	register_extended_taxonomy( 'class_instructor', 'elliptica_od_video', [
 
 		'dashboard_glance' => true,
+
+		// Show in Rest API
+		'show_in_rest' => true,
 
 	] );
 

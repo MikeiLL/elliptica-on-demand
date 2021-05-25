@@ -28,7 +28,7 @@ class InitRest extends Engine\Base {
             return;
 		}
 		// Initilize rest api
-		// add_action( 'rest_api_init', array( __CLASS__, 'add_restful_endpoint' ), 10, 3);
+		add_action( 'rest_api_init', array( __CLASS__, 'add_restful_endpoint' ), 10, 3);
 	}
 
 

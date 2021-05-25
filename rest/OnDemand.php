@@ -38,6 +38,7 @@ class OnDemand extends Engine\Base {
         $this->add_custom_field();
         $this->add_custom_route();
 		$this->add_simple_route();
+		$this->add_eod_get_route();
     }
 
     /**
@@ -112,6 +113,69 @@ class OnDemand extends Engine\Base {
 				'callback' => array( $this, 'simple_route_example' )
 			)
 		);
+    }
+
+	/**
+	 * Simple Route Example
+	 *
+	 * Make an instance of this class somewhere, then
+	 * call this method and test on the command line with
+	 * `curl http://example.com/wp-json/eod/v1/simple`
+	 */
+	public function add_eod_get_route() {
+        // An example with 0 parameters.
+        register_rest_route(
+            'eod/v1',
+            '/posts',
+            array(
+				'methods'  => 'GET',
+				'callback' => array( $this, 'return_on_demand_posts' )
+			)
+		);
+    }
+
+    /**
+     * Return On Demand Posts
+     *
+     * @since 1.0.0
+     *
+     * @param WP_REST_Request $request Values.
+	 *
+	 * Request could look like
+	 * eod/v1/posts?meta_query[relation]=OR&meta_query[0][key]=class_length&meta_query[0][value]=30&meta_query[0][compare]==
+     *
+     * @return array
+     */
+    public function return_on_demand_posts( \WP_REST_Request $request ) {
+		$parameters = $request->get_params();
+		// Do the actual query and return the data
+		if(isset($parameters['meta_query'])) {
+			$query = $parameters['meta_query'];
+			// Set the arguments based on get parameters
+			$args = array (
+				'relation' => $query[0]['relation'],
+				array(
+					'key' => $query[0]['key'],
+					'value' => $query[0]['value'],
+					'compare' => '=',
+				),
+			);
+			// Run a custom query
+			$meta_query = new WP_Query($args);
+			if($meta_query->have_posts()) {
+				//Define and empty array
+				$data = array();
+				// Store each post's title in the array
+				while($meta_query->have_posts()) {
+					$meta_query->the_post();
+					$data[] =  get_the_title();
+				}
+				// Return the data
+				return $data;
+			}
+			// If there is no post
+			return 'No post to show';
+		}
     }
 
     /**

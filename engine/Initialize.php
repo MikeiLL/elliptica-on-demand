@@ -119,8 +119,6 @@ class Initialize {
 					$this->classes[] = $class;
 				}
 			}
-			mmc_log_text($this->classes);
-			mmc_log($this->classes);
 			return $this->classes;
 		}
 
@@ -133,9 +131,6 @@ class Initialize {
 			if ( !WP_DEBUG ) {
 				wp_die( esc_html__( 'Plugin Name is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', MMC_TEXTDOMAIN ) );
 			}
-
-			mmc_log_text($this->classes);
-			mmc_log($this->classes);
 			return $this->classes;
 		}
 
