@@ -31,13 +31,25 @@
 			},
 			'dart-sass': {
 				target: {
-					files: [{
-						expand: true,
-						cwd: 'assets/',
-						src: ['scss/*.scss', 'css/*.css'],
-						dest: 'dist/css',
-						ext: '.css'
-					}]
+					options: {
+						outputStyle: 'compressed'
+					},
+					files: [
+						{
+							expand: true,
+							cwd: 'assets/sass/',
+							src: ['*.scss'],
+							dest: 'dist/css',
+							ext: '.min.css'
+						},
+						{
+							expand: true,
+							cwd: 'node_modules/modaal/source/css/',
+							src: ['*.scss'],
+							dest: 'dist/css',
+							ext: '.min.css'
+						}
+					]
 				}
 			},
 			watch: {
@@ -59,8 +71,8 @@
 			},
 			clean: {
 				dist: [
-					'dist/css/<%= pkg.name %>.min.css',
-					'dist/js/<%= pkg.name %>.min.js'
+					'dist/js/*',
+					'dist/css/*'
 				]
 			}
 		});
