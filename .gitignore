@@ -39,3 +39,4 @@ vendor
 tests/_output
 /elliptica-on-demand/vendor/
 tests/_support/_generated
+dist
