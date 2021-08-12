@@ -37,7 +37,7 @@ class OnDemand extends Engine\Base {
     public function add_custom_stuff() {
         $this->add_custom_field();
         $this->add_custom_route();
-		$this->add_simple_route();
+		//$this->add_simple_route();
 		$this->add_eod_get_route();
     }
 
@@ -147,34 +147,107 @@ class OnDemand extends Engine\Base {
      * @return array
      */
     public function return_on_demand_posts( \WP_REST_Request $request ) {
+        //global $wpdb;
 		$parameters = $request->get_params();
 		// Do the actual query and return the data
-		if(isset($parameters['meta_query'])) {
-			$query = $parameters['meta_query'];
-			// Set the arguments based on get parameters
-			$args = array (
-				'relation' => $query[0]['relation'],
-				array(
-					'key' => $query[0]['key'],
-					'value' => $query[0]['value'],
-					'compare' => '=',
-				),
-			);
-			// Run a custom query
-			$meta_query = new WP_Query($args);
-			if($meta_query->have_posts()) {
-				//Define and empty array
-				$data = array();
-				// Store each post's title in the array
-				while($meta_query->have_posts()) {
-					$meta_query->the_post();
-					$data[] =  get_the_title();
-				}
-				// Return the data
-				return $data;
-			}
-			// If there is no post
-			return 'No post to show';
+		if ( is_array( $parameters ) && isset( $parameters ) ){
+		    extract( $parameters );
+		    
+		    $class_instructor = isset($class_instructor) ? $class_instructor : '';
+		    $difficulty_levels = isset($difficulty_levels) ? $difficulty_levels : '';
+		    $music_styles = isset($music_styles) ? $music_styles : '';
+		    $class_lengths = isset($class_lengths) ? $class_lengths : '';
+		    //echo var_export($class_instructor);
+		    
+		    $args = array (
+		        'orderby'               => 'title',
+		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
+		        'posts_per_page'        => 100,
+		        //'class_lengths' => $class_lengths,
+		        //'fields' => 'ids'
+ 		        'tax_query' => array(
+		            'relation' => 'OR',
+		            array( // selects posts that are in this taxonomy
+		                'taxonomy' => 'class_instructor',
+		                'field'    => 'term_id',
+		                'terms'    => $class_instructor,
+		            ),
+ 		            //'relation' => 'OR',
+		            array( // OR the ones with the playlist available
+		                'taxonomy' => 'difficulty_levels',
+		                'field'    => 'term_id',
+		                'terms'    => $difficulty_levels, // or whatever the slug is
+		            ),
+		            //'relation' => 'OR',
+		            array( // OR the ones with the playlist available
+		                'taxonomy' => 'music_styles',
+		                'field'    => 'term_id',
+		                'terms'    => $music_styles, // or whatever the slug is
+		            ),
+ 		            array( // OR the ones with the playlist available
+ 		                'taxonomy' => 'class_lengths',
+ 		                'field'    => 'slug',
+ 		                'terms'    => $class_lengths, // or whatever the slug is
+ 		           ) 
+ 		            
+		        )
+		    );
+
+		    $query = new \WP_Query($args);
+		    if ( $query->have_posts() ) {
+		        
+		        while ( $query->have_posts() ) {
+		            
+		            $query->the_post();
+		            
+		            $data['id'] = get_the_ID() ;
+		            //$data['title'] = get_the_title();
+		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
+		            
+		            if(has_post_thumbnail( get_the_ID() )){
+		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
+		                $data[]['image'] = $f_image[0];
+		            }else{
+		                $data[]['image'] = '';
+		            }
+		            
+		        }
+		    }
+		    wp_reset_query();
+		    if(!empty($data) && isset($data)){
+		        return array('code' => 404, 'result' => $data);
+		    }
+			return array('code' => 404, 'result' => 'No post to show');
+		}else{
+
+		    $query = new \WP_Query( array (
+		        'orderby'               => 'title',
+		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
+		        'posts_per_page'        => 100,
+		        //'fields' => 'ids'
+		    ));
+		    
+		    if ( $query->have_posts() ) {
+		        
+		        while ( $query->have_posts() ) {
+		            
+		            $query->the_post();
+		            
+		            $data['id'] = get_the_ID() ;
+		            //$data['title'] = get_the_title();
+		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
+		            
+		            if(has_post_thumbnail( get_the_ID() )){
+		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
+		                $data['image'] = $f_image[0];
+		            }else{
+		                $data['image'] = '';
+		            }
+		            
+		        }
+		    }
+		    wp_reset_query();
+		    return array('code' => 500, 'result' => $data);
 		}
     }
 

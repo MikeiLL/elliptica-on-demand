@@ -1,6 +1,7 @@
 /*
  * Source: http://codepen.io/desandro/pen/GFbAs
  */
+/* jshint browser: true */
 jQuery(document).ready(function( $ ) {
 // Write in console log the PHP value passed in enqueue_js_vars in public/class-plugin-name.php
 
@@ -15,15 +16,35 @@ jQuery(document).ready(function( $ ) {
 	var filters = {}; //store filters in an array
 	$('.filters').on( 'click', '.button', function(event) {
 	   var button = $( event.currentTarget );
+		
+		var base_url = window.location.origin;
+		//alert(button.val());
+		
 	  // get group key
 	  var buttonGroup = button.parents('.button-group');
-	  var filterGroup = buttonGroup.attr('data-filter-group');
+	  var base_filter = buttonGroup.attr('id');
+	
+/*		var post_pram = {
+			
+			base_filter : button.val(),
+		};*/
+		//console.log(post_pram);
+		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + base_filter + '=' + button.val(); 
+		console.log(fetch_url);
+
+		const posts = async() => {
+		  const response = await fetch(fetch_url);
+		  const myJson = await response.json(); //extract JSON from the http response
+		  // do something with myJson
+		};
+		console.log(myJson);
+	  //var filterGroup = buttonGroup.attr('data-filter-group');
 	  // set filter for group
-	  filters[ filterGroup ] = button.attr('data-filter');
+	  //filters[ filterGroup ] = button.attr('data-filter');
 	  // combine filters
-	  var filterValue = concatValues( filters );
+/*	  var filterValue = concatValues( filters );
 	  console.log(filterValue);
-	  iso_grid.isotope({ filter: filterValue });
+	  iso_grid.isotope({ filter: filterValue });*/
 	});
 
 	// change is-checked class on buttons
