@@ -30,14 +30,20 @@ jQuery(document).ready(function( $ ) {
 		};*/
 		//console.log(post_pram);
 		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + base_filter + '=' + button.val(); 
-		console.log(fetch_url);
 
-		const posts = async() => {
+		fetch(fetch_url)
+		  .then((response) => {
+		    return response.json();
+		  })
+		  .then((posts) => {
+				console.log(posts);
+		  });
+/*		const posts = async() => {
 		  const response = await fetch(fetch_url);
 		  const myJson = await response.json(); //extract JSON from the http response
-		  // do something with myJson
+		  return myJson;
 		};
-		console.log(myJson);
+		console.log(posts);*/
 	  //var filterGroup = buttonGroup.attr('data-filter-group');
 	  // set filter for group
 	  //filters[ filterGroup ] = button.attr('data-filter');

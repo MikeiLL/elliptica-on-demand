@@ -154,45 +154,51 @@ class OnDemand extends Engine\Base {
 		    extract( $parameters );
 		    
 		    $class_instructor = isset($class_instructor) ? $class_instructor : '';
-		    $difficulty_levels = isset($difficulty_levels) ? $difficulty_levels : '';
-		    $music_styles = isset($music_styles) ? $music_styles : '';
-		    $class_lengths = isset($class_lengths) ? $class_lengths : '';
-		    //echo var_export($class_instructor);
+		    $difficulty_level = isset($difficulty_level) ? $difficulty_level : '';
+		    $music_style = isset($music_style) ? $music_style : '';
+		    $class_length = isset($class_length) ? $class_length : '';
 		    
 		    $args = array (
 		        'orderby'               => 'title',
 		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
-		        'posts_per_page'        => 100,
-		        //'class_lengths' => $class_lengths,
-		        //'fields' => 'ids'
+		        'posts_per_page'   => -1,
  		        'tax_query' => array(
-		            'relation' => 'OR',
-		            array( // selects posts that are in this taxonomy
-		                'taxonomy' => 'class_instructor',
-		                'field'    => 'term_id',
-		                'terms'    => $class_instructor,
-		            ),
- 		            //'relation' => 'OR',
-		            array( // OR the ones with the playlist available
-		                'taxonomy' => 'difficulty_levels',
-		                'field'    => 'term_id',
-		                'terms'    => $difficulty_levels, // or whatever the slug is
-		            ),
-		            //'relation' => 'OR',
-		            array( // OR the ones with the playlist available
-		                'taxonomy' => 'music_styles',
-		                'field'    => 'term_id',
-		                'terms'    => $music_styles, // or whatever the slug is
-		            ),
- 		            array( // OR the ones with the playlist available
- 		                'taxonomy' => 'class_lengths',
- 		                'field'    => 'slug',
- 		                'terms'    => $class_lengths, // or whatever the slug is
- 		           ) 
- 		            
+		            'relation' => 'OR'      
 		        )
 		    );
-
+		    
+		    if(!empty($class_instructor)){
+		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
+		            'taxonomy' => 'class_instructor',
+		            'field'    => 'term_id',
+		            'terms'    => $class_instructor,
+		        );
+		    }
+		    
+		    if(!empty($difficulty_level)){
+		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
+		            'taxonomy' => 'difficulty_level',
+		            'field'    => 'term_id',
+		            'terms'    => $difficulty_level,
+		        );
+		    }
+		    
+		    if(!empty($music_style)){
+		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
+		            'taxonomy' => 'music_style',
+		            'field'    => 'term_id',
+		            'terms'    => $music_style,
+		        );
+		    }
+		    
+		    if(!empty($class_length)){
+		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
+		            'taxonomy' => 'class_length',
+		            'field'    => 'term_id',
+		            'terms'    => $class_length,
+		        );
+		    }
+		    
 		    $query = new \WP_Query($args);
 		    if ( $query->have_posts() ) {
 		        
@@ -215,15 +221,16 @@ class OnDemand extends Engine\Base {
 		    }
 		    wp_reset_query();
 		    if(!empty($data) && isset($data)){
-		        return array('code' => 404, 'result' => $data);
+		        return array('code' => 400, 'result' => $data);
+		    }else{
+			     return array('code' => 404, 'result' => 'No post to show');
 		    }
-			return array('code' => 404, 'result' => 'No post to show');
 		}else{
 
 		    $query = new \WP_Query( array (
 		        'orderby'               => 'title',
 		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
-		        'posts_per_page'        => 100,
+		        'posts_per_page'        => -1,
 		        //'fields' => 'ids'
 		    ));
 		    
