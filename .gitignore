@@ -11,6 +11,8 @@
 *.sass-cache
 *.lock
 .nvmrc
+.in
+
 # OS or Editor folders
 .DS_Store
 Thumbs.db
