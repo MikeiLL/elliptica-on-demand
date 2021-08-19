@@ -149,6 +149,7 @@ class OnDemand extends Engine\Base {
     public function return_on_demand_posts( \WP_REST_Request $request ) {
         //global $wpdb;
 		$parameters = $request->get_params();
+		$data = array();
 		// Do the actual query and return the data
 		if ( is_array( $parameters ) && isset( $parameters ) ){
 		    extract( $parameters );
@@ -203,27 +204,29 @@ class OnDemand extends Engine\Base {
 		    if ( $query->have_posts() ) {
 		        
 		        while ( $query->have_posts() ) {
-		            
+		            $line_data = array();
 		            $query->the_post();
 		            
-		            $data['id'] = get_the_ID() ;
+		            $line_data['id'] = get_the_ID() ;
 		            //$data['title'] = get_the_title();
 		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
 		            
 		            if(has_post_thumbnail( get_the_ID() )){
 		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
-		                $data[]['image'] = $f_image[0];
+		                $line_data['image'] = $f_image[0];
 		            }else{
-		                $data[]['image'] = '';
+		                $line_data['image'] = '';
 		            }
 		            
+		            
+		            array_push($data, $line_data);
 		        }
 		    }
 		    wp_reset_query();
 		    if(!empty($data) && isset($data)){
-		        return array('code' => 400, 'result' => $data);
+		        return array('code' => 200, 'result' => $data);
 		    }else{
-			     return array('code' => 404, 'result' => 'No post to show');
+			     return array('code' => 204, 'result' => 'No post to show');
 		    }
 		}else{
 
@@ -237,24 +240,24 @@ class OnDemand extends Engine\Base {
 		    if ( $query->have_posts() ) {
 		        
 		        while ( $query->have_posts() ) {
-		            
+		            $line_data = array();
 		            $query->the_post();
 		            
-		            $data['id'] = get_the_ID() ;
+		            $line_data['id'] = get_the_ID() ;
 		            //$data['title'] = get_the_title();
 		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
 		            
 		            if(has_post_thumbnail( get_the_ID() )){
 		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
-		                $data['image'] = $f_image[0];
+		                $line_data['image'] = $f_image[0];
 		            }else{
-		                $data['image'] = '';
+		                $line_data['image'] = '';
 		            }
-		            
+		            array_push($data, $line_data);
 		        }
 		    }
 		    wp_reset_query();
-		    return array('code' => 500, 'result' => $data);
+		    return array('code' => 200, 'result' => $data);
 		}
     }
 
