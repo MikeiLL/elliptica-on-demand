@@ -2,7 +2,7 @@
 
     	<div class="ui-group">
     
-    		<div class="button-group" data-filter-group="level" id="difficulty_levels">
+    		<div class="button-group" data-filter-group="level" id="difficulty_level">
         		<?php $count = count($difficulty_levels); ?>
         		<button style="float:left;" class="button is-checked" data-filter="*">Any Level</button>
         		<?php $all_terms = [];
@@ -40,7 +40,7 @@
     
     	<div class="ui-group">
     
-    		<div class="button-group" data-filter-group="music" id="music_styles">
+    		<div class="button-group" data-filter-group="music" id="music_style">
     		<?php $count = count($music_styles);?>
     		<button style="float:left;" class="button is-checked" data-filter="*">All Styles</button>
     		<?php if ( $count > 0 ){
@@ -58,7 +58,7 @@
     		
     	<div class="ui-group">
     
-    		<div class="button-group" data-filter-group="length" id="class_lengths">
+    		<div class="button-group" data-filter-group="length" id="class_length">
     		<?php $count = count($class_lengths);?>
     		<button style="float:left;" class="button is-checked" data-filter="*">Any Length</button>
     		<?php if ( $count > 0 ){
@@ -266,5 +266,5 @@
 			$modaal_id_count++;?>
 
 		<?php endwhile; endif;?>
-	
+	</div>
 			
