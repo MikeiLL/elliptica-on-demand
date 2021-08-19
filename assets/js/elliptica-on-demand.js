@@ -16,41 +16,46 @@ jQuery(document).ready(function( $ ) {
 	var filters = {}; //store filters in an array
 	$('.filters').on( 'click', '.button', function(event) {
 	   var button = $( event.currentTarget );
-		
 		var base_url = window.location.origin;
-		//alert(button.val());
 		
 	  // get group key
 	  var buttonGroup = button.parents('.button-group');
 	  var base_filter = buttonGroup.attr('id');
-	
-/*		var post_pram = {
-			
-			base_filter : button.val(),
-		};*/
-		//console.log(post_pram);
-		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + base_filter + '=' + button.val(); 
+	  var params = [];
+	$('.button-group').each(function() {
+	    //other filters 
+		if($(this).attr('id') === base_filter){
+			params.push({ name: $(this).attr('id'), value: button.val() });
+		}else{
 
+			var current_button = '';
+			$('#' + $(this).attr('id') + ' > button').each(function() {
+				if($(this).hasClass('is-checked')){	
+					current_button = $(this).val();
+				}
+			});
+			params.push({ name: $(this).attr('id'), value: current_button });
+		}
+	});
+
+		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param( params ); 
+		console.log(fetch_url);
 		fetch(fetch_url)
 		  .then((response) => {
 		    return response.json();
 		  })
 		  .then((posts) => {
-				console.log(posts);
+				if(200 === posts.code){
+					
+					var data = posts.result;
+					//console.log(data);
+					data.forEach(function(post) {
+					    console.log(post.id);
+					});
+				}else{
+					return;
+				}
 		  });
-/*		const posts = async() => {
-		  const response = await fetch(fetch_url);
-		  const myJson = await response.json(); //extract JSON from the http response
-		  return myJson;
-		};
-		console.log(posts);*/
-	  //var filterGroup = buttonGroup.attr('data-filter-group');
-	  // set filter for group
-	  //filters[ filterGroup ] = button.attr('data-filter');
-	  // combine filters
-/*	  var filterValue = concatValues( filters );
-	  console.log(filterValue);
-	  iso_grid.isotope({ filter: filterValue });*/
 	});
 
 	// change is-checked class on buttons
