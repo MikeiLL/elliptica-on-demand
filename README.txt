@@ -91,7 +91,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 == Changelog ==
 
 = 1.0.4 =
-
+Limit initial number of videos requested and re-query database using restful calls based on filter selections.
 
 = 1.0.3 =
 Remove some unused fat.
