@@ -135,195 +135,119 @@ class OnDemand extends Engine\Base {
     }
 
     /**
-     * Return On Demand Posts
-     *
-     * @since 1.0.0
-     *
-     * @param WP_REST_Request $request Values.
-	 *
-	 * Request could look like
-	 * eod/v1/posts?meta_query[relation]=OR&meta_query[0][key]=class_length&meta_query[0][value]=30&meta_query[0][compare]==
-     *
-     * @return array
-     */
+		* Return On Demand Posts
+		*
+		* @since 1.0.0
+		*
+		* @param WP_REST_Request $request Values.
+		*
+		* Request example:
+		* /wp-json/eod/v1/posts?difficulty_level=75&class_instructor=2&music_style=4&class_length=6
+		*
+		* @return array
+		*/
     public function return_on_demand_posts( \WP_REST_Request $request ) {
-        //global $wpdb;
-		$parameters = $request->get_params();
-		$data = array();
-		// Do the actual query and return the data
-		if ( is_array( $parameters ) && isset( $parameters ) ){
-		    extract( $parameters );
-		    
-		    $class_instructor = isset($class_instructor) ? $class_instructor : '';
-		    $difficulty_level = isset($difficulty_level) ? $difficulty_level : '';
-		    $music_style = isset($music_style) ? $music_style : '';
-		    $class_length = isset($class_length) ? $class_length : '';
-		    
-		    $args = array (
-		        'orderby'               => 'title',
-		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
-		        'posts_per_page'   => -1,
- 		        'tax_query' => array(
-		            'relation' => 'OR'      
-		        )
-		    );
-		    
-		    if(!empty($class_instructor)){
-		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
-		            'taxonomy' => 'class_instructor',
-		            'field'    => 'term_id',
-		            'terms'    => $class_instructor,
-		        );
-		    }
-		    
-		    if(!empty($difficulty_level)){
-		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
-		            'taxonomy' => 'difficulty_level',
-		            'field'    => 'term_id',
-		            'terms'    => $difficulty_level,
-		        );
-		    }
-		    
-		    if(!empty($music_style)){
-		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
-		            'taxonomy' => 'music_style',
-		            'field'    => 'term_id',
-		            'terms'    => $music_style,
-		        );
-		    }
-		    
-		    if(!empty($class_length)){
-		        $args['tax_query'][] = array( // selects posts that are in this taxonomy
-		            'taxonomy' => 'class_length',
-		            'field'    => 'term_id',
-		            'terms'    => $class_length,
-		        );
-		    }
-		    
-		    $query = new \WP_Query($args);
-		    if ( $query->have_posts() ) {
-		        
-		        while ( $query->have_posts() ) {
-		            $line_data = array();
-		            $query->the_post();
-		            
-		            $line_data['id'] = get_the_ID() ;
-		            //$data['title'] = get_the_title();
-		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
-		            
-		            if(has_post_thumbnail( get_the_ID() )){
-		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
-		                $line_data['image'] = $f_image[0];
-		            }else{
-		                $line_data['image'] = '';
-		            }
-		            
-		            
-		            array_push($data, $line_data);
-		        }
-		    }
-		    wp_reset_query();
-		    if(!empty($data) && isset($data)){
-		        return array('code' => 200, 'result' => $data);
-		    }else{
-			     return array('code' => 204, 'result' => 'No post to show');
-		    }
-		}else{
 
-		    $query = new \WP_Query( array (
-		        'orderby'               => 'title',
-		        'post_type'		=> 'elliptica_od_video', // or 'post', 'page'
-		        'posts_per_page'        => -1,
-		        //'fields' => 'ids'
-		    ));
-		    
-		    if ( $query->have_posts() ) {
-		        
-		        while ( $query->have_posts() ) {
-		            $line_data = array();
-		            $query->the_post();
-		            
-		            $line_data['id'] = get_the_ID() ;
-		            //$data['title'] = get_the_title();
-		            //$data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
-		            
-		            if(has_post_thumbnail( get_the_ID() )){
-		                $f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
-		                $line_data['image'] = $f_image[0];
-		            }else{
-		                $line_data['image'] = '';
-		            }
-		            array_push($data, $line_data);
-		        }
-		    }
-		    wp_reset_query();
-		    return array('code' => 200, 'result' => $data);
+			// Set default arguments
+			$args = array (
+					'orderby'               => 'title',
+					'post_type'		=> 'elliptica_od_video',
+					'posts_per_page'        => -1,
+			);
+
+			$request_result = array();
+
+			$parameters = $request->get_params();
+
+			// Overwrite args from parameters if present
+			if ( is_array( $parameters ) && isset( $parameters ) ){
+
+				$args['tax_query'] = $this->_build_query_from_params($parameters);
+
+			}
+
+			$query = new \WP_Query( $args );
+
+			if ( $query->have_posts() ) {
+
+					while ( $query->have_posts() ) {
+
+							$query->the_post();
+
+							$line_data = array();
+							$line_data['id'] = get_the_ID() ;
+							$line_data['image'] = '';
+							// $line_data['title'] = get_the_title();
+							// $line_data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
+
+							if(has_post_thumbnail( get_the_ID() )){
+									$f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
+									$line_data['image'] = $f_image[0];
+							}
+
+							array_push($request_result, $line_data);
+					}
+			}
+
+			wp_reset_query();
+
+			if (!empty($request_result) && isset($request_result)){
+					return array('code' => 200, 'result' => $request_result);
+			}
+
+			return array('code' => 204, 'result' => 'No post to show');
+    }
+
+		/**
+		 * Build Query from Parameters
+		 *
+		 * Receive request parameters and query database, returning status and result.
+		 *
+		 * @since 1.0.4
+		 * @param $parameters array or http request parameters.
+		 * @access private
+		 * @return array $tax_query of tax term arguments for query.
+		 */
+		private function _build_query_from_params($parameters){
+
+			extract( $parameters );
+
+			$tax_query = [
+				'relation' => 'AND'
+			];
+
+			$filter_fields = [
+				'class_instructor' => isset($parameters['class_instructor']) ? $parameters['class_instructor']: '',
+				'difficulty_level' => isset($parameters['difficulty_level']) ? $parameters['difficulty_level'] : '',
+				'music_style' => isset($parameters['music_style']) ? $parameters['music_style'] : '',
+				'class_length' => isset($parameters['class_length']) ? $parameters['class_length'] : ''
+			];
+
+			foreach ($filter_fields as $tax => $id){
+				if (!empty($id)) {
+					$tax_query[] = $this->_build_tax_term_query($tax, $id);
+				}
+			}
+
+			return $tax_query;
+
 		}
-    }
 
-    /**
-     * Examples
-     *
-     * @since 1.0.0
-     *
-     * @param array $post_obj Post ID.
-     *
-     * @return string
-     */
-    public function get_text_field( $post_obj ) {
-        $post_id = $post_obj['id'];
-        return get_post_meta( $post_id, MMC_TEXTDOMAIN . '_text', true );
-    }
-
-    /**
-     * Examples
-     *
-     * @since 1.0.0
-     *
-     * @param string $value Value.
-     * @param object $post  Post object.
-     * @param string $key   Key.
-     *
-     * @return boolean|\WP_Error
-     */
-    public function update_text_field( $value, $post, $key ) {
-        $post_id = update_post_meta( $post->ID, $key, $value );
-
-        if ( false === $post_id ) {
-            return new \WP_Error(
-                'rest_post_views_failed',
-                __( 'Failed to update post views.', MMC_TEXTDOMAIN ),
-                array( 'status' => 500 )
-            );
-        }
-
-        return true;
-    }
-
-    /**
-     * Examples
-     *
-     * @since 1.0.0
-     *
-     * @param array $data Values.
-     *
-     * @return array
-     */
-    public function sum( $data ) {
-        return array( 'result' => $data[ 'first' ] + $data[ 'second' ] );
-    }
-
-    /**
-     * Simple Route Example
-     *
-     * @since 1.0.0
-     *
-     * @param array $data Values.
-     *
-     * @return array
-     */
-    public function simple_route_example( ) {
-        return array( 'result' => 'Salaam. I can hear you.' );
-    }
+		/**
+		 * Build Tax Term Query from Key and Value
+		 *
+		 * Selects posts that are in this taxonomy
+		 *
+		 * @since 1.0.4
+		 * @param string $tax taxonomy name
+		 * @param int $term_id the id of the item saught
+		 */
+		private function _build_tax_term_query($tax, $term_id){
+			return array(
+					'taxonomy' => $tax,
+					'field'    => 'term_id',
+					'terms'    => $term_id,
+			);
+		}
 
 }
