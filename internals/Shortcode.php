@@ -44,6 +44,8 @@ class Shortcode extends Engine\Base {
 
         // Like this:
         add_shortcode( 'on-demand-video', array( $this, 'elliptica_on_demand' ) );
+        
+
 	}
 
 	/**
@@ -64,7 +66,7 @@ class Shortcode extends Engine\Base {
 			),
             $atts
 		);
-		
+		//var_export(WP_CONTENT_DIR);
 		
 		// Build out the FILTER
         $difficulty_levels = get_terms( array(
@@ -148,11 +150,14 @@ class Shortcode extends Engine\Base {
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
 
         $params = array(
-            'ajaxurl' => admin_url('admin-ajax.php', $protocol),
+            'ajax_url' => admin_url('admin-ajax.php', $protocol),
             'alert' => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
        );
         wp_localize_script( MMC_TEXTDOMAIN . '-od-videos', 'mmc_js_vars', $params);
+        
     }
+    
+
 
 }
 

@@ -17,36 +17,68 @@ use Elliptica_On_Demand\Engine;
  */
 class Ajax extends Engine\Base {
 
-	/**
-	 * Initialize the class.
-	 *
-	 * @return void
-	 */
-	public function initialize() {
-		if ( !apply_filters( 'elliptica_on_demand_mmc_ajax_initialize', true ) ) {
-			return;
-		}
+    /**
+     * Initialize the class.
+     *
+     * @return void
+     */
+    public function initialize() {
+        if (! apply_filters('elliptica_on_demand_mmc_ajax_initialize', true)) {
+            return;
+        }
 
-		// For not logged user
-		add_action( 'wp_ajax_nopriv_your_method', array( $this, 'your_method' ) );
-	}
+        // For not logged user
+        add_action('wp_ajax_nopriv_your_method', array(
+            $this,
+            'your_method'
+        ));
+        add_action("wp_ajax_get_videos_ajax_loop", array(
+            $this,
+            "get_videos_ajax_loop"
+        ));
+        add_action("wp_ajax_nopriv_get_videos_ajax_loop", array(
+            $this,
+            "get_videos_ajax_loop"
+        ));
+    }
 
-	/**
-	 * The method to run on ajax
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function your_method() {
-		$return = array(
-			'message' => 'Saved',
-			'ID'      => 1,
-		);
+    /**
+     * The method to run on ajax
+     *
+     * @since 1.0.0
+     *       
+     * @return void
+     */
+    public function your_method() {
+        $return = array(
+            'message' => 'Saved',
+            'ID' => 1
+        );
 
-		wp_send_json_success( $return );
-		// wp_send_json_error( $return );
-	}
+        wp_send_json_success($return);
+        // wp_send_json_error( $return );
+    }
 
+    public function get_videos_ajax_loop() {
+        if (! isset($_REQUEST['data']) || empty($_REQUEST['data'])) {
+            wp_die();
+        }
+        $args = array();
+        $data = $_REQUEST['data'];
+
+        $prefix = '_elliptica_od_';
+
+        $args['query'] = new \WP_Query(array(
+            'post_type' => 'elliptica_od_video',
+            'post_status' => 'publish',
+            'posts_per_page' => - 1,
+            'post__in' => $data
+        ));
+        $args['prefix'] = $prefix;
+
+        eod_get_template('videos_loop.php', $args);
+
+        wp_die();
+    }
 }
 

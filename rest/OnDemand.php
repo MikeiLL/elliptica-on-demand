@@ -152,6 +152,7 @@ class OnDemand extends Engine\Base {
 			$args = array (
 					'orderby'               => 'title',
 					'post_type'		=> 'elliptica_od_video',
+			        'post_status' => 'publish',
 					'posts_per_page'        => -1,
 			);
 
@@ -171,21 +172,9 @@ class OnDemand extends Engine\Base {
 			if ( $query->have_posts() ) {
 
 					while ( $query->have_posts() ) {
-
 							$query->the_post();
-
-							$line_data = array();
-							$line_data['id'] = get_the_ID() ;
-							$line_data['image'] = '';
-							// $line_data['title'] = get_the_title();
-							// $line_data['image'] = has_post_thumbnail( get_the_ID() ) ? wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' ) : '';
-
-							if(has_post_thumbnail( get_the_ID() )){
-									$f_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'on_demand_video' );
-									$line_data['image'] = $f_image[0];
-							}
-
-							array_push($request_result, $line_data);
+							
+							array_push($request_result, get_the_ID() );
 					}
 			}
 
