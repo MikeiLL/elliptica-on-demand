@@ -11,7 +11,7 @@
  * Plugin Name:     Elliptica On Demand
  * Plugin URI:      https://mzoo.org
  * Description:     Archive and display video classes for Elliptica Studios.
- * Version:         1.0.4
+ * Version:         1.0.5
  * Author:          Mike iLL
  * Author URI:      http://mzoo.org
  * Text Domain:     elliptica-on-demand
@@ -29,7 +29,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
 }
 
-define( 'MMC_VERSION', '1.0.4' );
+define( 'MMC_VERSION', '1.0.5' );
 define( 'MMC_TEXTDOMAIN', 'elliptica-on-demand' );
 define( 'MMC_NAME', 'Elliptica On Demand' );
 define( 'MMC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
