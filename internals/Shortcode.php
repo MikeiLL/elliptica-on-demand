@@ -16,21 +16,19 @@ use \WP_Query as WP_Query;
 
 /**
  * Shortcodes of this plugin
- *
  */
 class Shortcode extends Engine\Base {
 
-
-    /**
-     * If shortcode script has been enqueued.
-     *
-     * @since    2.4.7
-     * @access   public
-     *
-     * @used in handleShortcode, addScript
-     * @var      boolean $addedAlready True if shorcdoe scripts have been enqueued.
-     */
-    static $addedAlready = false;
+	/**
+	 * If shortcode script has been enqueued.
+	 *
+	 * @since    2.4.7
+	 * @access   public
+	 *
+	 * @used in handleShortcode, addScript
+	 * @var      boolean $addedAlready True if shorcdoe scripts have been enqueued.
+	 */
+	static $addedAlready = false;
 
 	/**
 	 * Initialize the class.
@@ -40,11 +38,10 @@ class Shortcode extends Engine\Base {
 	public function initialize() {
 		parent::initialize();
 		// Just in case, but I believe the plural of video is video
-        add_shortcode( 'on-demand-videos', array( $this, 'elliptica_on_demand' ) );
+		add_shortcode( 'on-demand-videos', array( $this, 'elliptica_on_demand' ) );
 
-        // Like this:
-        add_shortcode( 'on-demand-video', array( $this, 'elliptica_on_demand' ) );
-        
+		// Like this:
+		add_shortcode( 'on-demand-video', array( $this, 'elliptica_on_demand' ) );
 
 	}
 
@@ -64,100 +61,103 @@ class Shortcode extends Engine\Base {
 			array(
 				'blank' => 'something',
 			),
-            $atts
+			$atts
 		);
-		//var_export(WP_CONTENT_DIR);
-		
-		// Build out the FILTER
-        $difficulty_levels = get_terms( array(
-			'taxonomy' => 'difficulty_level',
-			'hide_empty' => true,
-		) );
-
-
-        $temp_args['difficulty_levels'] = $difficulty_levels;        
+		// var_export(WP_CONTENT_DIR);
 
 		// Build out the FILTER
-        $instructors = get_terms( array(
-			'taxonomy' => 'class_instructor',
-			'hide_empty' => true,
-		) );
+		$difficulty_levels = get_terms(
+			array(
+				'taxonomy'   => 'difficulty_level',
+				'hide_empty' => true,
+			)
+		);
 
-        $temp_args['instructors'] = $instructors; 
-
-		// Build out the FILTER
-        $music_styles = get_terms( array(
-			'taxonomy' => 'music_style',
-			'hide_empty' => true,
-		) );
-        
-        $temp_args['music_styles'] = $music_styles; 
+		$temp_args['difficulty_levels'] = $difficulty_levels;
 
 		// Build out the FILTER
-        $class_lengths = get_terms( array(
-			'taxonomy' => 'class_length',
-			'hide_empty' => true,
-		) );
-        
-        $temp_args['class_lengths'] = $class_lengths;
+		$instructors = get_terms(
+			array(
+				'taxonomy'   => 'class_instructor',
+				'hide_empty' => true,
+			)
+		);
 
-		
-		//$return .= $filter_control;
+		$temp_args['instructors'] = $instructors;
 
-		$prefix   = '_elliptica_od_';
+		// Build out the FILTER
+		$music_styles = get_terms(
+			array(
+				'taxonomy'   => 'music_style',
+				'hide_empty' => true,
+			)
+		);
 
-		$temp_args['query'] = new WP_Query(array(
-			'post_type' => 'elliptica_od_video',
-			'post_status' => 'publish',
-			'posts_per_page' => 20,
-			'order'     => 'DESC',
-            'meta_key' => $prefix . MMC_TEXTDOMAIN . '_date',
-            'orderby'   => 'meta_value', //or 'meta_value_num'
-		));
-        $temp_args['prefix'] = $prefix;
-		
-        eod_get_template('html-shortcode.php', $temp_args);
-        // Add Style with script adder
-        self::addScript();
+		$temp_args['music_styles'] = $music_styles;
+
+		// Build out the FILTER
+		$class_lengths = get_terms(
+			array(
+				'taxonomy'   => 'class_length',
+				'hide_empty' => true,
+			)
+		);
+
+		$temp_args['class_lengths'] = $class_lengths;
+
+		// $return .= $filter_control;
+
+		$prefix = '_elliptica_od_';
+
+		$temp_args['query']  = new WP_Query(
+			array(
+				'post_type'      => 'elliptica_od_video',
+				'post_status'    => 'publish',
+				'posts_per_page' => 20,
+				'order'          => 'DESC',
+				'meta_key'       => $prefix . MMC_TEXTDOMAIN . '_date',
+				'orderby'        => 'meta_value', // or 'meta_value_num'
+			)
+		);
+		$temp_args['prefix'] = $prefix;
+
+		eod_get_template( 'html-shortcode.php', $temp_args );
+		// Add Style with script adder
+		self::addScript();
 
 	}
 
 
-    public static function addScript()
-    {
-        if (!self::$addedAlready) {
-            self::$addedAlready = true;
+	public static function addScript() {
+		if ( ! self::$addedAlready ) {
+			self::$addedAlready = true;
 
-            wp_register_style( MMC_TEXTDOMAIN . '-od-modaal', plugins_url( 'dist/css/modaal.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
-            wp_enqueue_style( MMC_TEXTDOMAIN . '-od-modaal');
+			wp_register_style( MMC_TEXTDOMAIN . '-od-modaal', plugins_url( 'dist/css/modaal.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION );
+			wp_enqueue_style( MMC_TEXTDOMAIN . '-od-modaal' );
 
-            wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION);
-            wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos');
+			wp_register_style( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/css/' . MMC_TEXTDOMAIN . '.min.css', MMC_PLUGIN_ABSOLUTE ), array(), MMC_VERSION );
+			wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos' );
 
-            wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
-            wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope');
+			wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
+			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope' );
 
-            wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope' ), MMC_VERSION );
-            wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos');
+			wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope' ), MMC_VERSION );
+			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos' );
 
-            self::localizeScript();
-        }
-    }
+			self::localizeScript();
+		}
+	}
 
-    public static function localizeScript()
-    {
+	public static function localizeScript() {
+		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 
-        $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
+		$params = array(
+			'ajax_url' => admin_url( 'admin-ajax.php', $protocol ),
+			'alert'    => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
+		);
+		wp_localize_script( MMC_TEXTDOMAIN . '-od-videos', 'mmc_js_vars', $params );
 
-        $params = array(
-            'ajax_url' => admin_url('admin-ajax.php', $protocol),
-            'alert' => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
-       );
-        wp_localize_script( MMC_TEXTDOMAIN . '-od-videos', 'mmc_js_vars', $params);
-        
-    }
-    
-
+	}
 
 }
 

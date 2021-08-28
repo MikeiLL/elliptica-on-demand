@@ -24,8 +24,8 @@ class ActDeact extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !parent::initialize() ) {
-            return;
+		if ( ! parent::initialize() ) {
+			return;
 		}
 
 		// Activate plugin when new blog is added
@@ -174,7 +174,7 @@ class ActDeact extends Engine\Base {
 		);
 		foreach ( $roles as $role ) {
 			foreach ( $caps as $cap ) {
-				if ( !is_null( $role ) ) {
+				if ( ! is_null( $role ) ) {
 					$role->add_cap( $cap );
 				}
 			}
@@ -204,7 +204,7 @@ class ActDeact extends Engine\Base {
 		);
 		foreach ( $roles as $role ) {
 			foreach ( $bad_caps as $cap ) {
-				if ( !is_null( $role ) ) {
+				if ( ! is_null( $role ) ) {
 					$role->remove_cap( $cap );
 				}
 			}

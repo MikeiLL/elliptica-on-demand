@@ -27,7 +27,7 @@ class Pointers extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-        parent::initialize();
+		parent::initialize();
 		new PointerPlus( array( 'prefix' => MMC_TEXTDOMAIN ) );
 		add_filter( 'elliptica_on_demand-pointerplus_list', array( $this, 'custom_initial_pointers' ), 10, 2 );
 	}

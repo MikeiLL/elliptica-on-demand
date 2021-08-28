@@ -100,15 +100,18 @@ class Is_Methods {
 	 */
 	public function is_rest() {
 		return true;
-		if (defined('REST_REQUEST') && REST_REQUEST )
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 			return true;
+		}
 
 		global $wp_rewrite;
-		if ($wp_rewrite === null) $wp_rewrite = new \WP_Rewrite();
+		if ( $wp_rewrite === null ) {
+			$wp_rewrite = new \WP_Rewrite();
+		}
 
-		$rest_url = wp_parse_url( trailingslashit( rest_url( ) ) );
-		$current_url = wp_parse_url( add_query_arg( array( ) ) );
-		return strpos( $current_url['path'], substr($rest_url['path'],0, strlen($rest_url['path'])-1)) === 0;
+		$rest_url    = wp_parse_url( trailingslashit( rest_url() ) );
+		$current_url = wp_parse_url( add_query_arg( array() ) );
+		return strpos( $current_url['path'], substr( $rest_url['path'], 0, strlen( $rest_url['path'] ) - 1 ) ) === 0;
 	}
 
 	/**
@@ -138,13 +141,13 @@ class Is_Methods {
 		return defined( 'WP_CLI' ) && WP_CLI;
 	}
 
-    /**
-     * Is AMP
-     *
-     * @return boolean
-     */
-    public function is_amp() {
-        return ( function_exists( 'is_amp_endpoint' ) && \is_amp_endpoint() );
-    }
+	/**
+	 * Is AMP
+	 *
+	 * @return boolean
+	 */
+	public function is_amp() {
+		return ( function_exists( 'is_amp_endpoint' ) && \is_amp_endpoint() );
+	}
 
 }

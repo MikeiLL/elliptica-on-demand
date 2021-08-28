@@ -26,9 +26,9 @@ class Enqueue extends Engine\Base {
 		parent::initialize();
 
 		// Load public-facing style sheet and JavaScript.
-		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
-		//add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_js_vars' ) );
+		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_styles' ) );
+		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_scripts' ) );
+		// add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue_js_vars' ) );
 	}
 
 
@@ -65,9 +65,9 @@ class Enqueue extends Engine\Base {
 	 */
 	public static function enqueue_js_vars() {
 		wp_localize_script(
-             MMC_TEXTDOMAIN . '-plugin-script',
-            'mmc_js_vars',
-            array(
+			MMC_TEXTDOMAIN . '-plugin-script',
+			'mmc_js_vars',
+			array(
 				'alert' => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
 			)
 		);

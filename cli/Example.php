@@ -17,43 +17,43 @@ use \WP_CLI as WP_CLI;
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 	/**
-     * WP CLI command example
-     */
-    class Example extends Engine\Base {
+	 * WP CLI command example
+	 */
+	class Example extends Engine\Base {
 
-    	private $wp_cli;
+		private $wp_cli;
 
 		/**
-         * Initialize the class.
-         *
-         * @return void
-         */
-        public function initialize() {
-            if ( !apply_filters( 'elliptica_on_demand_mmc_enqueue_admin_initialize', true ) ) {
-                return;
-            }
+		 * Initialize the class.
+		 *
+		 * @return void
+		 */
+		public function initialize() {
+			if ( ! apply_filters( 'elliptica_on_demand_mmc_enqueue_admin_initialize', true ) ) {
+				return;
+			}
 
-            parent::initialize();
+			parent::initialize();
 		}
 
-        /**
-         * Initialize the commands
-         *
-         * @since 1.0.0
-         *
-         * @return void
-         */
-        public function __construct() {
-        	$this->wp_cli = new WP_CLI;
-            $this->wp_cli->add_command( 'mmc_commandname', array( $this, 'command_example' ) );
-        }
+		/**
+		 * Initialize the commands
+		 *
+		 * @since 1.0.0
+		 *
+		 * @return void
+		 */
+		public function __construct() {
+			$this->wp_cli = new WP_CLI;
+			$this->wp_cli->add_command( 'mmc_commandname', array( $this, 'command_example' ) );
+		}
 
-        /**
-         * Example command
+		/**
+		 * Example command
 		 * API reference: https://wp-cli.org/docs/internal-api/
-         *
-         * @since 1.0.0
-         *
+		 *
+		 * @since 1.0.0
+		 *
 		 * @param array $args The attributes.
 		 *
 		 * @return void
