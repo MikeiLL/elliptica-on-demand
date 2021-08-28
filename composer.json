@@ -57,10 +57,10 @@
 	},
 	"scripts": {
 		"lint": [
-			"phpcs --extensions=php *.php"
+			"phpcs --extensions=php ajax assets backend cli engine frontend functions integrations internals rest templates *.php"
 		],
 		"fix": [
-			"phpcbf --extensions=php *.php"
+			"phpcbf --extensions=php ajax assets backend cli engine frontend functions integrations internals rest templates *.php"
 		]
 	},
 	"minimum-stability": "dev",
