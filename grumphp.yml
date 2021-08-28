@@ -9,13 +9,26 @@ parameters:
       strict: false
     phpmd:
       ruleset:
-      - phpmd.xml
+        - phpmd.xml
       triggered_by:
-      - php
+        - php
     git_blacklist:
       keywords:
-      - print_r(
-      - var_dump(
+        - print_r(
+        - var_dump(
       triggered_by:
-      - php
-...
+        - php
+    phpcs:
+      standard: []
+      severity: ~
+      error_severity: ~
+      warning_severity: ~
+      tab_width: ~
+      report: full
+      report_width: ~
+      whitelist_patterns: []
+      encoding: ~
+      ignore_patterns: []
+      sniffs: []
+      triggered_by: [php]
+      exclude: []
