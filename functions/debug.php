@@ -8,7 +8,7 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  *
- * @SuppressWarnings(PHPMD)
+ *
  */
 
 
