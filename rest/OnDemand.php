@@ -23,8 +23,9 @@ class OnDemand extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		parent::initialize();
-        add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
+			parent::initialize();
+			add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
+			wp_die('initialize');
     }
 
     /**
@@ -35,10 +36,9 @@ class OnDemand extends Engine\Base {
      * @return void
      */
     public function add_custom_stuff() {
-        $this->add_custom_field();
-        $this->add_custom_route();
-		//$this->add_simple_route();
-		$this->add_eod_get_route();
+			$this->add_custom_field();
+			$this->add_custom_route();
+			$this->add_eod_get_route();
     }
 
     /**
@@ -114,6 +114,17 @@ class OnDemand extends Engine\Base {
 			)
 		);
     }
+		/**
+		 * Simple Route Example
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data Values.
+		 *
+		 * @return array
+		 */
+		public function simple_route_example( ) {
+		    return array( 'result' => 'Salaam. I can hear you.' );
 
 	/**
 	 * Simple Route Example
@@ -152,7 +163,7 @@ class OnDemand extends Engine\Base {
 			$args = array (
 					'orderby'               => 'title',
 					'post_type'		=> 'elliptica_od_video',
-			        'post_status' => 'publish',
+					'post_status' => 'publish',
 					'posts_per_page'        => -1,
 			);
 
@@ -173,7 +184,7 @@ class OnDemand extends Engine\Base {
 
 					while ( $query->have_posts() ) {
 							$query->the_post();
-							
+
 							array_push($request_result, get_the_ID() );
 					}
 			}

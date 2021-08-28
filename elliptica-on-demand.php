@@ -41,27 +41,30 @@ define( 'MMC_MIN_WP_VERSION',  5.3 );
 add_action(
     'init',
     function () {
-		load_plugin_textdomain( MMC_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	}
-    );
+			load_plugin_textdomain( MMC_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		}
+);
+
+
 if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	add_action(
-        'admin_init',
-        function() {
-			deactivate_plugins( plugin_basename( __FILE__ ) );
-		}
-    );
+			'admin_init',
+			function() {
+				deactivate_plugins( plugin_basename( __FILE__ ) );
+			}
+	);
+
 	add_action(
-        'admin_notices',
-        function() {
+		'admin_notices',
+		function() {
 			echo wp_kses_post(
-			sprintf(
-				'<div class="notice notice-error"><p>%s</p></div>',
-				__( MMC_NAME . 'requires PHP ' . MMC_MIN_PHP_VERSION . ' or newer.', MMC_TEXTDOMAIN )
-			)
+				sprintf(
+					'<div class="notice notice-error"><p>%s</p></div>',
+					__( MMC_NAME . 'requires PHP ' . MMC_MIN_PHP_VERSION . ' or newer.', MMC_TEXTDOMAIN )
+				)
 			);
 		}
-    );
+	);
 
 	// Return early to prevent loading the plugin.
 	return;
