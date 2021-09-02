@@ -38,6 +38,7 @@ class InitializeAdminTest extends \Codeception\TestCase\WPTestCase {
 		$classes[] = 'Elliptica_On_Demand\Internals\PostTypes';
 		$classes[] = 'Elliptica_On_Demand\Internals\Shortcode';
 		$classes[] = 'Elliptica_On_Demand\Internals\Transient';
+		$classes[] = 'Elliptica_On_Demand\Internals\InitRest';
 		$classes[] = 'Elliptica_On_Demand\Integrations\CMB';
 		$classes[] = 'Elliptica_On_Demand\Integrations\Cron';
 		$classes[] = 'Elliptica_On_Demand\Integrations\FakePage';
