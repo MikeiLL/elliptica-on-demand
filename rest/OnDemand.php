@@ -39,6 +39,7 @@ public function add_custom_stuff() {
 		$this->add_custom_field();
 		$this->add_custom_route();
 		$this->add_eod_get_route();
+		$this->add_simple_route();
 }
 
 	/**
