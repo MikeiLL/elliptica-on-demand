@@ -9,7 +9,7 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Elliptica_On_Demand\Backend;
+namespace Elliptica_On_Demand\Internals;
 
 use \Elliptica_On_Demand\Rest;
 
