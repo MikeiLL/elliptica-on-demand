@@ -70,6 +70,7 @@
 			"Elliptica_On_Demand\\Backend\\": "backend",
 			"Elliptica_On_Demand\\Frontend\\": "frontend",
 			"Elliptica_On_Demand\\Ajax\\": "ajax",
+			"Elliptica_On_Demand\\Rest\\": "rest",
 			"Elliptica_On_Demand\\Internals\\": "internals",
 			"Elliptica_On_Demand\\Integrations\\": "integrations",
 			"Elliptica_On_Demand\\Engine\\": "engine"
