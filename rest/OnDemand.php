@@ -25,7 +25,6 @@ class OnDemand extends Engine\Base {
 public function initialize() {
 		parent::initialize();
 		add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
-		wp_die( 'initialize' );
 }
 
 	/**
