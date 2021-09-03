@@ -11,6 +11,7 @@
  */
 namespace Elliptica_On_Demand\Internals;
 
+use \Elliptica_On_Demand\Engine;
 use \Elliptica_On_Demand\Rest;
 
 /**
