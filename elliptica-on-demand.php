@@ -22,8 +22,6 @@
  * WordPress-Plugin-Boilerplate-Powered: v3.2.0
  */
 
-use Elliptica_On_Demand\Rest;
-
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
 	die( 'We\'re sorry, but you can not directly access this file.' );
@@ -70,12 +68,10 @@ if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	return;
 }
 
-$elliptica_on_demand_libraries = require '/srv/www/ellipticastudios.com/current/vendor/autoload.php';
+$elliptica_on_demand_libraries = require 'vendor/autoload.php';
 
 require_once MMC_PLUGIN_ROOT . 'functions/functions.php';
 require_once MMC_PLUGIN_ROOT . 'functions/debug.php';
-
-// Add your new plugin on the wiki: https://github.com/WPBP/WordPress-Plugin-Boilerplate-Powered/wiki/Plugin-made-with-this-Boilerplate
 
 $requirements = new \Micropackage\Requirements\Requirements(
 	MMC_NAME,
