@@ -159,12 +159,13 @@ class OnDemand extends Engine\Base {
 	 * @return array
 	 */
 	public function return_on_demand_posts( \WP_REST_Request $request ) {
+		
 			// Set default arguments
 			$args = array(
 				'orderby'        => 'title',
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => -1,
+				'posts_per_page' => 4,
 			);
 
 			$request_result = array();
@@ -174,6 +175,11 @@ class OnDemand extends Engine\Base {
 			// Overwrite args from parameters if present
 			if ( is_array( $parameters ) && isset( $parameters ) ) {
 				$args['tax_query'] = $this->_build_query_from_params( $parameters );
+				$args['paged'] = 1;
+
+				if(isset($parameters['paged']) && !empty($parameters['paged'])){
+					$args['paged'] = $parameters['paged'];
+				}
 
 			}
 
@@ -224,6 +230,7 @@ class OnDemand extends Engine\Base {
 				'difficulty_level' => isset( $parameters['difficulty_level'] ) ? $parameters['difficulty_level'] : '',
 				'music_style'      => isset( $parameters['music_style'] ) ? $parameters['music_style'] : '',
 				'class_length'     => isset( $parameters['class_length'] ) ? $parameters['class_length'] : '',
+				//'paged'			   => isset( $parameters['paged'] ) ? $parameters['paged'] : 1,
 			);
 
 			foreach ( $filter_fields as $tax => $id ) {

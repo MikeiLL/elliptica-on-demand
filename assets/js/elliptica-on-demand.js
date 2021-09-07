@@ -117,6 +117,62 @@ jQuery(document).ready(function($) {
 		});
 	}
 
+
+	$(window).scroll(function() {
+		if($('#elliptica_od_videos').scrollTop() + $('#elliptica_od_videos').height() === $('#elliptica_od_videos').height()) {
+			var params = [];
+			var base_url = window.location.origin;
+			$('.button-group').each(function() {
+				var current_button = '';
+				$('#' + $(this).attr('id') + ' > button').each(function() {
+					if ($(this).hasClass('is-checked')) {
+						current_button = $(this).val();
+					}
+				});
+				params.push({ name: $(this).attr('id'), value: current_button });
+
+			});
+			params.push({name: 'paged', value: $('#video_paged').val()});
+			var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param(params);
+
+			fetch(fetch_url)
+				.then((response) => {
+					return response.json();
+				})
+				.then((videos) => {
+					if (200 === videos.code) {
+	
+						var videos_data = videos.result;
+	
+						$.ajax({
+							url: mmc_js_vars.ajax_url,
+							type: "GET",
+							aSync: false,
+							dataType: "html",
+							data: { data: videos_data, action: 'get_videos_ajax_loop' },
+							success: function(response) {
+	
+								$('#elliptica_od_videos').append(response);
+								$('#video_paged').val($('#video_paged').val() + 1);
+								$('.info-popup').modaal();
+								eod_video_show_more();
+							},
+							error: function(e) {
+								console.log(e);
+							}
+						});
+	
+					} else {
+						//$('#elliptica_od_videos').html('<div>No post found</div>');
+					}
+				});
+
+				console.log('bottom!');
+		}
+	 });
+
+
+
 });
 
 
