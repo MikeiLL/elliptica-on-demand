@@ -39,9 +39,9 @@ if ( $query->have_posts() ) :
 			if ( has_post_thumbnail( $post_id ) ) :
 						$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'on_demand_video' );
 						$custom_style   = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
-		    else :
+			else :
 				$custom_style = 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
-		    endif;
+			endif;
 			?>
 
 			<div class="od-video" data-modaal-type="inline"
@@ -195,12 +195,12 @@ if ( $query->have_posts() ) :
 				</ol>
 				</div>
 			</div>
-        <?php } ?>
+		<?php } ?>
 
 		</div>
 	</div>
 		<?php $modaal_id_count++; ?>
 
 		<?php
-    endwhile;
+	endwhile;
 endif;

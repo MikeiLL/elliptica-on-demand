@@ -68,7 +68,7 @@ if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	return;
 }
 
-$elliptica_on_demand_libraries = require 'vendor/autoload.php';
+$elliptica_on_demand_libraries = include 'vendor/autoload.php';
 
 require_once MMC_PLUGIN_ROOT . 'functions/functions.php';
 require_once MMC_PLUGIN_ROOT . 'functions/debug.php';

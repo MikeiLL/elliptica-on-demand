@@ -8,7 +8,6 @@
  * @copyright 2020 mZoo.org
  * @license   GPL 2.0+
  * @link      http://mzoo.org
- *
  */
 namespace Elliptica_On_Demand\Integrations;
 
@@ -47,11 +46,11 @@ class CMB extends Engine\Base {
 	 */
 	public function initialize() {
 		parent::initialize();
-		require_once WP_PLUGIN_DIR . '/cmb2/init.php';
-		require_once WP_PLUGIN_DIR . '/cmb2-grid/Cmb2GridPluginLoad.php';
+		include_once WP_PLUGIN_DIR . '/cmb2/init.php';
+		include_once WP_PLUGIN_DIR . '/cmb2-grid/Cmb2GridPluginLoad.php';
 
 		// Start prefix with underscore to hide fields from custom fields list
-		$this->prefix	= '_elliptica_od_';
+		$this->prefix = '_elliptica_od_';
 
 		add_action( 'cmb2_init', array( $this, 'cmb_elliptica_od_metaboxes' ) );
 	}
@@ -64,7 +63,6 @@ class CMB extends Engine\Base {
 	 * @return void
 	 */
 	public function cmb_elliptica_od_metaboxes() {
-
 		$this->cmb_elliptica_od_mb = new_cmb2_box(
 			array(
 				'id'           => $this->prefix . 'metabox',
@@ -147,10 +145,10 @@ class CMB extends Engine\Base {
 
 	/**
 	 * Add Group Fields
+	 *
 	 * @since 1.0.6
 	 */
-	private function add_group_fields(){
-
+	private function add_group_fields() {
 		$class_plan = $this->class_plan;
 
 		// Id's for group's fields only need to be unique for the group. Prefix is not needed.

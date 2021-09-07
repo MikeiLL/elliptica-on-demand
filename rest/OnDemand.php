@@ -22,10 +22,10 @@ class OnDemand extends Engine\Base {
 	 *
 	 * @return void
 	 */
-public function initialize() {
+	public function initialize() {
 		parent::initialize();
 		add_action( 'rest_api_init', array( $this, 'add_custom_stuff' ) );
-}
+	}
 
 	/**
 	 * Examples
@@ -34,12 +34,12 @@ public function initialize() {
 	 *
 	 * @return void
 	 */
-public function add_custom_stuff() {
+	public function add_custom_stuff() {
 		$this->add_custom_field();
 		$this->add_custom_route();
 		$this->add_eod_get_route();
 		$this->add_simple_route();
-}
+	}
 
 	/**
 	 * Examples
@@ -48,20 +48,20 @@ public function add_custom_stuff() {
 	 *
 	 * @return void
 	 */
-public function add_custom_field() {
-	register_rest_field(
-		'demo',
-		MMC_TEXTDOMAIN . '_text',
-		array(
-			'get_callback'    => array( $this, 'get_text_field' ),
-			'update_callback' => array( $this, 'update_text_field' ),
-			'schema'          => array(
-				'description' => __( 'Text field demo of Post type', MMC_TEXTDOMAIN ),
-				'type'        => 'string',
-			),
-		)
-	);
-}
+	public function add_custom_field() {
+		register_rest_field(
+			'demo',
+			MMC_TEXTDOMAIN . '_text',
+			array(
+				'get_callback'    => array( $this, 'get_text_field' ),
+				'update_callback' => array( $this, 'update_text_field' ),
+				'schema'          => array(
+					'description' => __( 'Text field demo of Post type', MMC_TEXTDOMAIN ),
+					'type'        => 'string',
+				),
+			)
+		);
+	}
 
 	/**
 	 * Examples
@@ -74,27 +74,27 @@ public function add_custom_field() {
 	 *
 	 * @return void
 	 */
-public function add_custom_route() {
-	// Only an example with 2 parameters
-	register_rest_route(
-		'wp/v2',
-		'/calc',
-		array(
-			'methods'  => \WP_REST_Server::READABLE,
-			'callback' => array( $this, 'sum' ),
-			'args'     => array(
-				'first'  => array(
-					'default'           => 10,
-					'sanitize_callback' => 'absint',
+	public function add_custom_route() {
+		// Only an example with 2 parameters
+		register_rest_route(
+			'wp/v2',
+			'/calc',
+			array(
+				'methods'  => \WP_REST_Server::READABLE,
+				'callback' => array( $this, 'sum' ),
+				'args'     => array(
+					'first'  => array(
+						'default'           => 10,
+						'sanitize_callback' => 'absint',
+					),
+					'second' => array(
+						'default'           => 1,
+						'sanitize_callback' => 'absint',
+					),
 				),
-				'second' => array(
-					'default'           => 1,
-					'sanitize_callback' => 'absint',
-				),
-			),
-		)
-	);
-}
+			)
+		);
+	}
 
 	/**
 	 * Simple Route Example
@@ -103,17 +103,17 @@ public function add_custom_route() {
 	 * call this method and test on the command line with
 	 * `curl http://example.com/wp-json/eod/v1/simple`
 	 */
-public function add_simple_route() {
-	// An example with 0 parameters.
-	register_rest_route(
-		'eod/v1',
-		'/simple',
-		array(
-			'methods'  => 'GET',
-			'callback' => array( $this, 'simple_route_example' ),
-		)
-	);
-}
+	public function add_simple_route() {
+		// An example with 0 parameters.
+		register_rest_route(
+			'eod/v1',
+			'/simple',
+			array(
+				'methods'  => 'GET',
+				'callback' => array( $this, 'simple_route_example' ),
+			)
+		);
+	}
 		/**
 		 * Simple Route Example
 		 *
@@ -123,9 +123,9 @@ public function add_simple_route() {
 		 *
 		 * @return array
 		 */
-public function simple_route_example() {
-	return array( 'result' => 'Salaam. I can hear you.' );
-}
+	public function simple_route_example() {
+		return array( 'result' => 'Salaam. I can hear you.' );
+	}
 
 	/**
 	 * Simple Route Example
