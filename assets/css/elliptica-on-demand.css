@@ -1,3 +1,9 @@
+/* Button Group Styling for Filters */
+.button-group .button.is-checked {
+    background-color: #231f20;
+    color: #fff;
+}
+
 /* Styling for public-facing components of the plugin. */
 /*  Isotope Video Archive Display */
 /* line 5, ../sass/elliptica-on-demand.scss */
