@@ -1,8 +1,14 @@
 
-	<div class="on_demand_video_grid-sizer"></div>		
-	<input type="hidden" id="video_paged" value="2">
+	<div class="on_demand_video_grid-sizer"></div>
 <?php
+
 $modaal_id_count = 1;
+if(isset($paged)){
+	$modaal_id_count = (($paged - 1) * 20);
+	$modaal_id_count++;
+}
+
+
 if ( $query->have_posts() ) :
 	while ( $query->have_posts() ) :
 		$query->the_post();
@@ -104,8 +110,13 @@ if ( $query->have_posts() ) :
 			}
 		}
 
-		$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-		$header_attr    = $featured_image[0] ? 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"' : 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
+		$header_attr = 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
+		if ( has_post_thumbnail( $post_id ) ) :
+			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
+			if(is_array($featured_image)){
+				$header_attr   = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
+			}
+		endif;
 
 		?>
 		<!-- Build modal class header background declaration -->
@@ -204,3 +215,4 @@ if ( $query->have_posts() ) :
 		<?php
 	endwhile;
 endif;
+?>

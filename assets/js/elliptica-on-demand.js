@@ -7,16 +7,11 @@
 jQuery(document).ready(function($) {
 	// Write in console log the PHP value passed in enqueue_js_vars in public/class-plugin-name.php
 
-	var iso_grid = $('#elliptica_od_videos').isotope({
-		itemSelector: '.isotope_video_item',
-		percentPosition: true,
-		masonry: {
-			columnWidth: '.on_demand_video_grid-sizer'
-		}
-	});
+	eod_set_isotope();
 
 	// not required anymore ? var filters = {}; //store filters in an array
 	$('.filters').on('click', '.button', function(event) {
+		$('#video_paged').val(1);
 		var button = $(event.currentTarget);
 		var base_url = window.location.origin;
 
@@ -39,7 +34,7 @@ jQuery(document).ready(function($) {
 				params.push({ name: $(this).attr('id'), value: current_button });
 			}
 		});
-
+		params.push({name: 'paged', value: parseInt($('#video_paged').val())});
 		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param(params);
 
 		fetch(fetch_url)
@@ -56,12 +51,14 @@ jQuery(document).ready(function($) {
 						type: "GET",
 						aSync: false,
 						dataType: "html",
-						data: { data: videos_data, action: 'get_videos_ajax_loop' },
+						data: { data: videos_data, paged: parseInt($('#video_paged').val()), action: 'get_videos_ajax_loop' },
 						success: function(response) {
 
 							$('#elliptica_od_videos').html(response);
+							$('#video_paged').val(parseInt($('#video_paged').val()) + 1);
 							$('.info-popup').modaal();
 							eod_video_show_more();
+							eod_set_isotope();
 						},
 						error: function(e) {
 							console.log(e);
@@ -118,8 +115,8 @@ jQuery(document).ready(function($) {
 	}
 
 
-	$(window).scroll(function() {
-		if($('#elliptica_od_videos').scrollTop() + $('#elliptica_od_videos').height() === $('#elliptica_od_videos').height()) {
+		$("#eod_load_more").on("click", function(e){
+			e.preventDefault();
 			var params = [];
 			var base_url = window.location.origin;
 			$('.button-group').each(function() {
@@ -132,7 +129,7 @@ jQuery(document).ready(function($) {
 				params.push({ name: $(this).attr('id'), value: current_button });
 
 			});
-			params.push({name: 'paged', value: $('#video_paged').val()});
+			params.push({name: 'paged', value: parseInt($('#video_paged').val())});
 			var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param(params);
 
 			fetch(fetch_url)
@@ -149,13 +146,14 @@ jQuery(document).ready(function($) {
 							type: "GET",
 							aSync: false,
 							dataType: "html",
-							data: { data: videos_data, action: 'get_videos_ajax_loop' },
+							data: { data: videos_data, paged: parseInt($('#video_paged').val()), action: 'get_videos_ajax_loop' },
 							success: function(response) {
 	
 								$('#elliptica_od_videos').append(response);
-								$('#video_paged').val($('#video_paged').val() + 1);
+								$('#video_paged').val(parseInt($('#video_paged').val()) + 1);
 								$('.info-popup').modaal();
 								eod_video_show_more();
+								eod_set_isotope();
 							},
 							error: function(e) {
 								console.log(e);
@@ -166,13 +164,18 @@ jQuery(document).ready(function($) {
 						//$('#elliptica_od_videos').html('<div>No post found</div>');
 					}
 				});
+		});
 
-				console.log('bottom!');
+
+		function eod_set_isotope(){
+			var iso_grid = $('#elliptica_od_videos').isotope({
+				itemSelector: '.isotope_video_item',
+				percentPosition: true,
+				masonry: {
+					columnWidth: '.on_demand_video_grid-sizer'
+				}
+			});
 		}
-	 });
-
-
-
 });
 
 

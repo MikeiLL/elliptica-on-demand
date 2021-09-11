@@ -102,7 +102,8 @@
 
 <div id="elliptica_od_videos">
 
-	<div class="on_demand_video_grid-sizer"></div>		
+	<div class="on_demand_video_grid-sizer"></div>	
+	<input type="hidden" id="video_paged" value="1">	
 		<?php
 		eod_get_template(
 			'videos_loop.php',
@@ -113,3 +114,8 @@
 		);
 		?>
 	</div>
+</div>
+
+	<div style="clear: both;"></div>
+<div style="text-align: center;"><input type="button" id="eod_load_more" value="<?php esc_html_e('Load More...', 'elliptica-on-demand');?>" /></div>
+

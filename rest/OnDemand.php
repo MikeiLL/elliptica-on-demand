@@ -165,7 +165,7 @@ class OnDemand extends Engine\Base {
 				'orderby'        => 'title',
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => 4,
+				'posts_per_page' => 20,
 			);
 
 			$request_result = array();

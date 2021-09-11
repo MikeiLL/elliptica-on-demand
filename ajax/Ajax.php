@@ -82,11 +82,13 @@ class Ajax extends Engine\Base {
 			array(
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => - 1,
+				'posts_per_page' => 20,
 				'post__in'       => $data,
+				'paged'			 => $_REQUEST['paged']
 			)
 		);
 		$args['prefix'] = $prefix;
+		$args['paged'] = $_REQUEST['paged'];
 
 		eod_get_template( 'videos_loop.php', $args );
 
