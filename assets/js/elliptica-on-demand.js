@@ -4,38 +4,59 @@
 /* jshint browser: true */
 /*global mmc_js_vars */
 
-jQuery(document).ready(function($) {
-	// Write in console log the PHP value passed in enqueue_js_vars in public/class-plugin-name.php
+jQuery(document).ready(function ($) {
+	// Object to hold state of filter and video dislay data
+
+	var eod_video_state = {
+		paginated_segment_index: 1,
+		paginated_segment_size: mmc_js_vars.paginated_segment_size,
+		filter_parameters: [],
+		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
+	};
 
 	eod_set_isotope();
 
 	// not required anymore ? var filters = {}; //store filters in an array
-	$('.filters').on('click', '.button', function(event) {
-		$('#video_paged').val(1);
+	$(".filters").on("click", ".button", function (event) {
+		// For now, initialize pagination index to zero
+		eod_video_state.paginated_segment_index = 0;
 		var button = $(event.currentTarget);
-		var base_url = window.location.origin;
 
 		// get group key
-		var buttonGroup = button.parents('.button-group');
-		var base_filter = buttonGroup.attr('id');
-		var params = [];
-		$('.button-group').each(function() {
-			//other filters 
-			if ($(this).attr('id') === base_filter) {
-				params.push({ name: $(this).attr('id'), value: button.val() });
-			} else {
+		var buttonGroup = button.parents(".button-group");
+		var base_filter = buttonGroup.attr("id");
 
-				var current_button = '';
-				$('#' + $(this).attr('id') + ' > button').each(function() {
-					if ($(this).hasClass('is-checked')) {
+		// Clear rest params
+		eod_video_state.filter_parameters = [];
+
+		$(".button-group").each(function () {
+			//other filters
+			if ($(this).attr("id") === base_filter) {
+				eod_video_state.filter_parameters.push({
+					name: $(this).attr("id"),
+					value: button.val(),
+				});
+			} else {
+				var current_button = "";
+				$("#" + $(this).attr("id") + " > button").each(function () {
+					if ($(this).hasClass("is-checked")) {
 						current_button = $(this).val();
 					}
 				});
-				params.push({ name: $(this).attr('id'), value: current_button });
+				eod_video_state.filter_parameters.push({
+					name: $(this).attr("id"),
+					value: current_button,
+				});
 			}
 		});
-		params.push({name: 'paged', value: parseInt($('#video_paged').val())});
-		var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param(params);
+		let rest_params = eod_video_state.filter_parameters.concat([
+			{
+				name: "paginated_segment_index",
+				value: eod_video_state.paginated_segment_index,
+			},
+		]);
+		console.log(rest_params);
+		var fetch_url = eod_video_state.base_url + $.param(rest_params);
 
 		fetch(fetch_url)
 			.then((response) => {
@@ -43,7 +64,6 @@ jQuery(document).ready(function($) {
 			})
 			.then((videos) => {
 				if (200 === videos.code) {
-
 					var videos_data = videos.result;
 
 					$.ajax({
@@ -51,51 +71,56 @@ jQuery(document).ready(function($) {
 						type: "GET",
 						aSync: false,
 						dataType: "html",
-						data: { data: videos_data, paged: parseInt($('#video_paged').val()), action: 'get_videos_ajax_loop' },
-						success: function(response) {
-
-							$('#elliptica_od_videos').html(response);
-							$('#video_paged').val(parseInt($('#video_paged').val()) + 1);
-							$('.info-popup').modaal();
+						data: {
+							data: videos_data,
+							paginated_segment_index: parseInt(
+								eod_video_state.paginated_segment_index
+							),
+							action: "get_videos_ajax_loop",
+						},
+						success: function (response) {
+							$("#elliptica_od_videos").html(response);
+							eod_video_state.paginated_segment_index++;
+							$(".info-popup").modaal();
 							eod_video_show_more();
 							eod_set_isotope();
 						},
-						error: function(e) {
+						error: function (e) {
 							console.log(e);
-						}
+						},
 					});
-
 				} else {
-					$('#elliptica_od_videos').html('<div>No post found</div>');
+					$("#elliptica_od_videos").html(
+						"<div>" + mmc_js_vars.no_results_message + "</div>"
+					);
 				}
 			});
 	});
 
 	// change is-checked class on buttons
-	$('.button-group').each(function(i, buttonGroup) {
+	$(".button-group").each(function (i, buttonGroup) {
 		var $buttonGroup = $(buttonGroup);
-		$buttonGroup.on('click', 'button', function(event) {
-			$buttonGroup.find('.is-checked').removeClass('is-checked');
+		$buttonGroup.on("click", "button", function (event) {
+			$buttonGroup.find(".is-checked").removeClass("is-checked");
 			var button = $(event.currentTarget);
-			button.addClass('is-checked');
+			button.addClass("is-checked");
 		});
 	});
 
 	// flatten object by concatting values
 	function concatValues(obj) {
-		var value = '';
+		var value = "";
 		for (var prop in obj) {
 			value += obj[prop];
 		}
 		return value;
 	}
 
-	$('.info-popup').modaal();
+	$(".info-popup").modaal();
 	eod_video_show_more();
 
-
 	function eod_video_show_more() {
-		$(".mcd_playlist__show-more > a").on("click", function() {
+		$(".mcd_playlist__show-more > a").on("click", function () {
 			var self = $(this);
 			var content = self.parent().prev(".modal-class-details__listwrap");
 			var linkText = self.text().toUpperCase();
@@ -114,69 +139,63 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-
-		$("#eod_load_more").on("click", function(e){
-			e.preventDefault();
-			var params = [];
-			var base_url = window.location.origin;
-			$('.button-group').each(function() {
-				var current_button = '';
-				$('#' + $(this).attr('id') + ' > button').each(function() {
-					if ($(this).hasClass('is-checked')) {
-						current_button = $(this).val();
-					}
-				});
-				params.push({ name: $(this).attr('id'), value: current_button });
-
-			});
-			params.push({name: 'paged', value: parseInt($('#video_paged').val())});
-			var fetch_url = base_url + '/wp-json/eod/v1/posts?' + $.param(params);
-
-			fetch(fetch_url)
-				.then((response) => {
-					return response.json();
-				})
-				.then((videos) => {
-					if (200 === videos.code) {
-	
-						var videos_data = videos.result;
-	
-						$.ajax({
-							url: mmc_js_vars.ajax_url,
-							type: "GET",
-							aSync: false,
-							dataType: "html",
-							data: { data: videos_data, paged: parseInt($('#video_paged').val()), action: 'get_videos_ajax_loop' },
-							success: function(response) {
-	
-								$('#elliptica_od_videos').append(response);
-								$('#video_paged').val(parseInt($('#video_paged').val()) + 1);
-								$('.info-popup').modaal();
-								eod_video_show_more();
-								eod_set_isotope();
-							},
-							error: function(e) {
-								console.log(e);
-							}
-						});
-	
-					} else {
-						//$('#elliptica_od_videos').html('<div>No post found</div>');
-					}
-				});
-		});
-
-
-		function eod_set_isotope(){
-			var iso_grid = $('#elliptica_od_videos').isotope({
-				itemSelector: '.isotope_video_item',
-				percentPosition: true,
-				masonry: {
-					columnWidth: '.on_demand_video_grid-sizer'
+	$("#eod_load_more").on("click", function (e) {
+		e.preventDefault();
+		// Request list of post IDs from restful endpoint.
+		let rest_params = eod_video_state.filter_parameters.concat([
+			{
+				name: "paginated_segment_index",
+				value: eod_video_state.paginated_segment_index,
+			},
+		]);
+		var fetch_url = eod_video_state.base_url + $.param(rest_params);
+		console.log(rest_params);
+		fetch(fetch_url)
+			.then((response) => {
+				return response.json();
+			})
+			.then((videos) => {
+				if (200 === videos.code) {
+					var videos_data = videos.result;
+					// Make ajax call to retrieve html for videos
+					$.ajax({
+						url: mmc_js_vars.ajax_url,
+						type: "GET",
+						aSync: false,
+						dataType: "html",
+						data: {
+							data: videos_data,
+							paginated_segment_index: parseInt(
+								eod_video_state.paginated_segment_index
+							),
+							action: "get_videos_ajax_loop",
+						},
+						success: function (response) {
+							$("#elliptica_od_videos").append(response);
+							eod_video_state.paginated_segment_index++;
+							$(".info-popup").modaal();
+							eod_video_show_more();
+							eod_set_isotope();
+						},
+						error: function (e) {
+							console.log(e);
+						},
+					});
+				} else {
+					//$("#elliptica_od_videos").html(
+					//	"<div>" + mmc_js_vars.no_results_message + "</div>"
+					//);
 				}
 			});
-		}
+	});
+
+	function eod_set_isotope() {
+		var iso_grid = $("#elliptica_od_videos").isotope({
+			itemSelector: ".isotope_video_item",
+			percentPosition: true,
+			masonry: {
+				columnWidth: ".on_demand_video_grid-sizer",
+			},
+		});
+	}
 });
-
-
-
