@@ -168,6 +168,7 @@ class OnDemand extends Engine\Base {
 			);
 
 			$request_result = array();
+			$full_videos_data = array();
 
 			$parameters = $request->get_params();
 
@@ -187,7 +188,11 @@ class OnDemand extends Engine\Base {
 				while ( $query->have_posts() ) {
 						$query->the_post();
 
-						array_push( $request_result, get_the_ID() );
+						$post_id = get_the_ID();
+
+						array_push( $request_result, $post_id );
+
+						$full_videos_data[$post_id] = $this->build_full_video_data_array( $post_id );
 				}
 			}
 
@@ -197,13 +202,42 @@ class OnDemand extends Engine\Base {
 					return array(
 						'code'   => 200,
 						'result' => $request_result,
+						'data' =>	$full_videos_data
 					);
 			}
 
 			return array(
 				'code'   => 204,
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
+				'data' => []
 			);
+	}
+
+	/**
+	 * Build Full Video Data Array
+	 *
+	 * @since 1.0.5
+	 * @param int wordpress post id.
+	 * @return array of data points about the video
+	 */
+	private function build_full_video_data_array( $post_id ){
+
+		$prefix = '_elliptica_od_';
+
+		$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
+		$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
+		$class_plan      = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
+
+		return [
+			'class_instructor' => get_the_terms( $post_id, 'class_instructor' ),
+			'class_type' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' ),
+			'difficulty_level' => get_the_terms( $post_id, 'difficulty_level' ),
+			'class_date' => date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] ),
+			'class_description' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_desc' ),
+			'video_id' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_video_id' ),
+			'featured_image' => isset($featured_image[0]) ? $featured_image[0] : '',
+			'class_plan' => minimize_and_sum_class_plans( $class_plan )
+		];
 	}
 
 	/**
