@@ -159,13 +159,12 @@ class OnDemand extends Engine\Base {
 	 * @return array
 	 */
 	public function return_on_demand_posts( \WP_REST_Request $request ) {
-		
 			// Set default arguments
 			$args = array(
 				'orderby'        => 'title',
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => 20,
+				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
 			);
 
 			$request_result = array();
@@ -174,13 +173,12 @@ class OnDemand extends Engine\Base {
 
 			// Overwrite args from parameters if present
 			if ( is_array( $parameters ) && isset( $parameters ) ) {
-				$args['tax_query'] = $this->_build_query_from_params( $parameters );
-				$args['paged'] = 1;
+				$args['tax_query']               = $this->_build_query_from_params( $parameters );
+				$args['paginated_segment_index'] = 1;
 
-				if(isset($parameters['paged']) && !empty($parameters['paged'])){
-					$args['paged'] = $parameters['paged'];
+				if ( isset( $parameters['paginated_segment_index'] ) && ! empty( $parameters['paginated_segment_index'] ) ) {
+					$args['paginated_segment_index'] = $parameters['paginated_segment_index'];
 				}
-
 			}
 
 			$query = new \WP_Query( $args );
@@ -204,7 +202,7 @@ class OnDemand extends Engine\Base {
 
 			return array(
 				'code'   => 204,
-				'result' => 'No post to show',
+				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
 			);
 	}
 
@@ -230,7 +228,7 @@ class OnDemand extends Engine\Base {
 				'difficulty_level' => isset( $parameters['difficulty_level'] ) ? $parameters['difficulty_level'] : '',
 				'music_style'      => isset( $parameters['music_style'] ) ? $parameters['music_style'] : '',
 				'class_length'     => isset( $parameters['class_length'] ) ? $parameters['class_length'] : '',
-				//'paged'			   => isset( $parameters['paged'] ) ? $parameters['paged'] : 1,
+				// 'paged'              => isset( $parameters['paged'] ) ? $parameters['paged'] : 1,
 			);
 
 			foreach ( $filter_fields as $tax => $id ) {
