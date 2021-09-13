@@ -49,7 +49,6 @@ class Ajax extends Engine\Base {
 		}
 
 		$args = array();
-		$data = $_REQUEST['data'];
 
 		$prefix = '_elliptica_od_';
 
@@ -58,7 +57,7 @@ class Ajax extends Engine\Base {
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
 				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
-				'post__in'       => $data,
+				'post__in'       => $_REQUEST['data'],
 				'paged'          => $_REQUEST['paginated_segment_index'],
 			)
 		);
