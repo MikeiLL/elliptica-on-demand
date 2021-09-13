@@ -147,7 +147,7 @@ function eod_locate_template( $template_name, $template_path = '', $default_path
  * @see eod_locate_template()
  *
  * @param string $template_name          Template to load.
- * @param array  $args                   Args passed for the template file.
+ * @param array  $args                   Args passed for the template file, extracted as template variables.
  * @param string $string $template_path  Path to templates.
  * @param string $default_path           Default path to template files.
  */
@@ -162,6 +162,3 @@ function eod_get_template( $template_name, $args = array(), $tempate_path = '', 
 	endif;
 	include $template_file;
 }
-
-
-
