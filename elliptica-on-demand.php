@@ -35,6 +35,7 @@ define( 'BEDROCK_SITE_ROOT', '/srv/www/ellipticastudios.com/current/' );
 define( 'MMC_PLUGIN_ABSOLUTE', __FILE__ );
 define( 'MMC_MIN_PHP_VERSION', 7.2 );
 define( 'MMC_MIN_WP_VERSION', 5.3 );
+define( 'MMC_PAGINATED_SEGMENT_SIZE', 5 );
 
 add_action(
 	'init',
