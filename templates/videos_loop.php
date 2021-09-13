@@ -55,7 +55,7 @@ if ( $query->have_posts() ) :
 			<?php echo $custom_style; ?>>
 
 			<div class="od-video_info">
-					
+
 					<?php
 					$instructor_and_type = '';
 					$class_instructors   = get_the_terms( $post_id, 'class_instructor' );
@@ -78,7 +78,7 @@ if ( $query->have_posts() ) :
 						$instructor_and_type .= date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] );
 					}
 
-					echo $instructor_and_type;
+					echo $instructor_and_type  . ' Modal Id: ' . $modaal_id_count . ' ';
 					?>
 				</div>
 			<!-- //od-video_info -->
@@ -171,9 +171,9 @@ if ( $query->have_posts() ) :
 							<div class="modal-class-details__song_details">
 								<strong><?php echo $class_segment['song_title']; ?></strong> <span><?php echo $class_segment['song_artists']; ?></span>
 							</div></li>
-							
+
 						<?php } ?>
-				
+
 						</ol>
 				</div>
 
