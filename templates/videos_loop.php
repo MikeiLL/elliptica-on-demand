@@ -3,9 +3,8 @@
 <?php
 
 $modaal_id_count = 1;
-if(isset($paged)){
-	$modaal_id_count = (($paged - 1) * 20);
-	$modaal_id_count++;
+if ( isset( $paginated_segment_index ) ) {
+	$modaal_id_count = 1 + $paginated_segment_index * MMC_PAGINATED_SEGMENT_SIZE;
 }
 
 
@@ -44,8 +43,8 @@ if ( $query->have_posts() ) :
 			$custom_style = 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))"';
 			if ( has_post_thumbnail( $post_id ) ) :
 				$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'on_demand_video' );
-				if(is_array($featured_image)){
-					$custom_style   = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
+				if ( is_array( $featured_image ) ) {
+					$custom_style = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
 				}
 			endif;
 			?>
@@ -78,7 +77,7 @@ if ( $query->have_posts() ) :
 						$instructor_and_type .= date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] );
 					}
 
-					echo $instructor_and_type  . ' Modal Id: ' . $modaal_id_count . ' ';
+					echo $instructor_and_type . ' Modal Id: ' . $modaal_id_count . ' ';
 					?>
 				</div>
 			<!-- //od-video_info -->
@@ -113,8 +112,8 @@ if ( $query->have_posts() ) :
 		$header_attr = 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
 		if ( has_post_thumbnail( $post_id ) ) :
 			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-			if(is_array($featured_image)){
-				$header_attr   = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
+			if ( is_array( $featured_image ) ) {
+				$header_attr = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
 			}
 		endif;
 
@@ -215,4 +214,3 @@ if ( $query->have_posts() ) :
 		<?php
 	endwhile;
 endif;
-?>
