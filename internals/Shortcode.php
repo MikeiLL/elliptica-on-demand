@@ -113,7 +113,7 @@ class Shortcode extends Engine\Base {
 			array(
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => 20,
+				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
 				'order'          => 'DESC',
 				'meta_key'       => $prefix . MMC_TEXTDOMAIN . '_date',
 				'orderby'        => 'meta_value', // or 'meta_value_num'
@@ -152,12 +152,13 @@ class Shortcode extends Engine\Base {
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 
 		$params = array(
-			'ajax_url' => admin_url( 'admin-ajax.php', $protocol ),
-			'alert'    => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
+			'ajax_url'               => admin_url( 'admin-ajax.php', $protocol ),
+			'alert'                  => __( 'Hey! You have clicked the button!', MMC_TEXTDOMAIN ),
+			'paginated_segment_size' => MMC_PAGINATED_SEGMENT_SIZE,
+			'no_results_message'     => __( 'No video classes to show', 'elliptica-on-demand' ),
 		);
 		wp_localize_script( MMC_TEXTDOMAIN . '-od-videos', 'mmc_js_vars', $params );
 
 	}
 
 }
-
