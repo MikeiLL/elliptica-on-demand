@@ -1,99 +1,86 @@
 (function () {
-	'use strict';
+	"use strict";
 	module.exports = function (grunt) {
-
-
 		// Project configuration.
 		grunt.initConfig({
-			pkg: grunt.file.readJSON('package.json'),
+			pkg: grunt.file.readJSON("package.json"),
 			uglify: {
 				options: {
-					banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+					banner:
+						'/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
 				},
 				main: {
-					src: ['assets/js/<%= pkg.name %>.js', 'node_modules/modaal/source/js/modaal.js'],
-					dest: 'dist/js/<%= pkg.name %>.min.js'
+					src: [
+						"assets/js/<%= pkg.name %>.js",
+						"node_modules/modaal/source/js/modaal.js",
+					],
+					dest: "dist/js/<%= pkg.name %>.min.js",
+				},
+				odvideoelem: {
+					src: "assets/js/od-video-elem.js",
+					dest: "dist/js/od-video-elem.js",
 				},
 				isotope: {
-					src: 'node_modules/isotope-layout/dist/isotope.pkgd.js',
-					dest: 'dist/js/isotope.min.js'
-				}
+					src: "node_modules/isotope-layout/dist/isotope.pkgd.js",
+					dest: "dist/js/isotope.min.js",
+				},
 			},
 			jshint: {
 				options: {
-					jshintrc: '.jshintrc'
+					jshintrc: ".jshintrc",
 				},
-				all: [
-					'Gruntfile.js',
-					'assets/js/*.js',
-					'!dist/*'
-				]
+				all: ["Gruntfile.js", "assets/js/*.js", "!dist/*"],
 			},
-			'dart-sass': {
+			"dart-sass": {
 				target: {
 					options: {
-						outputStyle: 'compressed'
+						outputStyle: "compressed",
 					},
 					files: [
 						{
 							expand: true,
-							cwd: 'assets/sass/',
-							src: ['*.scss'],
-							dest: 'dist/css',
-							ext: '.min.css'
+							cwd: "assets/sass/",
+							src: ["*.scss"],
+							dest: "dist/css",
+							ext: ".min.css",
 						},
 						{
 							expand: true,
-							cwd: 'node_modules/modaal/source/css/',
-							src: ['*.scss'],
-							dest: 'dist/css',
-							ext: '.min.css'
-						}
-					]
-				}
+							cwd: "node_modules/modaal/source/css/",
+							src: ["*.scss"],
+							dest: "dist/css",
+							ext: ".min.css",
+						},
+					],
+				},
 			},
 			watch: {
 				options: {
-					livereload: true
+					livereload: true,
 				},
 				compass: {
-					files: [
-						'assets/sass/*.scss'
-					],
-					tasks: ['dart-sass']
+					files: ["assets/sass/*.scss"],
+					tasks: ["dart-sass"],
 				},
 				js: {
-					files: [
-						'assets/js/*.js'
-					],
-					tasks: ['jshint', 'uglify']
-				}
+					files: ["assets/js/*.js"],
+					tasks: ["jshint", "uglify"],
+				},
 			},
 			clean: {
-				dist: [
-					'dist/js/*',
-					'dist/css/*'
-				]
-			}
+				dist: ["dist/js/*", "dist/css/*"],
+			},
 		});
 
 		// Load tasks
-		grunt.loadNpmTasks('grunt-contrib-clean');
-		grunt.loadNpmTasks('grunt-contrib-jshint');
-		grunt.loadNpmTasks('grunt-contrib-uglify');
-		grunt.loadNpmTasks('grunt-contrib-watch');
-		grunt.loadNpmTasks('grunt-dart-sass');
+		grunt.loadNpmTasks("grunt-contrib-clean");
+		grunt.loadNpmTasks("grunt-contrib-jshint");
+		grunt.loadNpmTasks("grunt-contrib-uglify");
+		grunt.loadNpmTasks("grunt-contrib-watch");
+		grunt.loadNpmTasks("grunt-dart-sass");
 
 		// Register tasks
-		grunt.registerTask('default', [
-			'clean',
-			'dart-sass',
-			'uglify'
-		]);
-		grunt.registerTask('dev', [
-			'watch'
-		]);
-
+		grunt.registerTask("default", ["clean", "dart-sass", "uglify"]);
+		grunt.registerTask("dev", ["watch"]);
 	};
-}());
-
+})();

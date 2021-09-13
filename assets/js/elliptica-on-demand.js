@@ -2,11 +2,10 @@
  * Source: http://codepen.io/desandro/pen/GFbAs
  */
 /* jshint browser: true */
-/*global mmc_js_vars */
-
-jQuery(document).ready(function ($) {
+/* global mmc_js_vars */
+/* global Od_Video_Elem */
+jQuery(($) => {
 	// Object to hold state of filter and video dislay data
-
 	var eod_video_state = {
 		paginated_segment_index: 1,
 		paginated_segment_size: mmc_js_vars.paginated_segment_size,
@@ -149,16 +148,33 @@ jQuery(document).ready(function ($) {
 			},
 		]);
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
-		console.log(rest_params);
+
 		fetch(fetch_url)
 			.then((response) => {
 				return response.json();
 			})
 			.then((videos) => {
+				console.log(videos);
 				if (200 === videos.code) {
-					var videos_data = videos.result;
+					console.log(videos.data);
+					console.log(videos.data.length);
+					let modal_count =
+						1 +
+						eod_video_state.paginated_segment_index *
+							eod_video_state.paginated_segment_size;
+					console.log("modal count: " + modal_count);
+					for (var i = modal_count; videos.data < videos.data.length; i++) {
+						console.log("counter: " + i);
+						console.log(videos.data[i].class_instructor);
+						var template = new Od_Video_Elem(
+							i,
+							videos.data[i].class_instructor
+						);
+						console.log(template.class_instructor);
+					}
+					eod_video_state.paginated_segment_index++;
 					// Make ajax call to retrieve html for videos
-					$.ajax({
+					/* $.ajax({
 						url: mmc_js_vars.ajax_url,
 						type: "GET",
 						aSync: false,
@@ -180,7 +196,7 @@ jQuery(document).ready(function ($) {
 						error: function (e) {
 							console.log(e);
 						},
-					});
+					}); */
 				} else {
 					//$("#elliptica_od_videos").html(
 					//	"<div>" + mmc_js_vars.no_results_message + "</div>"
