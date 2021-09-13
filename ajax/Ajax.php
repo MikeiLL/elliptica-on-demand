@@ -27,14 +27,6 @@ class Ajax extends Engine\Base {
 			return;
 		}
 
-		// For not logged user
-		add_action(
-			'wp_ajax_nopriv_your_method',
-			array(
-				$this,
-				'your_method',
-			)
-		);
 		add_action(
 			'wp_ajax_get_videos_ajax_loop',
 			array(
@@ -51,23 +43,6 @@ class Ajax extends Engine\Base {
 		);
 	}
 
-	/**
-	 * The method to run on ajax
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function your_method() {
-		$return = array(
-			'message' => 'Saved',
-			'ID'      => 1,
-		);
-
-		wp_send_json_success( $return );
-		// wp_send_json_error( $return );
-	}
-
 	public function get_videos_ajax_loop() {
 		if ( ! isset( $_REQUEST['data'] ) || empty( $_REQUEST['data'] ) ) {
 			wp_die();
@@ -78,17 +53,17 @@ class Ajax extends Engine\Base {
 
 		$prefix = '_elliptica_od_';
 
-		$args['query']  = new \WP_Query(
+		$args['query']                   = new \WP_Query(
 			array(
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
-				'posts_per_page' => 20,
+				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
 				'post__in'       => $data,
-				'paged'			 => $_REQUEST['paged']
+				'paged'          => $_REQUEST['paginated_segment_index'],
 			)
 		);
-		$args['prefix'] = $prefix;
-		$args['paged'] = $_REQUEST['paged'];
+		$args['prefix']                  = $prefix;
+		$args['paginated_segment_index'] = $_REQUEST['paginated_segment_index'];
 
 		eod_get_template( 'videos_loop.php', $args );
 
@@ -96,4 +71,3 @@ class Ajax extends Engine\Base {
 	}
 
 }
-
