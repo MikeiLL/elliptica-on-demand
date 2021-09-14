@@ -60,7 +60,8 @@ class Settings_Page extends Engine\Base {
 		 *
 		 */
 		// add_menu_page( __( 'Elliptica On Demand Settings', MMC_TEXTDOMAIN ), MMC_NAME, 'manage_options', MMC_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
-		/* Retrieve settings in front end:
+		/*
+		 Retrieve settings in front end:
 		 *  $eod_options = cmb2_get_option( MMC_TEXTDOMAIN . '-settings', 'videos_per_segment', 'default one' );
 		 *  $opts = get_option( MMC_TEXTDOMAIN . '-settings', 'default too' );
 		 */

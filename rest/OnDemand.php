@@ -167,7 +167,7 @@ class OnDemand extends Engine\Base {
 				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
 			);
 
-			$request_result = array();
+			$request_result   = array();
 			$full_videos_data = array();
 
 			$parameters = $request->get_params();
@@ -202,14 +202,14 @@ class OnDemand extends Engine\Base {
 					return array(
 						'code'   => 200,
 						'result' => $request_result,
-						'data' =>	$full_videos_data
+						'data'   => $full_videos_data,
 					);
 			}
 
 			return array(
 				'code'   => 204,
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
-				'data' => []
+				'data'   => array(),
 			);
 	}
 
@@ -217,28 +217,27 @@ class OnDemand extends Engine\Base {
 	 * Build Full Video Data Array
 	 *
 	 * @since 1.0.5
-	 * @param int wordpress post id.
+	 * @param int WordPress post id.
 	 * @return array of data points about the video
 	 */
-	private function build_full_video_data_array( $post_id ){
-
+	private function build_full_video_data_array( $post_id ) {
 		$prefix = '_elliptica_od_';
 
-		$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
+		$date_time      = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
 		$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-		$class_plan      = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
+		$class_plan     = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
 
-		return [
-			'class_instructor' => get_the_terms( $post_id, 'class_instructor' )[0]->name,
-			'class_type' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' )[0],
-			'difficulty_level' => get_the_terms( $post_id, 'difficulty_level' ),
-			'class_date' => date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] ),
+		return array(
+			'class_instructor'  => get_the_terms( $post_id, 'class_instructor' )[0]->name,
+			'class_type'        => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' )[0],
+			'difficulty_level'  => get_the_terms( $post_id, 'difficulty_level' ),
+			'class_date'        => date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] ),
 			'class_description' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_desc' )[0],
-			'video_id' => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_video_id' )[0],
-			'featured_image' => isset($featured_image[0]) ? $featured_image[0] : '',
-			'playlist' => $class_plan,
-			'class_plan' => minimize_and_sum_class_plans( $class_plan )
-		];
+			'video_id'          => get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_video_id' )[0],
+			'featured_image'    => isset( $featured_image[0] ) ? $featured_image[0] : '',
+			'playlist'          => $class_plan,
+			'class_plan'        => minimize_and_sum_class_plans( $class_plan ),
+		);
 	}
 
 	/**

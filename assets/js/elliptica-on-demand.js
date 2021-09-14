@@ -148,31 +148,28 @@ jQuery(($) => {
 			},
 		]);
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
-
+		eod_video_state.paginated_segment_index++;
+		console.log(fetch_url);
 		fetch(fetch_url)
 			.then((response) => {
 				return response.json();
 			})
 			.then((videos) => {
-				console.log(videos);
 				if (200 === videos.code) {
 					console.log(videos.data);
-					console.log(videos.data.length);
 					let modal_count =
 						1 +
 						eod_video_state.paginated_segment_index *
 							eod_video_state.paginated_segment_size;
 					console.log("modal count: " + modal_count);
-					for (var i = modal_count; videos.data < videos.data.length; i++) {
-						console.log("counter: " + i);
-						console.log(videos.data[i].class_instructor);
+					for (var i = 0; i <= videos.data.length; i++) {
 						var template = new Od_Video_Elem(
-							i,
+							modal_count,
 							videos.data[i].class_instructor
 						);
-						console.log(template.class_instructor);
+						modal_count++;
+						console.log(template);
 					}
-					eod_video_state.paginated_segment_index++;
 					// Make ajax call to retrieve html for videos
 					/* $.ajax({
 						url: mmc_js_vars.ajax_url,
