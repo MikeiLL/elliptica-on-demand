@@ -163,11 +163,9 @@ jQuery(($) => {
 							eod_video_state.paginated_segment_size;
 					console.log("modal count: " + modal_count);
 					for (var i = 0; i <= videos.data.length; i++) {
-						var template = new Od_Video_Elem(
-							modal_count,
-							videos.data[i].class_instructor
-						);
+						var template = new Od_Video_Elem(modal_count, videos.data[i]);
 						modal_count++;
+						console.log(modal_count);
 						console.log(template);
 					}
 					// Make ajax call to retrieve html for videos
