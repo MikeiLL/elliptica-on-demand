@@ -122,6 +122,7 @@ class Shortcode extends Engine\Base {
 		$temp_args['prefix'] = $prefix;
 
 		eod_get_template( 'html-shortcode.php', $temp_args );
+		eod_get_template( 'od-video-template.php', array() );
 		// Add Style with script adder
 		self::addScript();
 
@@ -144,7 +145,13 @@ class Shortcode extends Engine\Base {
 			wp_register_script( MMC_TEXTDOMAIN . '-od-video-elem', plugins_url( 'dist/js/od-video-elem.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
 			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-video-elem' );
 
-			wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', MMC_TEXTDOMAIN . '-od-isotope', MMC_TEXTDOMAIN . '-od-video-elem' ), MMC_VERSION );
+			wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js',
+						MMC_PLUGIN_ABSOLUTE ),
+						array( 'jquery',
+								MMC_TEXTDOMAIN . '-od-isotope',
+								MMC_TEXTDOMAIN . '-od-video-elem' ),
+								MMC_VERSION
+						);
 			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos' );
 
 			self::localizeScript();

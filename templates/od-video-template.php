@@ -1,4 +1,9 @@
-<a data-modaal-content-source="#modal-id-1" href="#modal-id-1" class="">
+<?php
+/**
+ * On Demand Video Grid Item Template with Moday DOM element as well.
+ */
+?>
+<a display="none" class="info-popup isotope_video_item video_item_template">
   <div class="od-video">
     <div class="od-video_info">
       <span aria-hidden="true"> ·
@@ -11,7 +16,7 @@
 
 <!-- Modal Window -->
 <!-- /* Build the Modal Content */ -->
-<div id="modal-id-<?php esc_attr_e( $modaal_id_count ); ?>"
+<div id="modal-id-goes-here"
 		style="display: none;">
 		<?php
 		/* Header */
@@ -34,7 +39,7 @@
 
 		?>
 		<!-- Build modal class header background declaration -->
-		<div class="modal-class-details__header" <?php echo $header_attr; ?>>
+		<div class="modal-class-details__header"> <!-- some styling needs to be applied to details__header, needs background image. -->
 
 
 
