@@ -147,6 +147,25 @@ class OnDemand extends Engine\Base {
 	}
 
 	/**
+	 * Simple Route Example
+	 *
+	 * Make an instance of this class somewhere, then
+	 * call this method and test on the command line with
+	 * `curl http://example.com/wp-json/eod/v1/simple`
+	 */
+	public function add_eod_put_route() {
+		// An example with 0 parameters.
+		register_rest_route(
+			'eod/v1',
+			'/posts',
+			array(
+				'methods'  => 'POST',
+				'callback' => array( $this, 'create_on_demand_post' ),
+			)
+		);
+	}
+
+	/**
 	 * Return On Demand Posts
 	 *
 	 * @since 1.0.0
@@ -206,6 +225,26 @@ class OnDemand extends Engine\Base {
 					);
 			}
 
+			return array(
+				'code'   => 204,
+				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
+				'data'   => array(),
+			);
+	}
+
+	/**
+	 * Return On Demand Posts
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $request Values.
+	 *
+	 * Request example:
+	 * /wp-json/eod/v1/posts?difficulty_level=75&class_instructor=2&music_style=4&class_length=6
+	 *
+	 * @return array
+	 */
+	public function create_on_demand_post( \WP_REST_Request $request ) {
 			return array(
 				'code'   => 204,
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),

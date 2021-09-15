@@ -155,6 +155,8 @@ class PostTypes extends Engine\Base {
 
 				// Show in Rest API
 				'show_in_rest'     => true,
+				'rest_base'             => 'music_style',
+				'rest_controller_class' => '\WP_REST_Terms_Controller'
 
 			)
 		);
@@ -167,6 +169,8 @@ class PostTypes extends Engine\Base {
 
 				// Show in Rest API
 				'show_in_rest'     => true,
+				'rest_base'             => 'difficulty_level',
+				'rest_controller_class' => '\WP_REST_Terms_Controller'
 
 			)
 		);
@@ -179,6 +183,8 @@ class PostTypes extends Engine\Base {
 
 				// Show in Rest API
 				'show_in_rest'     => true,
+				'rest_base'             => 'class_length',
+				'rest_controller_class' => '\WP_REST_Terms_Controller'
 
 			)
 		);
@@ -191,6 +197,8 @@ class PostTypes extends Engine\Base {
 
 				// Show in Rest API
 				'show_in_rest'     => true,
+				'rest_base'             => 'class_instructor',
+				'rest_controller_class' => '\WP_REST_Terms_Controller'
 
 			)
 		);
