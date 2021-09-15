@@ -17,7 +17,7 @@
 <!-- Modal Window -->
 <!-- /* Build the Modal Content */ -->
 <div id="modal-id-goes-here"
-		style="display: none;">
+		style="display: none;" class="video_item_modal_template">
 		<?php
 		/* Header */
 

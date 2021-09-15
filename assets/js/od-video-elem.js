@@ -1,7 +1,6 @@
 class Od_Video_Elem {
 	constructor(modaal_id, video_data) {
 		this.modaal_id = modaal_id;
-		this.class_instructor = video_data.class_instructor;
 		this.class_type = video_data.class_type;
 		this.difficulty_level = video_data.difficulty_level;
 		this.class_date = video_data.class_date;
@@ -12,6 +11,4 @@ class Od_Video_Elem {
 		this.playlist = video_data.playlist;
 		this.featured_image = video_data.featured_image;
 	}
-
-	// Here we can have methods which build the HTML DOM elements _from_ HTML that we create in a (php) page template.
 }

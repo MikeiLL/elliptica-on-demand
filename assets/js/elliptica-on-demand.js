@@ -5,7 +5,6 @@
 /* global mmc_js_vars */
 /* global Od_Video_Elem */
 jQuery(($) => {
-	console.log("elliptica-on-demand");
 	// Object to hold state of filter and video dislay data
 	var eod_video_state = {
 		paginated_segment_index: 1,
@@ -163,7 +162,7 @@ jQuery(($) => {
 						eod_video_state.paginated_segment_index *
 							eod_video_state.paginated_segment_size;
 					console.log("modal count: " + modal_count);
-					for (var i = 0; i <= videos.data.length; i++) {
+					for (var i = 0; i < videos.data.length; i++) {
 						var od_video_element = new Od_Video_Elem(
 							modal_count,
 							videos.data[i]
@@ -204,8 +203,17 @@ jQuery(($) => {
 			});
 	});
 
-	const od_video_container = $(".video_item_template");
-	console.log(od_video_container.html());
+	/**
+	 * Build OD Video Container
+	 *
+	 * @returns html for single on-demand video details container and modal.
+	 */
+	function build_od_video_container(modal_id, video_data_element) {
+		const od_video_container = $(".video_item_template");
+		const od_video_modal_container = $(".video_item_modal_template");
+
+		return od_video_container.html();
+	}
 
 	function eod_set_isotope() {
 		var iso_grid = $("#elliptica_od_videos").isotope({
