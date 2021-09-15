@@ -140,30 +140,18 @@ class OnDemand extends Engine\Base {
 			'eod/v1',
 			'/posts',
 			array(
-				'methods'  => 'GET',
+				'methods'  => \WP_REST_Server::READABLE,
 				'callback' => array( $this, 'return_on_demand_posts' ),
+			),
+			array(
+					// By using this constant we ensure that when the WP_REST_Server changes, our create endpoints will work as intended.
+					'methods'  => \WP_REST_Server::CREATABLE,
+					// Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
+					'callback' => 'create_on_demand_post',
 			)
 		);
 	}
 
-	/**
-	 * Simple Route Example
-	 *
-	 * Make an instance of this class somewhere, then
-	 * call this method and test on the command line with
-	 * `curl http://example.com/wp-json/eod/v1/simple`
-	 */
-	public function add_eod_put_route() {
-		// An example with 0 parameters.
-		register_rest_route(
-			'eod/v1',
-			'/posts',
-			array(
-				'methods'  => 'POST',
-				'callback' => array( $this, 'create_on_demand_post' ),
-			)
-		);
-	}
 
 	/**
 	 * Return On Demand Posts
@@ -218,29 +206,29 @@ class OnDemand extends Engine\Base {
 			wp_reset_query();
 
 			if ( ! empty( $request_result ) && isset( $request_result ) ) {
-					return array(
+					return rest_ensure_response( [
 						'code'   => 200,
 						'result' => $request_result,
 						'data'   => $full_videos_data,
-					);
+					] );
 			}
 
-			return array(
+			return rest_ensure_response( [
 				'code'   => 204,
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
-				'data'   => array(),
-			);
+				'data'   => array()
+			] );
 	}
 
 	/**
-	 * Return On Demand Posts
+	 * Create On Demand Posts
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param WP_REST_Request $request Values.
 	 *
 	 * Request example:
-	 * /wp-json/eod/v1/posts?difficulty_level=75&class_instructor=2&music_style=4&class_length=6
+	 * /wp-json/eod/v1/posts coming soon.
 	 *
 	 * @return array
 	 */
