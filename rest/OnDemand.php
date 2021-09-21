@@ -147,11 +147,41 @@ class OnDemand extends Engine\Base {
 					// By using this constant we ensure that when the WP_REST_Server changes, our create endpoints will work as intended.
 					'methods'  => \WP_REST_Server::CREATABLE,
 					// Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
-					'callback' => 'create_on_demand_post',
+					'callback' => array($this, 'create_on_demand_post'),
+					// 'permission_callback' => array( $this, 'od_video_permissions_check') TODO
+					// Generate Application Password at Users->profile page
 			)
 		);
 	}
 
+	/**
+	 * Create On Demand Posts
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param WP_REST_Request $request Values.
+	 *
+	 * Request example:
+	 * /wp-json/eod/v1/posts TODO.
+	 *
+	 * @return TODO
+	 */
+	public function create_on_demand_post( \WP_REST_Request $request ) {
+			return rest_ensure_response( __('You will create a post', 'elliptica-on-demand' ));
+	}
+
+	/**
+	 * This is our callback function that embeds our resource in a WP_REST_Response
+	 */
+	public function od_video_permissions_check() {
+		// Restrict endpoint to only users who have the edit_posts capability.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+				return new WP_Error( 'rest_forbidden', esc_html__( 'You are not permitted this.', 'elliptica-on-demand' ), array( 'status' => 401 ) );
+		}
+
+		// This is a black-listing approach. You could alternatively do this via white-listing, by returning false here and changing the permissions check.
+		return true;
+	}
 
 	/**
 	 * Return On Demand Posts
@@ -218,27 +248,84 @@ class OnDemand extends Engine\Base {
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
 				'data'   => array()
 			] );
+
+			return new WP_Error( 'rest_invalid',
+				esc_html__( 'The data parameter is required.', 'elliptica-on-demand' ),
+				array( 'status' => 400 ) );
 	}
 
 	/**
-	 * Create On Demand Posts
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param WP_REST_Request $request Values.
-	 *
-	 * Request example:
-	 * /wp-json/eod/v1/posts coming soon.
-	 *
-	 * @return array
+	 * This is our callback function that embeds our resource in a WP_REST_Response
+	 * @in_progress TODO
+	 * see https://developer.wordpress.org/rest-api/extending-the-rest-api/routes-and-endpoints/
 	 */
-	public function create_on_demand_post( \WP_REST_Request $request ) {
-			return array(
-				'code'   => 204,
-				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
-				'data'   => array(),
-			);
+	private function od_video_allowed_params( $request ) {
+
+		$allowed_params = array(
+				'difficulty_level',
+				'class_instructor',
+				'music_style',
+				'class_length'
+		);
+
+		if ( isset( $request['filter'] ) ) {
+			$filtered_params = array();
+			foreach ( $allowed_params as $param ) {
+					if ( $request['filter'] === $param ) {
+							$filtered_params[] = $param;
+					}
+			}
+			return rest_ensure_response( $filtered_params );
+		}
+		return rest_ensure_response( $colors );
 	}
+
+	/**
+	 * Validate a request argument based on details registered to the route.
+	* @in_progress TODO
+	 *
+	 * @param  mixed            $value   Value of the 'filter' argument.
+	 * @param  WP_REST_Request  $request The current request object.
+	 * @param  string           $param   Key of the parameter. In this case it is 'filter'.
+	 * @return WP_Error|boolean
+	 */
+	private function od_video_arg_validate_callback( $value, $request, $param ) {
+		// If the 'filter' argument is not a string return an error.
+		if ( ! is_string( $value ) ) {
+				return new WP_Error( 'rest_invalid_param', esc_html__( 'The filter argument must be a string.', 'my-text-domain' ), array( 'status' => 400 ) );
+		}
+
+		// Get the registered attributes for this endpoint request.
+		$attributes = $request->get_attributes();
+
+		// Grab the filter param schema.
+		$args = $attributes['args'][ $param ];
+
+		// If the filter param is not a value in our enum then we should return an error as well.
+		if ( ! in_array( $value, $args['enum'], true ) ) {
+				return new WP_Error( 'rest_invalid_param', sprintf( __( '%s is not one of %s' ), $param, implode( ', ', $args['enum'] ) ), array( 'status' => 400 ) );
+		}
+	}
+
+	/**
+	* We can use this function to contain our arguments for the example product endpoint.
+	* @in_progress TODO
+	*/
+ private function od_video_request_arguments() {
+		 $args = array();
+		 // Here we are registering the schema for the filter argument.
+		 $args['filter'] = array(
+				 // description should be a human readable description of the argument.
+				 'description' => esc_html__( 'The filter parameter is used to filter the collection of colors', 'my-text-domain' ),
+				 // type specifies the type of data that the argument should be.
+				 'type'        => 'string',
+				 // enum specified what values filter can take on.
+				 'enum'        => array( 'red', 'green', 'blue' ),
+				 // Here we register the validation callback for the filter argument.
+				 'validate_callback' => array(this, 'od_video_arg_validate_callback'),
+		 );
+		 return $args;
+ }
 
 	/**
 	 * Build Full Video Data Array

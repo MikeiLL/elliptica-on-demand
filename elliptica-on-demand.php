@@ -44,6 +44,8 @@ add_action(
 	}
 );
 
+add_filter( 'wp_is_application_passwords_available', '__return_true' );
+
 
 if ( version_compare( PHP_VERSION, MMC_MIN_PHP_VERSION, '<=' ) ) {
 	add_action(
