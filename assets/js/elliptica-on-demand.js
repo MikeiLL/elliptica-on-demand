@@ -7,7 +7,7 @@
 jQuery(($) => {
 	// Object to hold state of filter and video dislay data
 	var eod_video_state = {
-		paginated_segment_index: 1,
+		paginated_segment_index: 0,
 		paginated_segment_size: mmc_js_vars.paginated_segment_size,
 		filter_parameters: [],
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
@@ -167,9 +167,19 @@ jQuery(($) => {
 							modal_count,
 							videos.data[i]
 						);
-						modal_count++;
+						var video_container = $(".video_item_template");
+						var modal_container = $(".video_item_modal_template");
+						video_container
+							.find(".od-video_info")
+							.html(od_video_element.class_date)
+							.show();
+						$(modal_container).attr("id", "modal-id-" + modal_count);
+						$("#elliptica_od_videos").append(modal_container);
+
+						$("#elliptica_od_videos").append(video_container);
 						console.log(modal_count);
-						console.log(od_video_element);
+						modal_count++;
+						//console.log(video_container);
 					}
 					// Make ajax call to retrieve html for videos
 					/* $.ajax({
