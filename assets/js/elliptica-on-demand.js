@@ -12,13 +12,13 @@ jQuery(($) => {
 		filter_parameters: [],
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
 	};
-
+	$(".loader_container").hide();
 	// not required anymore ? var filters = {}; //store filters in an array
 	$(".filters").on("click", ".button", function (event) {
 		// For now, initialize pagination index to zero
 		eod_video_state.paginated_segment_index = 0;
 		var button = $(event.currentTarget);
-
+		$(".loader_container").show();
 		// get group key
 		var buttonGroup = button.parents(".button-group");
 		var base_filter = buttonGroup.attr("id");
@@ -100,11 +100,14 @@ jQuery(($) => {
 	}
 
 	$("#eod_load_more").on("click", function (e) {
+
 		e.preventDefault();
+		$(".loader_container").show();
 		get_eod_videos_from_server_and_update_display();
 	});
 
 	function get_eod_videos_from_server_and_update_display() {
+		
 		// Request list of post IDs from restful endpoint.
 		let rest_params = eod_video_state.filter_parameters.concat([
 			{
@@ -121,6 +124,7 @@ jQuery(($) => {
 			})
 			.then((videos) => {
 				if (200 === videos.code) {
+					
 					console.log(videos.data);
 					let modal_count =
 						1 +
@@ -184,7 +188,9 @@ jQuery(($) => {
 				} else {
 					// TODO remove LoadMore button, then redisplay
 				}
+				$(".loader_container").hide();
 			});
+			
 	}
 
 	/**

@@ -98,6 +98,12 @@
 	<!-- ui-group -->
 </div>
 <!-- // filters -->
+<div class="loader_container">
+	<div class="loader__wrapper">
+		<div class="eod_loader"></div>
+	</div>
+</div>
+
 
 <div id="elliptica_od_videos">
 

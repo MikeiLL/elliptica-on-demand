@@ -1,3 +1,37 @@
+.eod_loader {
+  position: absolute;
+  left: 44%;
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #d10056;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+  }
+  .loader_container {
+    position: fixed;
+    left: 46%;
+    bottom: 50%;
+    z-index: 3;
+    background: rgba(0,0,0,.7);
+  }
+  .loader__wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  /* Safari */
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+  
 /* Styling for public-facing components of the plugin. */
 
 /*  Isotope Video Archive Display */
