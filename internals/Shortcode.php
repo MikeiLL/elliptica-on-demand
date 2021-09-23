@@ -140,7 +140,7 @@ class Shortcode extends Engine\Base {
 			wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos' );
 
 			wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
-			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope' );
+			//wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope' );
 
 			wp_register_script( MMC_TEXTDOMAIN . '-od-video-elem', plugins_url( 'dist/js/od-video-elem.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
 			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-video-elem' );

@@ -13,8 +13,6 @@ jQuery(($) => {
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
 	};
 
-	eod_set_isotope();
-
 	// not required anymore ? var filters = {}; //store filters in an array
 	$(".filters").on("click", ".button", function (event) {
 		// For now, initialize pagination index to zero
@@ -55,45 +53,8 @@ jQuery(($) => {
 			},
 		]);
 		console.log(rest_params);
-		var fetch_url = eod_video_state.base_url + $.param(rest_params);
-
-		fetch(fetch_url)
-			.then((response) => {
-				return response.json();
-			})
-			.then((videos) => {
-				if (200 === videos.code) {
-					var videos_data = videos.result;
-
-					$.ajax({
-						url: mmc_js_vars.ajax_url,
-						type: "GET",
-						aSync: false,
-						dataType: "html",
-						data: {
-							data: videos_data,
-							paginated_segment_index: parseInt(
-								eod_video_state.paginated_segment_index
-							),
-							action: "get_videos_ajax_loop",
-						},
-						success: function (response) {
-							$("#elliptica_od_videos").html(response);
-							eod_video_state.paginated_segment_index++;
-							$(".info-popup").modaal();
-							eod_video_show_more();
-							eod_set_isotope();
-						},
-						error: function (e) {
-							console.log(e);
-						},
-					});
-				} else {
-					$("#elliptica_od_videos").html(
-						"<div>" + mmc_js_vars.no_results_message + "</div>"
-					);
-				}
-			});
+		$("#elliptica_od_videos").html("");
+		get_eod_videos_from_server_and_update_display();
 	});
 
 	// change is-checked class on buttons
@@ -140,6 +101,10 @@ jQuery(($) => {
 
 	$("#eod_load_more").on("click", function (e) {
 		e.preventDefault();
+		get_eod_videos_from_server_and_update_display();
+	});
+
+	function get_eod_videos_from_server_and_update_display() {
 		// Request list of post IDs from restful endpoint.
 		let rest_params = eod_video_state.filter_parameters.concat([
 			{
@@ -167,51 +132,60 @@ jQuery(($) => {
 							modal_count,
 							videos.data[i]
 						);
-						var video_container = $(".video_item_template");
-						var modal_container = $(".video_item_modal_template");
+						console.log(videos.data[i]);
+						var video_container = $(".video_item_template").clone();
+						video_container.attr(
+							"data-modaal-content-source",
+							"#modal-id-" + modal_count
+						);
+						video_container.attr("href", "#modal-id-" + modal_count);
+						video_container.removeClass("video_item_template");
+						let video_container_background =
+							"linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))";
+						if ("" !== videos.data[i].featured_image) {
+							video_container_background +=
+								", url(" + videos.data[i].featured_image + ")";
+						}
 						video_container
 							.find(".od-video_info")
-							.html(od_video_element.class_date)
-							.show();
-						$(modal_container).attr("id", "modal-id-" + modal_count);
-						$("#elliptica_od_videos").append(modal_container);
+							.append(
+								videos.data[i].class_instructor +
+									'<span aria-hidden="true"> · </span>' +
+									videos.data[i].class_type +
+									"<br>" +
+									od_video_element.class_date
+							);
+						video_container
+							.find(".od-video")
+							.css("background", video_container_background);
+						var modal_container = $(".video_item_modal_template").clone();
 
+						modal_container
+							.find(".instructor_and_type")
+							.append(
+								videos.data[i].class_instructor +
+									'<span aria-hidden="true"> · </span>' +
+									videos.data[i].class_typ +
+									"<br>" +
+									od_video_element.class_date
+							);
+						modal_container.removeClass("video_item_modal_template");
+						video_container.show();
+						$(modal_container).attr("id", "modal-id-" + modal_count);
 						$("#elliptica_od_videos").append(video_container);
+						$("#elliptica_od_videos").append(
+							"<!-- /* Build the Modal Content */ -->"
+						);
+						$("#elliptica_od_videos").append(modal_container);
 						console.log(modal_count);
 						modal_count++;
-						//console.log(video_container);
 					}
-					// Make ajax call to retrieve html for videos
-					/* $.ajax({
-						url: mmc_js_vars.ajax_url,
-						type: "GET",
-						aSync: false,
-						dataType: "html",
-						data: {
-							data: videos_data,
-							paginated_segment_index: parseInt(
-								eod_video_state.paginated_segment_index
-							),
-							action: "get_videos_ajax_loop",
-						},
-						success: function (response) {
-							$("#elliptica_od_videos").append(response);
-							eod_video_state.paginated_segment_index++;
-							$(".info-popup").modaal();
-							eod_video_show_more();
-							eod_set_isotope();
-						},
-						error: function (e) {
-							console.log(e);
-						},
-					}); */
+					$(".info-popup").modaal();
 				} else {
-					//$("#elliptica_od_videos").html(
-					//	"<div>" + mmc_js_vars.no_results_message + "</div>"
-					//);
+					// TODO remove LoadMore button, then redisplay
 				}
 			});
-	});
+	}
 
 	/**
 	 * Build OD Video Container
@@ -223,15 +197,5 @@ jQuery(($) => {
 		const od_video_modal_container = $(".video_item_modal_template");
 
 		return od_video_container.html();
-	}
-
-	function eod_set_isotope() {
-		var iso_grid = $("#elliptica_od_videos").isotope({
-			itemSelector: ".isotope_video_item",
-			percentPosition: true,
-			masonry: {
-				columnWidth: ".on_demand_video_grid-sizer",
-			},
-		});
 	}
 });
