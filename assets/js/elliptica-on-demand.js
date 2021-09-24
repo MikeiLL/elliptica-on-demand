@@ -100,14 +100,11 @@ jQuery(($) => {
 	}
 
 	$("#eod_load_more").on("click", function (e) {
-
 		e.preventDefault();
-		$(".loader_container").show();
 		get_eod_videos_from_server_and_update_display();
 	});
 
 	function get_eod_videos_from_server_and_update_display() {
-		
 		// Request list of post IDs from restful endpoint.
 		let rest_params = eod_video_state.filter_parameters.concat([
 			{
@@ -115,6 +112,7 @@ jQuery(($) => {
 				value: eod_video_state.paginated_segment_index,
 			},
 		]);
+		eod_enter_loading_mode();
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
 		eod_video_state.paginated_segment_index++;
 		console.log(fetch_url);
@@ -124,7 +122,6 @@ jQuery(($) => {
 			})
 			.then((videos) => {
 				if (200 === videos.code) {
-					
 					console.log(videos.data);
 					let modal_count =
 						1 +
@@ -188,11 +185,29 @@ jQuery(($) => {
 				} else {
 					// TODO remove LoadMore button, then redisplay
 				}
-				$(".loader_container").hide();
+				eod_exit_loading_mode();
 			});
-			
 	}
 
+	/**
+	 * Enter Loading Mode
+	 *
+	 * @returns null
+	 */
+	function eod_enter_loading_mode() {
+		$(".loader_container").show();
+		$("#eod_load_more").hide();
+	}
+
+	/**
+	 * Enter Loading Mode
+	 *
+	 * @returns null
+	 */
+	function eod_exit_loading_mode() {
+		$(".loader_container").hide();
+		$("#eod_load_more").show();
+	}
 	/**
 	 * Build OD Video Container
 	 *
