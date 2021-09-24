@@ -11,6 +11,7 @@ jQuery(($) => {
 		paginated_segment_size: mmc_js_vars.paginated_segment_size,
 		filter_parameters: [],
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
+		loading_mode: null,
 	};
 	$(".loader_container").hide();
 	// not required anymore ? var filters = {}; //store filters in an array
@@ -115,14 +116,21 @@ jQuery(($) => {
 		eod_enter_loading_mode();
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
 		eod_video_state.paginated_segment_index++;
-		console.log(fetch_url);
 		fetch(fetch_url)
 			.then((response) => {
 				return response.json();
 			})
 			.then((videos) => {
 				if (200 === videos.code) {
-					console.log(videos.data);
+					const display_load_more_button =
+						false ===
+						eod_video_state.paginated_segment_index >= videos.max_num_pages;
+					console.log(
+						"paginated_segment_index: " +
+							eod_video_state.paginated_segment_index
+					);
+					console.log("max pages: " + videos.max_num_pages);
+					console.log("display_load_more_button: " + display_load_more_button);
 					let modal_count =
 						1 +
 						eod_video_state.paginated_segment_index *
@@ -133,7 +141,7 @@ jQuery(($) => {
 							modal_count,
 							videos.data[i]
 						);
-						console.log(videos.data[i]);
+						// console.log(videos.data[i]);
 						var video_container = $(".video_item_template").clone();
 						video_container.attr(
 							"data-modaal-content-source",
@@ -178,14 +186,11 @@ jQuery(($) => {
 							"<!-- /* Build the Modal Content */ -->"
 						);
 						$("#elliptica_od_videos").append(modal_container);
-						console.log(modal_count);
 						modal_count++;
 					}
 					$(".info-popup").modaal();
-				} else {
-					// TODO remove LoadMore button, then redisplay
+					eod_exit_loading_mode(display_load_more_button);
 				}
-				eod_exit_loading_mode();
 			});
 	}
 
@@ -202,11 +207,16 @@ jQuery(($) => {
 	/**
 	 * Enter Loading Mode
 	 *
+	 * @param display_load_more bool
 	 * @returns null
 	 */
-	function eod_exit_loading_mode() {
+	function eod_exit_loading_mode(display_load_more) {
+		display_load_more =
+			typeof display_load_more !== "undefined" ? display_load_more : true;
 		$(".loader_container").hide();
-		$("#eod_load_more").show();
+		if (true === display_load_more) {
+			$("#eod_load_more").show();
+		}
 	}
 	/**
 	 * Build OD Video Container

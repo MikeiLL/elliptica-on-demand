@@ -203,6 +203,7 @@ class OnDemand extends Engine\Base {
 				}
 			}
 
+			$max_num_pages = $query->max_num_pages;
 			wp_reset_query();
 
 			if ( ! empty( $request_result ) && isset( $request_result ) ) {
@@ -210,13 +211,15 @@ class OnDemand extends Engine\Base {
 						'code'   => 200,
 						'result' => $request_result,
 						'data'   => $full_videos_data,
+						'max_num_pages' => $max_num_pages
 					] );
 			}
 
 			return rest_ensure_response( [
 				'code'   => 204,
 				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
-				'data'   => array()
+				'data'   => array(),
+				'max_num_pages' => ""
 			] );
 	}
 
