@@ -195,8 +195,8 @@ jQuery(($) => {
 	 * @returns null
 	 */
 	function eod_enter_loading_mode() {
-		$(".loader_container").show();
 		$("#eod_load_more").hide();
+		$(".loader_container").show();
 	}
 
 	/**
