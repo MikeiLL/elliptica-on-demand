@@ -7,7 +7,7 @@
 jQuery(($) => {
 	// Object to hold state of filter and video dislay data
 	var eod_video_state = {
-		paginated_segment_index: 0,
+		paginated_segment_index: 2,
 		paginated_segment_size: mmc_js_vars.paginated_segment_size,
 		filter_parameters: [],
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
@@ -17,7 +17,7 @@ jQuery(($) => {
 	// not required anymore ? var filters = {}; //store filters in an array
 	$(".filters").on("click", ".button", function (event) {
 		// For now, initialize pagination index to zero
-		eod_video_state.paginated_segment_index = 0;
+		eod_video_state.paginated_segment_index = 2;
 		var button = $(event.currentTarget);
 		$(".loader_container").show();
 		// get group key
@@ -47,13 +47,13 @@ jQuery(($) => {
 				});
 			}
 		});
-		let rest_params = eod_video_state.filter_parameters.concat([
+/*		let rest_params = eod_video_state.filter_parameters.concat([
 			{
 				name: "paginated_segment_index",
 				value: eod_video_state.paginated_segment_index,
 			},
-		]);
-		console.log(rest_params);
+		]); 
+		console.log(rest_params);*/
 		$("#elliptica_od_videos").html("");
 		get_eod_videos_from_server_and_update_display();
 	});

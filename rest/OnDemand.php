@@ -168,7 +168,7 @@ class OnDemand extends Engine\Base {
 	public function return_on_demand_posts( \WP_REST_Request $request ) {
 			// Set default arguments
 			$args = array(
-				'orderby'        => 'title',
+				'orderby'        => 'date',
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
 				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
@@ -182,10 +182,10 @@ class OnDemand extends Engine\Base {
 			// Overwrite args from parameters if present
 			if ( is_array( $parameters ) && isset( $parameters ) ) {
 				$args['tax_query']               = $this->_build_query_from_params( $parameters );
-				$args['paginated_segment_index'] = 1;
+				$args['paged'] = 1;
 
 				if ( isset( $parameters['paginated_segment_index'] ) && ! empty( $parameters['paginated_segment_index'] ) ) {
-					$args['paginated_segment_index'] = $parameters['paginated_segment_index'];
+					$args['paged'] = $parameters['paginated_segment_index'];
 				}
 			}
 
