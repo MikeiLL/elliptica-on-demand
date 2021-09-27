@@ -5,8 +5,8 @@
 ?>
 <a style="display: none;" class="info-popup isotope_video_item video_item_template">
   <div class="od-video">
-    <div class="od-video_info"></div>
-    <!-- //od-video_info -->
+	<div class="od-video_info"></div>
+	<!-- //od-video_info -->
   </div>
   <!-- //od-video -->
 </a>
@@ -16,7 +16,8 @@
 <div id="modal-id-goes-here"
 		style="display: none;" class="video_item_modal_template">
 <?php
-/* Header was built data like
+/*
+ Header was built data like
 
 		$difficulty_levels       = array();
 		$difficulty_levels_array = get_the_terms( $post_id, 'difficulty_level' );
@@ -68,7 +69,7 @@
 		/* // Intro */
 
 		/* Playlist */
-			?>
+		?>
 			<div class="modal-class-details__playlist_section">
 				<h2>Playlist</h2>
 				<div class="modal-class-details__listwrap mcd__playlist_hideContent">

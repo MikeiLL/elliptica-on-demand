@@ -65,34 +65,48 @@ class Shortcode extends Engine\Base {
 		);
 
 		// Build out the FILTER
-		$tax_terms = get_terms([
-			'taxonomy' => [
-				'difficulty_level',
-				'class_instructor',
-				'music_style',
-				'class_length'
-			],
-			'hide_empty' => true
-			]);
+		$tax_terms = get_terms(
+			array(
+				'taxonomy'   => array(
+					'difficulty_level',
+					'class_instructor',
+					'music_style',
+					'class_length',
+				),
+				'hide_empty' => true,
+			)
+		);
 
-		$difficulty_levels = array_filter($tax_terms, function($term){
-			return 'difficulty_level' === $term->taxonomy;
-		});
+		$difficulty_levels              = array_filter(
+			$tax_terms,
+			function( $term ) {
+				return 'difficulty_level' === $term->taxonomy;
+			}
+		);
 		$temp_args['difficulty_levels'] = $difficulty_levels;
 
-		$class_instructors = array_filter($tax_terms, function($term){
-			return 'class_instructor' === $term->taxonomy;
-		});
+		$class_instructors        = array_filter(
+			$tax_terms,
+			function( $term ) {
+				return 'class_instructor' === $term->taxonomy;
+			}
+		);
 		$temp_args['instructors'] = $class_instructors;
 
-		$music_styles = array_filter($tax_terms, function($term){
-			return 'music_style' === $term->taxonomy;
-		});
+		$music_styles              = array_filter(
+			$tax_terms,
+			function( $term ) {
+				return 'music_style' === $term->taxonomy;
+			}
+		);
 		$temp_args['music_styles'] = $music_styles;
 
-		$class_lengths = array_filter($tax_terms, function($term){
-			return 'class_length' === $term->taxonomy;
-		});
+		$class_lengths              = array_filter(
+			$tax_terms,
+			function( $term ) {
+				return 'class_length' === $term->taxonomy;
+			}
+		);
 		$temp_args['class_lengths'] = $class_lengths;
 
 		// $return .= $filter_control;
@@ -130,18 +144,24 @@ class Shortcode extends Engine\Base {
 			wp_enqueue_style( MMC_TEXTDOMAIN . '-od-videos' );
 
 			wp_register_script( MMC_TEXTDOMAIN . '-od-isotope', plugins_url( 'dist/js/isotope.min.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
-			//wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope' );
+			// wp_enqueue_script( MMC_TEXTDOMAIN . '-od-isotope' );
 
 			wp_register_script( MMC_TEXTDOMAIN . '-od-video-elem', plugins_url( 'dist/js/od-video-elem.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION );
 			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-video-elem' );
 
-			wp_register_script( MMC_TEXTDOMAIN . '-od-videos', plugins_url( 'dist/js/' . MMC_TEXTDOMAIN . '.min.js',
-						MMC_PLUGIN_ABSOLUTE ),
-						array( 'jquery',
-								MMC_TEXTDOMAIN . '-od-isotope',
-								MMC_TEXTDOMAIN . '-od-video-elem' ),
-								MMC_VERSION
-						);
+			wp_register_script(
+				MMC_TEXTDOMAIN . '-od-videos',
+				plugins_url(
+					'dist/js/' . MMC_TEXTDOMAIN . '.min.js',
+					MMC_PLUGIN_ABSOLUTE
+				),
+				array(
+					'jquery',
+					MMC_TEXTDOMAIN . '-od-isotope',
+					MMC_TEXTDOMAIN . '-od-video-elem',
+				),
+				MMC_VERSION
+			);
 			wp_enqueue_script( MMC_TEXTDOMAIN . '-od-videos' );
 
 			self::localizeScript();

@@ -144,10 +144,10 @@ class OnDemand extends Engine\Base {
 				'callback' => array( $this, 'return_on_demand_posts' ),
 			),
 			array(
-					// By using this constant we ensure that when the WP_REST_Server changes, our create endpoints will work as intended.
-					'methods'  => \WP_REST_Server::CREATABLE,
-					// Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
-					'callback' => 'create_on_demand_post',
+				// By using this constant we ensure that when the WP_REST_Server changes, our create endpoints will work as intended.
+				'methods'  => \WP_REST_Server::CREATABLE,
+				// Here we register our callback. The callback is fired when this endpoint is matched by the WP_REST_Server class.
+				'callback' => 'create_on_demand_post',
 			)
 		);
 	}
@@ -181,8 +181,8 @@ class OnDemand extends Engine\Base {
 
 			// Overwrite args from parameters if present
 			if ( is_array( $parameters ) && isset( $parameters ) ) {
-				$args['tax_query']               = $this->_build_query_from_params( $parameters );
-				$args['paged'] = 1;
+				$args['tax_query'] = $this->_build_query_from_params( $parameters );
+				$args['paged']     = 1;
 
 				if ( isset( $parameters['paginated_segment_index'] ) && ! empty( $parameters['paginated_segment_index'] ) ) {
 					$args['paged'] = $parameters['paginated_segment_index'];
@@ -207,20 +207,24 @@ class OnDemand extends Engine\Base {
 			wp_reset_query();
 
 			if ( ! empty( $request_result ) && isset( $request_result ) ) {
-					return rest_ensure_response( [
-						'code'   => 200,
-						'result' => $request_result,
-						'data'   => $full_videos_data,
-						'max_num_pages' => $max_num_pages
-					] );
+					return rest_ensure_response(
+						array(
+							'code'          => 200,
+							'result'        => $request_result,
+							'data'          => $full_videos_data,
+							'max_num_pages' => $max_num_pages,
+						)
+					);
 			}
 
-			return rest_ensure_response( [
-				'code'   => 204,
-				'result' => __( 'No video classes to show', 'elliptica-on-demand' ),
-				'data'   => array(),
-				'max_num_pages' => ""
-			] );
+			return rest_ensure_response(
+				array(
+					'code'          => 204,
+					'result'        => __( 'No video classes to show', 'elliptica-on-demand' ),
+					'data'          => array(),
+					'max_num_pages' => '',
+				)
+			);
 	}
 
 	/**
@@ -255,16 +259,16 @@ class OnDemand extends Engine\Base {
 
 
 		$od_video_metadata = get_post_meta( $post_id );
-		$date_time      = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_date'];
-		$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-		$class_plan     = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_classplan'];
+		$date_time         = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_date' ];
+		$featured_image    = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
+		$class_plan        = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ];
 		return array(
 			'class_instructor'  => get_the_terms( $post_id, 'class_instructor' )[0]->name,
-			'class_type'        => $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_class_type'][0],
+			'class_type'        => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_class_type' ][0],
 			'difficulty_level'  => get_the_terms( $post_id, 'difficulty_level' ),
 			'class_date'        => date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] ),
-			'class_description' => $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_desc'][0],
-			'video_id'          => $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_video_id'][0],
+			'class_description' => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_desc' ][0],
+			'video_id'          => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_video_id' ][0],
 			'featured_image'    => isset( $featured_image[0] ) ? $featured_image[0] : '',
 			'playlist'          => $class_plan,
 			'class_plan'        => minimize_and_sum_class_plans( $class_plan ),

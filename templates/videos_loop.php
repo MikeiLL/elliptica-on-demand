@@ -68,12 +68,12 @@ if ( $query->have_posts() ) :
 
 					$od_video_metadata = get_post_meta( $post_id );
 
-					$class_type = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_class_type'];
+					$class_type = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_class_type' ];
 					if ( ! empty( $class_type ) ) {
 						$instructor_and_type .= $class_type[0] . ' ';
 					}
 
-					$date_time = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_date' ];
+					$date_time = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_date' ];
 					if ( ! empty( $date_time ) ) {
 						$instructor_and_type .= '<br/>';
 						$instructor_and_type .= date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] );
@@ -87,12 +87,12 @@ if ( $query->have_posts() ) :
 		</div> <!-- //od-video -->
 	</a>
 		<?php
-		$class_desc = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_desc'];
+		$class_desc = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_desc' ];
 		if ( ! empty( $class_desc ) ) {
 			$description = $class_desc[0] . ' ';
 		}
 
-		$video_id = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_video_id'];
+		$video_id = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_video_id' ];
 		if ( ! empty( $video_id ) ) {
 			$video_link = $video_id[0] . ' ';
 		}
