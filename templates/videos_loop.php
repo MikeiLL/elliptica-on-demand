@@ -54,7 +54,7 @@ if ( $query->have_posts() ) :
 			<?php echo $custom_style; ?>>
 
 			<div class="od-video_info">
-					
+
 					<?php
 					$instructor_and_type = '';
 					$class_instructors   = get_the_terms( $post_id, 'class_instructor' );
@@ -66,12 +66,14 @@ if ( $query->have_posts() ) :
 
 					$instructor_and_type .= '<span aria-hidden="true"> · </span>';
 
-					$class_type = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_class_type' );
+					$od_video_metadata = get_post_meta( $post_id );
+
+					$class_type = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_class_type'];
 					if ( ! empty( $class_type ) ) {
 						$instructor_and_type .= $class_type[0] . ' ';
 					}
 
-					$date_time = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_date' );
+					$date_time = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_date' ];
 					if ( ! empty( $date_time ) ) {
 						$instructor_and_type .= '<br/>';
 						$instructor_and_type .= date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] );
@@ -85,12 +87,12 @@ if ( $query->have_posts() ) :
 		</div> <!-- //od-video -->
 	</a>
 		<?php
-		$class_desc = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_desc' );
+		$class_desc = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_desc'];
 		if ( ! empty( $class_desc ) ) {
 			$description = $class_desc[0] . ' ';
 		}
 
-		$video_id = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_video_id' );
+		$video_id = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_video_id'];
 		if ( ! empty( $video_id ) ) {
 			$video_link = $video_id[0] . ' ';
 		}
@@ -170,9 +172,9 @@ if ( $query->have_posts() ) :
 							<div class="modal-class-details__song_details">
 								<strong><?php echo $class_segment['song_title']; ?></strong> <span><?php echo $class_segment['song_artists']; ?></span>
 							</div></li>
-							
+
 						<?php } ?>
-				
+
 						</ol>
 				</div>
 
