@@ -164,7 +164,7 @@ if ( $query->have_posts() ) :
 		<?php
 		/* // Intro */
 
-		$class_plans      = get_post_meta( $post_id, $prefix . MMC_TEXTDOMAIN . '_classplan' );
+		$class_plans      = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_classplan'];
 		$class_plans_only = $class_plans;
 
 		/* Playlist */
@@ -175,7 +175,7 @@ if ( $query->have_posts() ) :
 				<div class="modal-class-details__listwrap mcd__playlist_hideContent">
 					<ol>
 
-						<?php foreach ( $class_plans[0] as $class_segment ) { ?>
+						<?php foreach ( maybe_unserialize($class_plans[0]) as $class_segment ) { ?>
 							<li class="modal-class-details__playlist_item"><img
 							class="modal-class-details__playlist_img"
 							src="<?php echo $class_segment['song_artwork']; ?>" />
