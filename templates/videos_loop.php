@@ -57,7 +57,12 @@ if ( $query->have_posts() ) :
 
 					<?php
 					$instructor_and_type = '';
-					$class_instructors   = get_the_terms( $post_id, 'class_instructor' );
+					$class_instructors        = array_filter(
+						$post_terms,
+						function( $term ) {
+							return 'class_instructor' === $term->taxonomy;
+						}
+					);
 					if ( ! empty( $class_instructors ) ) {
 						foreach ( $class_instructors as $class_instructor ) {
 							$instructor_and_type .= $class_instructor->name . ' ';
@@ -104,7 +109,12 @@ if ( $query->have_posts() ) :
 		/* Header */
 
 		$difficulty_levels       = array();
-		$difficulty_levels_array = get_the_terms( $post_id, 'difficulty_level' );
+		$difficulty_levels_array = array_filter(
+			$post_terms,
+			function( $term ) {
+				return 'difficulty_level' === $term->taxonomy;
+			}
+		);
 		if ( ! empty( $difficulty_levels_array ) ) {
 			foreach ( $difficulty_levels_array as $k => $difficulty_level ) {
 				$difficulty_levels[ $k ] = $difficulty_level->name . ' ';
