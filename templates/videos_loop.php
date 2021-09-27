@@ -57,7 +57,7 @@ if ( $query->have_posts() ) :
 
 					<?php
 					$instructor_and_type = '';
-					$class_instructors        = array_filter(
+					$class_instructors   = array_filter(
 						$post_terms,
 						function( $term ) {
 							return 'class_instructor' === $term->taxonomy;
