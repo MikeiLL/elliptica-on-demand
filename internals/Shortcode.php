@@ -63,46 +63,36 @@ class Shortcode extends Engine\Base {
 			),
 			$atts
 		);
-		// var_export(WP_CONTENT_DIR);
 
 		// Build out the FILTER
-		$difficulty_levels = get_terms(
-			array(
-				'taxonomy'   => 'difficulty_level',
-				'hide_empty' => true,
-			)
-		);
+		$tax_terms = get_terms([
+			'taxonomy' => [
+				'difficulty_level',
+				'class_instructor',
+				'music_style',
+				'class_length'
+			],
+			'hide_empty' => true
+			]);
 
+		$difficulty_levels = array_filter($tax_terms, function($term){
+			return 'difficulty_level' === $term->taxonomy;
+		});
 		$temp_args['difficulty_levels'] = $difficulty_levels;
 
-		// Build out the FILTER
-		$instructors = get_terms(
-			array(
-				'taxonomy'   => 'class_instructor',
-				'hide_empty' => true,
-			)
-		);
+		$class_instructors = array_filter($tax_terms, function($term){
+			return 'class_instructor' === $term->taxonomy;
+		});
+		$temp_args['instructors'] = $class_instructors;
 
-		$temp_args['instructors'] = $instructors;
-
-		// Build out the FILTER
-		$music_styles = get_terms(
-			array(
-				'taxonomy'   => 'music_style',
-				'hide_empty' => true,
-			)
-		);
-
+		$music_styles = array_filter($tax_terms, function($term){
+			return 'music_style' === $term->taxonomy;
+		});
 		$temp_args['music_styles'] = $music_styles;
 
-		// Build out the FILTER
-		$class_lengths = get_terms(
-			array(
-				'taxonomy'   => 'class_length',
-				'hide_empty' => true,
-			)
-		);
-
+		$class_lengths = array_filter($tax_terms, function($term){
+			return 'class_length' === $term->taxonomy;
+		});
 		$temp_args['class_lengths'] = $class_lengths;
 
 		// $return .= $filter_control;
