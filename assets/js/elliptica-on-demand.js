@@ -47,12 +47,12 @@ jQuery(($) => {
 				});
 			}
 		});
-/*		let rest_params = eod_video_state.filter_parameters.concat([
+		/*		let rest_params = eod_video_state.filter_parameters.concat([
 			{
 				name: "paginated_segment_index",
 				value: eod_video_state.paginated_segment_index,
 			},
-		]); 
+		]);
 		console.log(rest_params);*/
 		$("#elliptica_od_videos").html("");
 		get_eod_videos_from_server_and_update_display();
@@ -115,6 +115,7 @@ jQuery(($) => {
 		]);
 		eod_enter_loading_mode();
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
+		console.log(fetch_url);
 		eod_video_state.paginated_segment_index++;
 		fetch(fetch_url)
 			.then((response) => {
@@ -122,6 +123,7 @@ jQuery(($) => {
 			})
 			.then((videos) => {
 				if (200 === videos.code) {
+					// Maybe don't display the load more button.
 					const display_load_more_button =
 						false ===
 						eod_video_state.paginated_segment_index >= videos.max_num_pages;
@@ -148,6 +150,7 @@ jQuery(($) => {
 							"#modal-id-" + modal_count
 						);
 						video_container.attr("href", "#modal-id-" + modal_count);
+						video_container.attr("data-post-title", videos.data[i].post_title);
 						video_container.removeClass("video_item_template");
 						let video_container_background =
 							"linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7))";

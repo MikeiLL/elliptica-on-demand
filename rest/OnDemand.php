@@ -272,6 +272,7 @@ class OnDemand extends Engine\Base {
 			'featured_image'    => isset( $featured_image[0] ) ? $featured_image[0] : '',
 			'playlist'          => $class_plan,
 			'class_plan'        => minimize_and_sum_class_plans( $class_plan ),
+			'post_title'        => get_the_title(),
 		);
 	}
 
