@@ -83,7 +83,7 @@ class Shortcode extends Engine\Base {
 				return 'difficulty_level' === $term->taxonomy;
 			}
 		);
-		$temp_args['difficulty_levels'] = $difficulty_levels;
+		$template_args['difficulty_levels'] = $difficulty_levels;
 
 		$class_instructors        = array_filter(
 			$post_terms,
@@ -91,7 +91,7 @@ class Shortcode extends Engine\Base {
 				return 'class_instructor' === $term->taxonomy;
 			}
 		);
-		$temp_args['instructors'] = $class_instructors;
+		$template_args['instructors'] = $class_instructors;
 
 		$music_styles              = array_filter(
 			$post_terms,
@@ -99,7 +99,7 @@ class Shortcode extends Engine\Base {
 				return 'music_style' === $term->taxonomy;
 			}
 		);
-		$temp_args['music_styles'] = $music_styles;
+		$template_args['music_styles'] = $music_styles;
 
 		$class_lengths              = array_filter(
 			$post_terms,
@@ -107,13 +107,13 @@ class Shortcode extends Engine\Base {
 				return 'class_length' === $term->taxonomy;
 			}
 		);
-		$temp_args['class_lengths'] = $class_lengths;
+		$template_args['class_lengths'] = $class_lengths;
 
 		// $return .= $filter_control;
 
 		$prefix = '_elliptica_od_';
 
-		$temp_args['query']  = new WP_Query(
+		$template_args['query']  = new WP_Query(
 			array(
 				'post_type'      => 'elliptica_od_video',
 				'post_status'    => 'publish',
@@ -123,9 +123,9 @@ class Shortcode extends Engine\Base {
 				'orderby'        => 'meta_value', // or 'meta_value_num'
 			)
 		);
-		$temp_args['prefix'] = $prefix;
+		$template_args['prefix'] = $prefix;
 
-		eod_get_template( 'html-shortcode.php', $temp_args );
+		eod_get_template( 'html-shortcode.php', $template_args );
 		eod_get_template( 'od-video-template.php', array() );
 		// Add Style with script adder
 		self::addScript();
