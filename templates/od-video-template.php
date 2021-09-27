@@ -55,14 +55,8 @@
 		<div class="modal-class-details__body">
 
 			<div class="modal-class-details__intro">
-				<div class="modal-class-details__intro__level">
-					<p>
-						<strong>Level</strong>:</p>
-				</div>
-				<div class="modal-class-details__intro__desc">
-					<p></p>
-
-				</div>
+				<div class="modal-class-details__intro__level"></div>
+				<div class="modal-class-details__intro__desc"></div>
 			</div>
 
 		<?php
@@ -74,7 +68,7 @@
 				<h2>Playlist</h2>
 				<div class="modal-class-details__listwrap mcd__playlist_hideContent">
 					<ol>
-							<li class="modal-class-details__playlist_item"><img
+							<li class="modal-class-details__playlist_item playlist_item"><img
 							class="modal-class-details__playlist_img"
 							src="" />
 							<div class="modal-class-details__song_details">

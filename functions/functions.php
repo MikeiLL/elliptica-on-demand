@@ -23,7 +23,7 @@ function mmc_get_settings() {
 /**
  * Minimize and Sum Class Plans
  *
- * @param array @class_plans from Custom Field, which contain some fields we don't need,
+ * @param array @class_plan from Custom Field, which contain some fields we don't need,
  * as well as unknown time format. We also want to sum times for concurrent, matching
  * Segment Types:
  *
@@ -33,12 +33,12 @@ function mmc_get_settings() {
  *
  * return array @minimized_class_plan
  */
-function minimize_and_sum_class_plans( $class_plans = array() ) {
-	if ( empty( $class_plans ) ) {
+function minimize_and_sum_class_plan( $class_plan = array() ) {
+	if ( empty( $class_plan ) ) {
 		return false;
 	}
 
-	if ( is_array( $class_plans[0] ) && ! empty( $class_plans[0] ) ) {
+	if ( is_array( $class_plan ) && ! empty( $class_plan ) ) {
 		$segments_only = array_map(
 			function ( $array ) {
 				$allowed      = array( 'segment_duration', 'segment_type' );
@@ -69,7 +69,7 @@ function minimize_and_sum_class_plans( $class_plans = array() ) {
 
 				return $segment_info;
 			},
-			$class_plans[0]
+			$class_plan
 		);
 
 		// Now let's concatenate the subsequent occurences of matching keys

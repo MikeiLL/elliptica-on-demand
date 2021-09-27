@@ -164,18 +164,22 @@ if ( $query->have_posts() ) :
 		<?php
 		/* // Intro */
 
-		$class_plans      = $od_video_metadata[$prefix . MMC_TEXTDOMAIN . '_classplan'];
-		$class_plans_only = $class_plans;
+		try {
+			$class_plan        = maybe_unserialize($od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ][0]);
+		} catch (exception $e) {
+			$class_plan        = array();
+		}
+		$class_plan_only = $class_plan;
 
 		/* Playlist */
-		if ( ! empty( $class_plans ) ) {
+		if ( ! empty( $class_plan ) ) {
 			?>
 			<div class="modal-class-details__playlist_section">
 				<h2>Playlist</h2>
 				<div class="modal-class-details__listwrap mcd__playlist_hideContent">
 					<ol>
 
-						<?php foreach ( maybe_unserialize($class_plans[0]) as $class_segment ) { ?>
+						<?php foreach ( maybe_unserialize($class_plan) as $class_segment ) { ?>
 							<li class="modal-class-details__playlist_item"><img
 							class="modal-class-details__playlist_img"
 							src="<?php echo $class_segment['song_artwork']; ?>" />
@@ -188,7 +192,7 @@ if ( $query->have_posts() ) :
 						</ol>
 				</div>
 
-					<?php if ( count( $class_plans[0] ) > 3 ) { ?>
+					<?php if ( !empty($class_plan) && count( $class_plan ) > 3 ) { ?>
 						<div class="mcd_playlist__show-more">
 					<a href="#">Show more</a>
 				</div>
@@ -202,7 +206,7 @@ if ( $query->have_posts() ) :
 
 				<?php
 
-				$minimized_class_plan = minimize_and_sum_class_plans( $class_plans );
+				$minimized_class_plan = is_array($class_plan) ? minimize_and_sum_class_plan( $class_plan ) : array();
 				foreach ( $minimized_class_plan as $class_segment ) {
 					?>
 					<li class="modal-class-details__classplan_item">

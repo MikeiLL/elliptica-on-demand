@@ -261,17 +261,22 @@ class OnDemand extends Engine\Base {
 		$od_video_metadata = get_post_meta( $post_id );
 		$date_time         = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_date' ];
 		$featured_image    = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-		$class_plan        = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ];
+
+		try {
+			$class_plan        = maybe_unserialize($od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ][0]);
+		} catch (exception $e) {
+			$class_plan        = array();
+		}
 		return array(
 			'class_instructor'  => get_the_terms( $post_id, 'class_instructor' )[0]->name,
 			'class_type'        => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_class_type' ][0],
-			'difficulty_level'  => get_the_terms( $post_id, 'difficulty_level' ),
+			'difficulty_levels'  => get_the_terms( $post_id, 'difficulty_level' ),
 			'class_date'        => date_i18n( 'F j', $date_time[0] ) . ' @ ' . date_i18n( 'g:i a', $date_time[0] ),
 			'class_description' => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_desc' ][0],
 			'video_id'          => $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_video_id' ][0],
 			'featured_image'    => isset( $featured_image[0] ) ? $featured_image[0] : '',
 			'playlist'          => $class_plan,
-			'class_plan'        => minimize_and_sum_class_plans( $class_plan ),
+			'class_plan'        => minimize_and_sum_class_plan( $class_plan ),
 			'post_title'        => get_the_title(),
 		);
 	}
