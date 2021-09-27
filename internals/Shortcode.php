@@ -65,7 +65,7 @@ class Shortcode extends Engine\Base {
 		);
 
 		// Build out the FILTER
-		$tax_terms = get_terms(
+		$post_terms = get_terms(
 			array(
 				'taxonomy'   => array(
 					'difficulty_level',
@@ -78,7 +78,7 @@ class Shortcode extends Engine\Base {
 		);
 
 		$difficulty_levels              = array_filter(
-			$tax_terms,
+			$post_terms,
 			function( $term ) {
 				return 'difficulty_level' === $term->taxonomy;
 			}
@@ -86,7 +86,7 @@ class Shortcode extends Engine\Base {
 		$temp_args['difficulty_levels'] = $difficulty_levels;
 
 		$class_instructors        = array_filter(
-			$tax_terms,
+			$post_terms,
 			function( $term ) {
 				return 'class_instructor' === $term->taxonomy;
 			}
@@ -94,7 +94,7 @@ class Shortcode extends Engine\Base {
 		$temp_args['instructors'] = $class_instructors;
 
 		$music_styles              = array_filter(
-			$tax_terms,
+			$post_terms,
 			function( $term ) {
 				return 'music_style' === $term->taxonomy;
 			}
@@ -102,7 +102,7 @@ class Shortcode extends Engine\Base {
 		$temp_args['music_styles'] = $music_styles;
 
 		$class_lengths              = array_filter(
-			$tax_terms,
+			$post_terms,
 			function( $term ) {
 				return 'class_length' === $term->taxonomy;
 			}
