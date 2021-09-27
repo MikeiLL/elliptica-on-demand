@@ -131,13 +131,12 @@ jQuery(($) => {
 						"paginated_segment_index: " +
 							eod_video_state.paginated_segment_index
 					);
-					console.log("max pages: " + videos.max_num_pages);
-					console.log("display_load_more_button: " + display_load_more_button);
+
 					let modal_count =
 						1 +
 						eod_video_state.paginated_segment_index *
 							eod_video_state.paginated_segment_size;
-					console.log("modal count: " + modal_count);
+
 					for (var i = 0; i < videos.data.length; i++) {
 						var od_video_element = new Od_Video_Elem(
 							modal_count,
@@ -172,15 +171,67 @@ jQuery(($) => {
 							.css("background", video_container_background);
 						var modal_container = $(".video_item_modal_template").clone();
 
+						let difficulty_levels_string = build_difficulty_levels_string(
+							videos.data[i].difficulty_levels
+						);
+						modal_container
+							.find(".modal-class-details__intro__level")
+							.html(difficulty_levels_string);
+						modal_container
+							.find(".modal-class-details__intro__desc")
+							.html("<p>" + videos.data[i].class_description + "</p>");
 						modal_container
 							.find(".instructor_and_type")
 							.append(
 								videos.data[i].class_instructor +
 									'<span aria-hidden="true"> · </span>' +
-									videos.data[i].class_typ +
+									videos.data[i].class_type +
 									"<br>" +
 									od_video_element.class_date
 							);
+						//console.log("Playlist:");
+						//console.log(videos.data[i].playlist);
+						modal_container
+							.find(".modal-class-details__header")
+							.css("background", video_container_background);
+						modal_container
+							.find("modal_header_play_button")
+							.attr(
+								"href",
+								"https://video.mindbody.io/studios/526618/videos/" +
+									videos.data[i].video_id
+							);
+						let playlist = videos.data[i].playlist;
+
+						/*
+						segment_duration: "3:34"
+						segment_type: "Weights"
+						song_artists: "Calvin Harris, Dua Lipa"
+						song_artwork: "https://i.scdn.co/image/ab67616d00004851d09f96d82310d4d77c14c108"
+						song_title: "One Kiss (with Dua Lipa)"
+						*/
+						let playlist_holder = $("<ol>");
+						for (var j = 0; j < playlist.length; j++) {
+							let playlist_item = $("<li>");
+							let song_details = $("<div>");
+							song_details.addClass("modal-class-details__song_details");
+							let artwork = $("<img>");
+							let title = $("<strong>");
+							let artist = $("<span>");
+							playlist_item.addClass("modal-class-details__playlist_item");
+							artwork.attr("src", playlist[j].song_artwork);
+							playlist_item.append(artwork);
+							title.html(playlist[j].song_title);
+							song_details.append(title);
+							artist.html(playlist[j].song_artists);
+							song_details.append(artist);
+							playlist_item.append(song_details);
+							playlist_holder.append(playlist_item);
+						}
+						modal_container
+							.find(".modal-class-details__listwrap")
+							.append(playlist_holder);
+
 						modal_container.removeClass("video_item_modal_template");
 						video_container.show();
 						$(modal_container).attr("id", "modal-id-" + modal_count);
@@ -195,6 +246,17 @@ jQuery(($) => {
 					eod_exit_loading_mode(display_load_more_button);
 				}
 			});
+	}
+
+	/**
+	 * Build Difficulty Levels String
+	 */
+	function build_difficulty_levels_string(difficulty_levels) {
+		let names = [];
+		for (let i = 0; i < difficulty_levels.length; i++) {
+			names.push(difficulty_levels[i].name);
+		}
+		return "<p><strong>Level</strong>: " + names.join(", ") + "</p>";
 	}
 
 	/**

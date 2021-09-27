@@ -67,15 +67,15 @@
 			<div class="modal-class-details__playlist_section">
 				<h2>Playlist</h2>
 				<div class="modal-class-details__listwrap mcd__playlist_hideContent">
-					<ol>
-							<li class="modal-class-details__playlist_item playlist_item"><img
+					<!--<ol>
+							<li style="display:none" class="modal-class-details__playlist_item playlist_item"><img
 							class="modal-class-details__playlist_img"
 							src="" />
 							<div class="modal-class-details__song_details">
 								<strong></strong> <span></span>
 							</div></li>
 
-						</ol>
+						</ol>-->
 				</div>
 
 					<a href="#">Show more</a>
@@ -85,12 +85,6 @@
 			<div class="modal-class-details__classplan_section">
 				<h2>Class Plan</h2>
 				<div class="modal-class-details__listwrap">
-					<ol>
-						<li class="modal-class-details__classplan_item">
-							<div class="modal-class-details__segment_type"></div>
-							<div class="modal-class-details__segment_duration"></div>
-						</li>
-					</ol>
 				</div>
 			</div>
 
