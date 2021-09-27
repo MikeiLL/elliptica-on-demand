@@ -113,7 +113,7 @@ class PostTypes extends Engine\Base {
 					'elliptica_od_video_date_col'         => array(
 						'title_icon'  => 'dashicons-calendar-alt',
 						'meta_key'    => '_elliptica_od_' . MMC_TEXTDOMAIN . '_date',
-						'date_format' => 'd/m/Y',
+						'date_format' => 'm/d/Y',
 					),
 					'elliptica_od_video_music_style'      => array(
 						'taxonomy' => 'music_style',
