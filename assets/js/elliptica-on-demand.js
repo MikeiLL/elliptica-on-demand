@@ -47,13 +47,7 @@ jQuery(($) => {
 				});
 			}
 		});
-		/*		let rest_params = eod_video_state.filter_parameters.concat([
-			{
-				name: "paginated_segment_index",
-				value: eod_video_state.paginated_segment_index,
-			},
-		]);
-		console.log(rest_params);*/
+
 		$("#elliptica_od_videos").html("");
 		get_eod_videos_from_server_and_update_display();
 	});
@@ -105,6 +99,9 @@ jQuery(($) => {
 		get_eod_videos_from_server_and_update_display();
 	});
 
+	/**
+	 * Get Videos from server and update display.
+	 */
 	function get_eod_videos_from_server_and_update_display() {
 		// Request list of post IDs from restful endpoint.
 		let rest_params = eod_video_state.filter_parameters.concat([
@@ -127,10 +124,6 @@ jQuery(($) => {
 					const display_load_more_button =
 						false ===
 						eod_video_state.paginated_segment_index >= videos.max_num_pages;
-					console.log(
-						"paginated_segment_index: " +
-							eod_video_state.paginated_segment_index
-					);
 
 					let modal_count =
 						1 +
@@ -142,7 +135,7 @@ jQuery(($) => {
 							modal_count,
 							videos.data[i]
 						);
-						// console.log(videos.data[i]);
+
 						var video_container = $(".video_item_template").clone();
 						video_container.attr(
 							"data-modaal-content-source",
@@ -169,6 +162,8 @@ jQuery(($) => {
 						video_container
 							.find(".od-video")
 							.css("background", video_container_background);
+
+						/* Modal Container */
 						var modal_container = $(".video_item_modal_template").clone();
 
 						let difficulty_levels_string = build_difficulty_levels_string(
@@ -189,8 +184,7 @@ jQuery(($) => {
 									"<br>" +
 									od_video_element.class_date
 							);
-						//console.log("Playlist:");
-						//console.log(videos.data[i].playlist);
+
 						modal_container
 							.find(".modal-class-details__header")
 							.css("background", video_container_background);
@@ -201,16 +195,10 @@ jQuery(($) => {
 								"https://video.mindbody.io/studios/526618/videos/" +
 									videos.data[i].video_id
 							);
-						let playlist = videos.data[i].playlist;
 
-						/*
-						segment_duration: "3:34"
-						segment_type: "Weights"
-						song_artists: "Calvin Harris, Dua Lipa"
-						song_artwork: "https://i.scdn.co/image/ab67616d00004851d09f96d82310d4d77c14c108"
-						song_title: "One Kiss (with Dua Lipa)"
-						*/
+						let playlist = videos.data[i].playlist;
 						let playlist_holder = $("<ol>");
+						playlist_holder.addClass("modal-class-details__song_holder");
 						for (var j = 0; j < playlist.length; j++) {
 							let playlist_item = $("<li>");
 							let song_details = $("<div>");
@@ -228,9 +216,28 @@ jQuery(($) => {
 							playlist_item.append(song_details);
 							playlist_holder.append(playlist_item);
 						}
-						modal_container
-							.find(".modal-class-details__listwrap")
-							.append(playlist_holder);
+
+						let classplan = videos.data[i].class_plan;
+						let classplan_holder = $("<ol>");
+						classplan_holder.addClass("modal-class-details__classplan_holder");
+						for (var k = 0; k < classplan.length; k++) {
+							let classplan_item = $("<li>");
+							classplan_item.addClass("modal-class-details__classplan_item");
+							let segment_type = $("<div>");
+							segment_type.addClass("modal-class-details__segment_type");
+							let segment_duration = $("<div>");
+							segment_duration.addClass(
+								"modal-class-details__segment_duration"
+							);
+							segment_type.html(classplan[k].segment_type);
+							classplan_item.append(segment_type);
+							segment_duration.html(classplan[k].segment_duration + " min");
+							classplan_item.append(segment_duration);
+							classplan_holder.append(classplan_item);
+						}
+
+						modal_container.find(".class_playlist").append(playlist_holder);
+						modal_container.find(".class_classplan").append(classplan_holder);
 
 						modal_container.removeClass("video_item_modal_template");
 						video_container.show();
@@ -242,7 +249,9 @@ jQuery(($) => {
 						$("#elliptica_od_videos").append(modal_container);
 						modal_count++;
 					}
+
 					$(".info-popup").modaal();
+
 					eod_exit_loading_mode(display_load_more_button);
 				}
 			});
@@ -282,6 +291,8 @@ jQuery(($) => {
 		if (true === display_load_more) {
 			$("#eod_load_more").show();
 		}
+		// reinit show more button
+		eod_video_show_more();
 	}
 	/**
 	 * Build OD Video Container

@@ -15,27 +15,6 @@
 <!-- /* Build the Modal Content */ -->
 <div id="modal-id-goes-here"
 		style="display: none;" class="video_item_modal_template">
-<?php
-/*
- Header was built data like
-
-		$difficulty_levels       = array();
-		$difficulty_levels_array = get_the_terms( $post_id, 'difficulty_level' );
-		if ( ! empty( $difficulty_levels_array ) ) {
-			foreach ( $difficulty_levels_array as $k => $difficulty_level ) {
-				$difficulty_levels[ $k ] = $difficulty_level->name . ' ';
-			}
-		}
-
-		$header_attr = 'style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));"';
-		if ( has_post_thumbnail( $post_id ) ) :
-			$featured_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-			if ( is_array( $featured_image ) ) {
-				$header_attr = 'style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)),url(' . $featured_image[0] . ')"';
-			}
-		endif;
-*/
-?>
 		<!-- Build modal class header background declaration -->
 		<div class="modal-class-details__header"> <!-- some styling needs to be applied to details__header, needs background image. -->
 
@@ -58,15 +37,9 @@
 				<div class="modal-class-details__intro__level"></div>
 				<div class="modal-class-details__intro__desc"></div>
 			</div>
-
-		<?php
-		/* // Intro */
-
-		/* Playlist */
-		?>
 			<div class="modal-class-details__playlist_section">
 				<h2>Playlist</h2>
-				<div class="modal-class-details__listwrap mcd__playlist_hideContent">
+				<div class="modal-class-details__listwrap mcd__playlist_hideContent class_playlist">
 					<!--<ol>
 							<li style="display:none" class="modal-class-details__playlist_item playlist_item"><img
 							class="modal-class-details__playlist_img"
@@ -78,13 +51,20 @@
 						</ol>-->
 				</div>
 
+				<div class="mcd_playlist__show-more">
 					<a href="#">Show more</a>
 				</div>
-					</div>
+			</div>
 
-			<div class="modal-class-details__classplan_section">
+			<div class="modal-class-details__classplan_section class_classplan">
 				<h2>Class Plan</h2>
 				<div class="modal-class-details__listwrap">
+					<!-- <ol>
+						<li class="modal-class-details__classplan_item">
+							<div class="modal-class-details__segment_type"></div>
+							<div class="modal-class-details__segment_duration"></div>
+						</li>
+					</ol> -->
 				</div>
 			</div>
 
