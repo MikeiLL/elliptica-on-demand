@@ -3,10 +3,6 @@
 <?php
 
 $modaal_id_count = 1;
-if ( isset( $paginated_segment_index ) ) {
-	$modaal_id_count = 1 + $paginated_segment_index * MMC_PAGINATED_SEGMENT_SIZE;
-}
-
 
 if ( $query->have_posts() ) :
 	while ( $query->have_posts() ) :

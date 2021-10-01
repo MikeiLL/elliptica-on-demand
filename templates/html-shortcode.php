@@ -114,7 +114,6 @@
 			array(
 				'query'                   => $query,
 				'prefix'                  => $prefix,
-				'paginated_segment_index' => 0,
 			)
 		);
 		?>
