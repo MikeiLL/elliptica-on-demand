@@ -174,7 +174,6 @@ class OnDemand extends Engine\Base {
 				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
 			);
 
-			$request_result   = array();
 			$full_videos_data = array();
 
 			$parameters = $request->get_params();
@@ -197,8 +196,6 @@ class OnDemand extends Engine\Base {
 
 						$post_id = get_the_ID();
 
-						array_push( $request_result, $post_id );
-
 						$full_videos_data[] = $this->build_full_video_data_array( $post_id );
 				}
 			}
@@ -206,11 +203,10 @@ class OnDemand extends Engine\Base {
 			$max_num_pages = $query->max_num_pages;
 			wp_reset_query();
 
-			if ( ! empty( $request_result ) && isset( $request_result ) ) {
+			if ( !empty( $full_videos_data ) ) {
 					return rest_ensure_response(
 						array(
 							'code'          => 200,
-							'result'        => $request_result,
 							'data'          => $full_videos_data,
 							'max_num_pages' => $max_num_pages,
 						)
@@ -220,8 +216,7 @@ class OnDemand extends Engine\Base {
 			return rest_ensure_response(
 				array(
 					'code'          => 204,
-					'result'        => __( 'No video classes to show', 'elliptica-on-demand' ),
-					'data'          => array(),
+					'data'          => __( 'No video classes match your query.', 'elliptica-on-demand' ),
 					'max_num_pages' => '',
 				)
 			);
