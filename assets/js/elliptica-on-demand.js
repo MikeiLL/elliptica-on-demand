@@ -7,7 +7,7 @@
 jQuery(($) => {
 	// Object to hold state of filter and video dislay data
 	var eod_video_state = {
-		paginated_segment_index: 2,
+		paginated_segment_index: 1,
 		paginated_segment_size: mmc_js_vars.paginated_segment_size,
 		filter_parameters: [],
 		base_url: window.location.origin + "/wp-json/eod/v1/posts?",
@@ -17,7 +17,7 @@ jQuery(($) => {
 	// not required anymore ? var filters = {}; //store filters in an array
 	$(".filters").on("click", ".button", function (event) {
 		// For now, initialize pagination index to zero
-		eod_video_state.paginated_segment_index = 2;
+		eod_video_state.paginated_segment_index = 1;
 		var button = $(event.currentTarget);
 		$(".loader_container").show();
 		// get group key
@@ -114,14 +114,19 @@ jQuery(($) => {
 		var fetch_url = eod_video_state.base_url + $.param(rest_params);
 		console.log(fetch_url);
 		eod_video_state.paginated_segment_index++;
+		let display_load_more_button = false;
 		fetch(fetch_url)
 			.then((response) => {
 				return response.json();
 			})
 			.then((videos) => {
+				console.log("videos");
+				console.log(videos);
 				if (200 === videos.code) {
 					// Maybe don't display the load more button.
-					const display_load_more_button =
+					console.log("videos.data");
+					console.log(videos.data);
+					display_load_more_button =
 						false ===
 						eod_video_state.paginated_segment_index >= videos.max_num_pages;
 
@@ -251,9 +256,10 @@ jQuery(($) => {
 					}
 
 					$(".info-popup").modaal();
-
-					eod_exit_loading_mode(display_load_more_button);
+				} else {
+					$("#elliptica_od_videos").html("<h1>no videos found</h1>");
 				}
+				eod_exit_loading_mode(display_load_more_button);
 			});
 	}
 
