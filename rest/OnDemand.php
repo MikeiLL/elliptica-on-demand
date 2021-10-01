@@ -256,11 +256,14 @@ class OnDemand extends Engine\Base {
 		$od_video_metadata = get_post_meta( $post_id );
 		$date_time         = $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_date' ];
 		$featured_image    = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium_large' );
-
-		try {
-			$class_plan = maybe_unserialize( $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ][0] );
-		} catch ( exception $e ) {
-			$class_plan = array();
+		
+		$class_plan = array();
+		if(isset($od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ][0])){
+			try {
+				$class_plan = maybe_unserialize( $od_video_metadata[ $prefix . MMC_TEXTDOMAIN . '_classplan' ][0] );
+			} catch ( exception $e ) {
+				$class_plan = array();
+			}
 		}
 
 		return array(
