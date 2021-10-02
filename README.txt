@@ -92,6 +92,7 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 = 1.0.6 =
 Improve standards compliance.
+Pull videos in paginated segments via rest.
 
 = 1.0.5 =
 Limit initial number of videos requested and re-query database using restful calls based on filter selections.
