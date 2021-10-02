@@ -20,10 +20,6 @@
 					src: "assets/js/od-video-elem.js",
 					dest: "dist/js/od-video-elem.js",
 				},
-				isotope: {
-					src: "node_modules/isotope-layout/dist/isotope.pkgd.js",
-					dest: "dist/js/isotope.min.js",
-				},
 			},
 			jshint: {
 				options: {
