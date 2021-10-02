@@ -10,6 +10,8 @@
 *~
 *.sass-cache
 *.lock
+.nvmrc
+.in
 
 # OS or Editor folders
 .DS_Store
@@ -39,3 +41,4 @@ vendor
 tests/_output
 /elliptica-on-demand/vendor/
 tests/_support/_generated
+dist

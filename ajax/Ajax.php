@@ -23,30 +23,50 @@ class Ajax extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !apply_filters( 'elliptica_on_demand_mmc_ajax_initialize', true ) ) {
+		if ( ! apply_filters( 'elliptica_on_demand_mmc_ajax_initialize', true ) ) {
 			return;
 		}
 
-		// For not logged user
-		add_action( 'wp_ajax_nopriv_your_method', array( $this, 'your_method' ) );
+		add_action(
+			'wp_ajax_get_videos_ajax_loop',
+			array(
+				$this,
+				'get_videos_ajax_loop',
+			)
+		);
+		add_action(
+			'wp_ajax_nopriv_get_videos_ajax_loop',
+			array(
+				$this,
+				'get_videos_ajax_loop',
+			)
+		);
 	}
 
-	/**
-	 * The method to run on ajax
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function your_method() {
-		$return = array(
-			'message' => 'Saved',
-			'ID'      => 1,
-		);
+	public function get_videos_ajax_loop() {
+		if ( ! isset( $_REQUEST['data'] ) || empty( $_REQUEST['data'] ) ) {
+			wp_die();
+		}
 
-		wp_send_json_success( $return );
-		// wp_send_json_error( $return );
+		$args = array();
+
+		$prefix = '_elliptica_od_';
+
+		$args['query']                   = new \WP_Query(
+			array(
+				'post_type'      => 'elliptica_od_video',
+				'post_status'    => 'publish',
+				'posts_per_page' => MMC_PAGINATED_SEGMENT_SIZE,
+				'post__in'       => $_REQUEST['data'],
+				'paged'          => $_REQUEST['paginated_segment_index'],
+			)
+		);
+		$args['prefix']                  = $prefix;
+		$args['paginated_segment_index'] = $_REQUEST['paginated_segment_index'];
+
+		eod_get_template( 'videos_loop.php', $args );
+
+		wp_die();
 	}
 
 }
-

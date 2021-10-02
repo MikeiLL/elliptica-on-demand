@@ -9,8 +9,9 @@
  * @license   GPL 2.0+
  * @link      http://mzoo.org
  */
-namespace Elliptica_On_Demand\Backend;
+namespace Elliptica_On_Demand\Internals;
 
+use \Elliptica_On_Demand\Engine;
 use \Elliptica_On_Demand\Rest;
 
 /**
@@ -24,11 +25,12 @@ class InitRest extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !parent::initialize() ) {
-            return;
+		if ( ! parent::initialize() ) {
+			return;
 		}
+
 		// Initilize rest api
-		add_action( 'rest_api_init', array( __CLASS__, 'add_restful_endpoint' ), 10, 3);
+		add_action( 'rest_api_init', array( __CLASS__, 'add_restful_endpoint' ), 10, 3 );
 	}
 
 
@@ -40,7 +42,7 @@ class InitRest extends Engine\Base {
 	 *
 	 * @return array
 	 */
-	public static function add_restful_endpoint( ) {
+	public static function add_restful_endpoint() {
 		$on_demand_rest = new Rest\OnDemand;
 		$on_demand_rest->add_simple_route();
 	}

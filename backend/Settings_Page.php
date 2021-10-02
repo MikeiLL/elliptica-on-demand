@@ -24,7 +24,7 @@ class Settings_Page extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !parent::initialize() ) {
+		if ( ! parent::initialize() ) {
 			return;
 		}
 
@@ -59,7 +59,13 @@ class Settings_Page extends Engine\Base {
 		 * Add a settings page for this plugin to the main menu
 		 *
 		 */
-		//add_menu_page( __( 'Elliptica On Demand Settings', MMC_TEXTDOMAIN ), MMC_NAME, 'manage_options', MMC_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
+		// add_menu_page( __( 'Elliptica On Demand Settings', MMC_TEXTDOMAIN ), MMC_NAME, 'manage_options', MMC_TEXTDOMAIN, array( $this, 'display_plugin_admin_page' ), 'dashicons-hammer', 90 );
+		/*
+		 Retrieve settings in front end:
+		 *  $eod_options = cmb2_get_option( MMC_TEXTDOMAIN . '-settings', 'videos_per_segment', 'default one' );
+		 *  $opts = get_option( MMC_TEXTDOMAIN . '-settings', 'default too' );
+		 */
+
 	}
 
 	/**
@@ -88,7 +94,7 @@ class Settings_Page extends Engine\Base {
 				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . MMC_TEXTDOMAIN ) . '">' . __( 'Settings', MMC_TEXTDOMAIN ) . '</a>',
 				'donate'   => '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=mike@mzoo.org&item_name=Donation">' . __( 'Donate', MMC_TEXTDOMAIN ) . '</a>',
 			),
-            $links
+			$links
 		);
 	}
 

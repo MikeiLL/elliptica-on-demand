@@ -33,10 +33,10 @@ class Initialize {
 	public $classes = array();
 
 	/**
-     * Composer autoload file list.
-     *
-     * @var \Composer\Autoload\ClassLoader
-     */
+	 * Composer autoload file list.
+	 *
+	 * @var \Composer\Autoload\ClassLoader
+	 */
 	private $composer;
 
 	/**
@@ -47,9 +47,8 @@ class Initialize {
 	 * @since 1.0.0
 	 */
 	public function __construct( \Composer\Autoload\ClassLoader $composer ) {
-
-		$this->is_methods       = new Engine\Is_Methods();
-		$this->composer = $composer;
+		$this->is_methods = new Engine\Is_Methods();
+		$this->composer   = $composer;
 
 		$this->get_classes( 'Internals' );
 		$this->get_classes( 'Integrations' );
@@ -66,7 +65,6 @@ class Initialize {
 			$this->get_classes( 'Ajax' );
 		}
 
-
 		if ( $this->is_methods->request( 'backend' ) ) {
 			$this->get_classes( 'Backend' );
 		}
@@ -79,10 +77,10 @@ class Initialize {
 	}
 
 	/**
-     * Initialize all the classes.
-     *
-     * @since 1.0.0
-     */
+	 * Initialize all the classes.
+	 *
+	 * @since 1.0.0
+	 */
 	private function load_classes() {
 		$this->classes = apply_filters( 'elliptica_on_demand_classes_to_execute', $this->classes );
 		foreach ( $this->classes as $class ) {
@@ -112,13 +110,14 @@ class Initialize {
 		$classmap  = $this->composer->getClassMap();
 		$namespace = 'Elliptica_On_Demand\\' . $namespace;
 		// In case composer has autoload optimized
-		if ( isset( $classmap[ 'Elliptica_On_Demand\\Engine\\Initialize' ] ) ) {
+		if ( isset( $classmap['Elliptica_On_Demand\\Engine\\Initialize'] ) ) {
 			$classes = array_keys( $classmap );
 			foreach ( $classes as $class ) {
 				if ( strncmp( (string) $class, $namespace, strlen( $namespace ) ) === 0 ) {
 					$this->classes[] = $class;
 				}
 			}
+
 			return $this->classes;
 		}
 
@@ -128,9 +127,10 @@ class Initialize {
 			$folder    = $prefix[ $namespace ][0];
 			$php_files = $this->scandir( $folder );
 			$this->find_classes( $php_files, $folder, $namespace );
-			if ( !WP_DEBUG ) {
+			if ( ! WP_DEBUG ) {
 				wp_die( esc_html__( 'Plugin Name is on production environment with missing `composer dumpautoload -o` that will improve the performance on autoloading itself.', MMC_TEXTDOMAIN ) );
 			}
+
 			return $this->classes;
 		}
 

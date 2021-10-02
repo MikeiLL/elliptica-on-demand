@@ -16,41 +16,52 @@
 	],
 	"require": {
 		"php": ">=7.0",
-		"composer\/installers": "1.x",
-		"wpbp\/pointerplus": "1.0.*",
-		"wpbp\/cronplus": "1.0.*",
-		"wpbp\/widgets-helper": "1.0.*",
-		"wpbp\/fakepage": "1.0.*",
-		"wpbp\/template": "1.0.*",
-		"wpbp\/debug": "1.1.*",
-		"wpbp\/cpt_columns": "1.0.*",
-		"wpbp\/language": "1.0.*",
-		"johnbillion\/extended-cpts": "dev-trunk",
-		"cmb2\/cmb2": "2.7.*",
-		"origgami\/cmb2-grid": "dev-master",
-		"stevegrunwell\/wp-cache-remember": "dev-master",
-		"micropackage\/requirements": "^1.0",
-		"wpdesk\/wp-notice": "^3.1",
-		"yahnis-elsts\/plugin-update-checker": "^4.9"
+		"composer/installers": "1.x",
+		"wpbp/pointerplus": "1.0.*",
+		"wpbp/cronplus": "1.0.*",
+		"wpbp/widgets-helper": "1.0.*",
+		"wpbp/fakepage": "1.0.*",
+		"wpbp/template": "1.0.*",
+		"wpbp/debug": "1.1.*",
+		"wpbp/cpt_columns": "1.0.*",
+		"wpbp/language": "1.0.*",
+		"johnbillion/extended-cpts": "dev-trunk",
+		"cmb2/cmb2": "2.7.*",
+		"origgami/cmb2-grid": "dev-master",
+		"stevegrunwell/wp-cache-remember": "dev-master",
+		"micropackage/requirements": "^1.0",
+		"wpdesk/wp-notice": "^3.1",
+		"yahnis-elsts/plugin-update-checker": "^4.9"
 	},
 	"require-dev": {
-		"szepeviktor\/phpstan-wordpress": "^0.6.0",
-		"szepeviktor\/phpstan-phpdoc": "^0.2.1",
-		"lucatume\/wp-browser": "^2.5",
-		"lucatume\/function-mocker": "~1.0",
-		"phpro\/grumphp": "^0.18",
-		"codeception\/codeception": "4.1.*",
-		"codeception\/module-asserts": "^1.0",
-		"codeception\/module-phpbrowser": "^1.0",
-		"codeception\/module-webdriver": "^1.0",
-		"codeception\/module-db": "^1.0",
-		"codeception\/module-filesystem": "^1.0",
-		"codeception\/module-cli": "^1.0",
-		"codeception\/util-universalframework": "^1.0",
-		"phpunit\/phpunit": "6.*",
-		"codeception\/module-rest": "^1.2",
-		"codeception\/codeception-progress-reporter": "^4.0",
-		"phpmd/phpmd": "@stable"
+		"szepeviktor/phpstan-wordpress": "^0.6.0",
+		"szepeviktor/phpstan-phpdoc": "^0.2.1",
+		"lucatume/wp-browser": "^2.5",
+		"lucatume/function-mocker": "~1.0",
+		"phpro/grumphp": "^0.18",
+		"codeception/codeception": "4.1.*",
+		"codeception/module-asserts": "^1.0",
+		"codeception/module-phpbrowser": "^1.0",
+		"codeception/module-webdriver": "^1.0",
+		"codeception/module-db": "^1.0",
+		"codeception/module-filesystem": "^1.0",
+		"codeception/module-cli": "^1.0",
+		"codeception/util-universalframework": "^1.0",
+		"phpunit/phpunit": "6.*",
+		"codeception/module-rest": "^1.2",
+		"codeception/codeception-progress-reporter": "^4.0",
+		"phpmd/phpmd": "@stable",
+		"squizlabs/php_codesniffer": "^3.6",
+		"wp-coding-standards/wpcs": "^2.3",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1"
+	},
+	"scripts": {
+		"lint": [
+			"phpcs --extensions=php ajax assets backend cli engine frontend functions integrations internals rest templates *.php"
+		],
+		"fix": [
+			"phpcbf --extensions=php ajax assets backend cli engine frontend functions integrations internals rest templates *.php"
+		]
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -59,6 +70,7 @@
 			"Elliptica_On_Demand\\Backend\\": "backend",
 			"Elliptica_On_Demand\\Frontend\\": "frontend",
 			"Elliptica_On_Demand\\Ajax\\": "ajax",
+			"Elliptica_On_Demand\\Rest\\": "rest",
 			"Elliptica_On_Demand\\Internals\\": "internals",
 			"Elliptica_On_Demand\\Integrations\\": "integrations",
 			"Elliptica_On_Demand\\Engine\\": "engine"
@@ -66,13 +78,13 @@
 	},
 	"extra": {
 		"installer-paths": {
-			"vendor\/{$name}\/": [
-				"cmb2\/cmb2",
-				"origgami\/cmb2-grid",
-				"stevegrunwell\/wp-cache-remember",
-				"seravo\/wp-custom-bulk-actions"
+			"vendor/{$name}/": [
+				"cmb2/cmb2",
+				"origgami/cmb2-grid",
+				"stevegrunwell/wp-cache-remember",
+				"seravo/wp-custom-bulk-actions"
 			]
 		}
 	},
-	"homepage": "https:\/\/github.com\/MikeiLL\/elliptica-on-demand"
+	"homepage": "https://github.com/MikeiLL/elliptica-on-demand"
 }

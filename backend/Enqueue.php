@@ -24,8 +24,8 @@ class Enqueue extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-		if ( !parent::initialize() ) {
-            return;
+		if ( ! parent::initialize() ) {
+			return;
 		}
 
 		// Load admin style sheet and JavaScript.
@@ -43,7 +43,7 @@ class Enqueue extends Engine\Base {
 	 */
 	public function enqueue_admin_styles() {
 		$admin_page = get_current_screen();
-		if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
+		if ( ! is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
 			wp_enqueue_style( MMC_TEXTDOMAIN . '-settings-styles', plugins_url( 'assets/css/settings.css', MMC_PLUGIN_ABSOLUTE ), array( 'dashicons' ), MMC_VERSION );
 		}
 
@@ -59,9 +59,9 @@ class Enqueue extends Engine\Base {
 	 */
 	public function enqueue_admin_scripts() {
 		$admin_page = get_current_screen();
-        if ( !is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
-            wp_enqueue_script( MMC_TEXTDOMAIN . '-settings-script', plugins_url( 'assets/js/settings.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', 'jquery-ui-tabs' ), MMC_VERSION, false );
-        }
+		if ( ! is_null( $admin_page ) && $admin_page->id === 'toplevel_page_elliptica-on-demand' ) {
+			wp_enqueue_script( MMC_TEXTDOMAIN . '-settings-script', plugins_url( 'assets/js/settings.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery', 'jquery-ui-tabs' ), MMC_VERSION, false );
+		}
 
 		wp_enqueue_script( MMC_TEXTDOMAIN . '-admin-script', plugins_url( 'assets/js/admin.js', MMC_PLUGIN_ABSOLUTE ), array( 'jquery' ), MMC_VERSION, false );
 	}

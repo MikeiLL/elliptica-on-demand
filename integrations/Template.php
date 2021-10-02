@@ -24,7 +24,7 @@ class Template extends Engine\Base {
 	 * @return void
 	 */
 	public function initialize() {
-        parent::initialize();
+		parent::initialize();
 
 		// Override the template hierarchy for load /templates/content-demo.php
 		// add_filter( 'template_include', array( __CLASS__, 'load_content_od_video' ) );
